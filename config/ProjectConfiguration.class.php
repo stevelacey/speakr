@@ -6,6 +6,7 @@ sfCoreAutoload::register();
 class ProjectConfiguration extends sfProjectConfiguration {
   public function setup() {
     $this->enableAllPluginsExcept('sfPropelPlugin');
+    $this->enablePlugins('sfDoctrineGuardPlugin');
   }
 
   public function getEnvironment() {
