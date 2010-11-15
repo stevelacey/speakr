@@ -4,11 +4,33 @@ homepage:
     module: homepage
     action: index
 
+account:
+  url: /account
+  param:
+    module: account
+    action: edit
+
+profile:
+  class: sfDoctrineRoute
+  url: /:username
+  options:
+    model: sfGuardUser
+    type: object
+  param:
+    module: account
+    action: show
+
 login:
   url:   /login
   param:
     module: sfTwitterAuth
     action: login
+
+logout:
+  url:   /logout
+  param:
+    module: sfTwitterAuth
+    action: logout
 
 # generic rules
 # please, remove them by adding more specific rules
