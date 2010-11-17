@@ -1,1 +1,1 @@
-<?php echo link_to('Login with Twitter', 'sfTwitterAuth/login') ?>
+<?php echo link_to('Login with Twitter', 'login') ?>
