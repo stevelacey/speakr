@@ -1,5 +1,5 @@
 homepage:
-  url:   /
+  url: /
   param:
     module: homepage
     action: index
@@ -7,36 +7,33 @@ homepage:
 account:
   url: /account
   param:
-    module: account
+    module: user
     action: edit
 
-profile:
-  class: sfDoctrineRoute
-  url: /:username
-  options:
-    model: sfGuardUser
-    type: object
-  param:
-    module: account
-    action: show
-
 login:
-  url:   /login
+  url: /login
   param:
     module: sfTwitterAuth
     action: login
 
+login_error:
+  url: /login/error
+  param:
+    module: sfTwitterAuth
+    action: failed
+
 logout:
-  url:   /logout
+  url: /logout
   param:
     module: sfTwitterAuth
     action: logout
 
-# generic rules
-# please, remove them by adding more specific rules
-default_index:
-  url:   /:module
-  param: { action: index }
-
-default:
-  url:   /:module/:action/*
+profile:
+  class: sfDoctrineRoute
+  url: /user/:username
+  options:
+    model: sfGuardUser
+    type: object
+  param:
+    module: user
+    action: show
