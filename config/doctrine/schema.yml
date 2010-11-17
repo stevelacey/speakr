@@ -1,6 +1,50 @@
 actAs:
   Timestampable: ~
 
+Conference:
+  actAs:
+    Sluggable: ~
+    Timestampable: ~
+  columns:
+    title:
+      type: string(255)
+      notnull: true
+
+Event:
+  actAs:
+    Sluggable: ~
+    Timestampable: ~
+  columns:
+    conference_id:
+      type: integer(11)
+      notnull: true
+    location_id:
+      type: integer(11)
+      notnull: true
+    title:
+      type: string(255)
+      notnull: true
+    description:
+      type: string(255)
+      notnull: true
+    url:
+      type: string(255)
+      notnull: true
+    hashtag:
+      type: string(20)
+      notnull: true
+    address:
+      type: string(255)
+      notnull: true
+    postcode:
+      type: string(8)
+      notnull: true
+  relations:
+    Conference:
+      class: Conference
+      local: conference_id
+      foreign: id
+
 sfGuardUserProfile:
   columns:
     user_id:
