@@ -1,6 +1,6 @@
 <?php
 
-class accountActions extends sfActions {
+class userActions extends sfActions {
   public function executeShow(sfWebRequest $request) {
     $this->user = $this->getRoute()->getObject();
   }
