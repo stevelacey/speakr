@@ -1,0 +1,25 @@
+actAs:
+  Timestampable: ~
+
+sfGuardUserProfile:
+  columns:
+    user_id:
+      type: integer(20)
+      notnull: true
+    name:
+      type: string(255)
+    description:
+      type: string(255)
+    website:
+      type: string(255)
+    image:
+      type: string(255)
+    icon:
+      type: string(255)
+  relations:
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreign: id
+      foreignAlias: Profile
+      foreignType: one
