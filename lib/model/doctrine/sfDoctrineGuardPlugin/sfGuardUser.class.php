@@ -11,11 +11,11 @@
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 class sfGuardUser extends PluginsfGuardUser {
-  public function getTwitterAPIUrl() {
-    return sfConfig::get('app_twitter_api_url').'/'.sfConfig::get('app_twitter_api_version').'/';
-  }
-
-  public function getProfileImage($size = 'normal') {
-    return $this->getTwitterAPIUrl().'users/profile_image/'.$this->getUsername().'.json?size='.$size;
+  public function __call($method, $arguments) {
+    try {
+      return parent::__call($method, $arguments);
+    } catch (Doctrine_Record_UnknownPropertyException $e) {
+      return call_user_func_array(array($this->getProfile(), $method), $arguments);
+    }
   }
 }
