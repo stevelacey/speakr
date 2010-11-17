@@ -7,7 +7,7 @@
  *
  * @package    speakr
  * @subpackage form
- * @author     Your name here
+ * @author     Steve Lacey
  * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 24171 2009-11-19 16:37:50Z Kris.Wallsmith $
  */
 abstract class BaseSpeakerForm extends BaseFormDoctrine
