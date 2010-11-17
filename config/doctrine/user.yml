@@ -1,0 +1,102 @@
+sfGuardUser:
+  relations:
+    Attending:
+      class: Event
+      refClass: Attendee
+      local: user_id
+      foreign: event_id
+      foreignAlias: Attending
+    Favourites:
+      class: Event
+      refClass: Favouriter
+      local: user_id
+      foreign: event_id
+      foreignAlias: Favouriters
+    Organising:
+      class: Event
+      refClass: Organiser
+      local: user_id
+      foreign: event_id
+      foreignAlias: Organisers
+    Speaking:
+      class: Event
+      refClass: Speaker
+      local: user_id
+      foreign: event_id
+      foreignAlias: Speakers
+    Watching:
+      class: Event
+      refClass: Watcher
+      local: user_id
+      foreign: event_id
+      foreignAlias: Watchers
+
+sfGuardUserProfile:
+  actAs:
+    Timestampable: ~
+  columns:
+    user_id:
+      type: integer(20)
+      notnull: true
+    name:
+      type: string(255)
+    description:
+      type: string(255)
+    website:
+      type: string(255)
+    image:
+      type: string(255)
+    icon:
+      type: string(255)
+  relations:
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreign: id
+      foreignAlias: Profile
+      foreignType: one
+
+Attendee:
+  columns:
+    user_id:
+      type: integer(20)
+      primary: true
+    event_id:
+      type: integer(20)
+      primary: true
+
+Favouriter:
+  columns:
+    user_id:
+      type: integer(20)
+      primary: true
+    event_id:
+      type: integer(20)
+      primary: true
+
+Organiser:
+  columns:
+    user_id:
+      type: integer(20)
+      primary: true
+    event_id:
+      type: integer(20)
+      primary: true
+
+Speaker:
+  columns:
+    user_id:
+      type: integer(20)
+      primary: true
+    event_id:
+      type: integer(20)
+      primary: true
+
+Watcher:
+  columns:
+    user_id:
+      type: integer(20)
+      primary: true
+    event_id:
+      type: integer(20)
+      primary: true

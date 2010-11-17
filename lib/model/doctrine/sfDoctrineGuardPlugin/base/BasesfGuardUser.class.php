@@ -17,6 +17,11 @@
  * @property timestamp $last_login
  * @property Doctrine_Collection $Groups
  * @property Doctrine_Collection $Permissions
+ * @property Doctrine_Collection $Attending
+ * @property Doctrine_Collection $Favourites
+ * @property Doctrine_Collection $Organising
+ * @property Doctrine_Collection $Speaking
+ * @property Doctrine_Collection $Watching
  * @property Doctrine_Collection $sfGuardUserPermission
  * @property Doctrine_Collection $sfGuardUserGroup
  * @property sfGuardRememberKey $RememberKeys
@@ -35,6 +40,11 @@
  * @method timestamp             getLastLogin()             Returns the current record's "last_login" value
  * @method Doctrine_Collection   getGroups()                Returns the current record's "Groups" collection
  * @method Doctrine_Collection   getPermissions()           Returns the current record's "Permissions" collection
+ * @method Doctrine_Collection   getAttending()             Returns the current record's "Attending" collection
+ * @method Doctrine_Collection   getFavourites()            Returns the current record's "Favourites" collection
+ * @method Doctrine_Collection   getOrganising()            Returns the current record's "Organising" collection
+ * @method Doctrine_Collection   getSpeaking()              Returns the current record's "Speaking" collection
+ * @method Doctrine_Collection   getWatching()              Returns the current record's "Watching" collection
  * @method Doctrine_Collection   getSfGuardUserPermission() Returns the current record's "sfGuardUserPermission" collection
  * @method Doctrine_Collection   getSfGuardUserGroup()      Returns the current record's "sfGuardUserGroup" collection
  * @method sfGuardRememberKey    getRememberKeys()          Returns the current record's "RememberKeys" value
@@ -52,6 +62,11 @@
  * @method sfGuardUser           setLastLogin()             Sets the current record's "last_login" value
  * @method sfGuardUser           setGroups()                Sets the current record's "Groups" collection
  * @method sfGuardUser           setPermissions()           Sets the current record's "Permissions" collection
+ * @method sfGuardUser           setAttending()             Sets the current record's "Attending" collection
+ * @method sfGuardUser           setFavourites()            Sets the current record's "Favourites" collection
+ * @method sfGuardUser           setOrganising()            Sets the current record's "Organising" collection
+ * @method sfGuardUser           setSpeaking()              Sets the current record's "Speaking" collection
+ * @method sfGuardUser           setWatching()              Sets the current record's "Watching" collection
  * @method sfGuardUser           setSfGuardUserPermission() Sets the current record's "sfGuardUserPermission" collection
  * @method sfGuardUser           setSfGuardUserGroup()      Sets the current record's "sfGuardUserGroup" collection
  * @method sfGuardUser           setRememberKeys()          Sets the current record's "RememberKeys" value
@@ -135,6 +150,31 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'refClass' => 'sfGuardUserPermission',
              'local' => 'user_id',
              'foreign' => 'permission_id'));
+
+        $this->hasMany('Event as Attending', array(
+             'refClass' => 'Attendee',
+             'local' => 'user_id',
+             'foreign' => 'event_id'));
+
+        $this->hasMany('Event as Favourites', array(
+             'refClass' => 'Favouriter',
+             'local' => 'user_id',
+             'foreign' => 'event_id'));
+
+        $this->hasMany('Event as Organising', array(
+             'refClass' => 'Organiser',
+             'local' => 'user_id',
+             'foreign' => 'event_id'));
+
+        $this->hasMany('Event as Speaking', array(
+             'refClass' => 'Speaker',
+             'local' => 'user_id',
+             'foreign' => 'event_id'));
+
+        $this->hasMany('Event as Watching', array(
+             'refClass' => 'Watcher',
+             'local' => 'user_id',
+             'foreign' => 'event_id'));
 
         $this->hasMany('sfGuardUserPermission', array(
              'local' => 'id',

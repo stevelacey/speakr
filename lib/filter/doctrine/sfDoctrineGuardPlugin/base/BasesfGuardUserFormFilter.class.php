@@ -27,6 +27,11 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
       'updated_at'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'groups_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardGroup')),
       'permissions_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardPermission')),
+      'attending_list'   => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
+      'favourites_list'  => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
+      'organising_list'  => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
+      'speaking_list'    => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
+      'watching_list'    => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
     ));
 
     $this->setValidators(array(
@@ -44,6 +49,11 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
       'updated_at'       => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'groups_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardGroup', 'required' => false)),
       'permissions_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardPermission', 'required' => false)),
+      'attending_list'   => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
+      'favourites_list'  => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
+      'organising_list'  => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
+      'speaking_list'    => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
+      'watching_list'    => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('sf_guard_user_filters[%s]');
@@ -87,6 +97,86 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
           ->andWhereIn('sfGuardUserPermission.permission_id', $values);
   }
 
+  public function addAttendingListColumnQuery(Doctrine_Query $query, $field, $values)
+  {
+    if (!is_array($values))
+    {
+      $values = array($values);
+    }
+
+    if (!count($values))
+    {
+      return;
+    }
+
+    $query->leftJoin('r.Attendee Attendee')
+          ->andWhereIn('Attendee.event_id', $values);
+  }
+
+  public function addFavouritesListColumnQuery(Doctrine_Query $query, $field, $values)
+  {
+    if (!is_array($values))
+    {
+      $values = array($values);
+    }
+
+    if (!count($values))
+    {
+      return;
+    }
+
+    $query->leftJoin('r.Favouriter Favouriter')
+          ->andWhereIn('Favouriter.event_id', $values);
+  }
+
+  public function addOrganisingListColumnQuery(Doctrine_Query $query, $field, $values)
+  {
+    if (!is_array($values))
+    {
+      $values = array($values);
+    }
+
+    if (!count($values))
+    {
+      return;
+    }
+
+    $query->leftJoin('r.Organiser Organiser')
+          ->andWhereIn('Organiser.event_id', $values);
+  }
+
+  public function addSpeakingListColumnQuery(Doctrine_Query $query, $field, $values)
+  {
+    if (!is_array($values))
+    {
+      $values = array($values);
+    }
+
+    if (!count($values))
+    {
+      return;
+    }
+
+    $query->leftJoin('r.Speaker Speaker')
+          ->andWhereIn('Speaker.event_id', $values);
+  }
+
+  public function addWatchingListColumnQuery(Doctrine_Query $query, $field, $values)
+  {
+    if (!is_array($values))
+    {
+      $values = array($values);
+    }
+
+    if (!count($values))
+    {
+      return;
+    }
+
+    $query->leftJoin('r.Watcher Watcher')
+          ->andWhereIn('Watcher.event_id', $values);
+  }
+
   public function getModelName()
   {
     return 'sfGuardUser';
@@ -110,6 +200,11 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
       'updated_at'       => 'Date',
       'groups_list'      => 'ManyKey',
       'permissions_list' => 'ManyKey',
+      'attending_list'   => 'ManyKey',
+      'favourites_list'  => 'ManyKey',
+      'organising_list'  => 'ManyKey',
+      'speaking_list'    => 'ManyKey',
+      'watching_list'    => 'ManyKey',
     );
   }
 }

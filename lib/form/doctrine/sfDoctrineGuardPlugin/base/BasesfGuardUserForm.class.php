@@ -30,6 +30,11 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       'updated_at'       => new sfWidgetFormDateTime(),
       'groups_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardGroup')),
       'permissions_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardPermission')),
+      'attending_list'   => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
+      'favourites_list'  => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
+      'organising_list'  => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
+      'speaking_list'    => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
+      'watching_list'    => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
     ));
 
     $this->setValidators(array(
@@ -48,6 +53,11 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       'updated_at'       => new sfValidatorDateTime(),
       'groups_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardGroup', 'required' => false)),
       'permissions_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardPermission', 'required' => false)),
+      'attending_list'   => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
+      'favourites_list'  => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
+      'organising_list'  => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
+      'speaking_list'    => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
+      'watching_list'    => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
     ));
 
     $this->validatorSchema->setPostValidator(
@@ -85,12 +95,42 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       $this->setDefault('permissions_list', $this->object->Permissions->getPrimaryKeys());
     }
 
+    if (isset($this->widgetSchema['attending_list']))
+    {
+      $this->setDefault('attending_list', $this->object->Attending->getPrimaryKeys());
+    }
+
+    if (isset($this->widgetSchema['favourites_list']))
+    {
+      $this->setDefault('favourites_list', $this->object->Favourites->getPrimaryKeys());
+    }
+
+    if (isset($this->widgetSchema['organising_list']))
+    {
+      $this->setDefault('organising_list', $this->object->Organising->getPrimaryKeys());
+    }
+
+    if (isset($this->widgetSchema['speaking_list']))
+    {
+      $this->setDefault('speaking_list', $this->object->Speaking->getPrimaryKeys());
+    }
+
+    if (isset($this->widgetSchema['watching_list']))
+    {
+      $this->setDefault('watching_list', $this->object->Watching->getPrimaryKeys());
+    }
+
   }
 
   protected function doSave($con = null)
   {
     $this->saveGroupsList($con);
     $this->savePermissionsList($con);
+    $this->saveAttendingList($con);
+    $this->saveFavouritesList($con);
+    $this->saveOrganisingList($con);
+    $this->saveSpeakingList($con);
+    $this->saveWatchingList($con);
 
     parent::doSave($con);
   }
@@ -168,6 +208,196 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
     if (count($link))
     {
       $this->object->link('Permissions', array_values($link));
+    }
+  }
+
+  public function saveAttendingList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['attending_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->Attending->getPrimaryKeys();
+    $values = $this->getValue('attending_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('Attending', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('Attending', array_values($link));
+    }
+  }
+
+  public function saveFavouritesList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['favourites_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->Favourites->getPrimaryKeys();
+    $values = $this->getValue('favourites_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('Favourites', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('Favourites', array_values($link));
+    }
+  }
+
+  public function saveOrganisingList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['organising_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->Organising->getPrimaryKeys();
+    $values = $this->getValue('organising_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('Organising', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('Organising', array_values($link));
+    }
+  }
+
+  public function saveSpeakingList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['speaking_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->Speaking->getPrimaryKeys();
+    $values = $this->getValue('speaking_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('Speaking', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('Speaking', array_values($link));
+    }
+  }
+
+  public function saveWatchingList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['watching_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->Watching->getPrimaryKeys();
+    $values = $this->getValue('watching_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('Watching', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('Watching', array_values($link));
     }
   }
 

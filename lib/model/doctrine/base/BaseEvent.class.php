@@ -14,25 +14,40 @@
  * @property string $address
  * @property string $postcode
  * @property Conference $Conference
+ * @property Doctrine_Collection $Attending
+ * @property Doctrine_Collection $Favouriters
+ * @property Doctrine_Collection $Organisers
+ * @property Doctrine_Collection $Speakers
+ * @property Doctrine_Collection $Watchers
  * 
- * @method integer    getConferenceId()  Returns the current record's "conference_id" value
- * @method integer    getLocationId()    Returns the current record's "location_id" value
- * @method string     getTitle()         Returns the current record's "title" value
- * @method string     getDescription()   Returns the current record's "description" value
- * @method string     getUrl()           Returns the current record's "url" value
- * @method string     getHashtag()       Returns the current record's "hashtag" value
- * @method string     getAddress()       Returns the current record's "address" value
- * @method string     getPostcode()      Returns the current record's "postcode" value
- * @method Conference getConference()    Returns the current record's "Conference" value
- * @method Event      setConferenceId()  Sets the current record's "conference_id" value
- * @method Event      setLocationId()    Sets the current record's "location_id" value
- * @method Event      setTitle()         Sets the current record's "title" value
- * @method Event      setDescription()   Sets the current record's "description" value
- * @method Event      setUrl()           Sets the current record's "url" value
- * @method Event      setHashtag()       Sets the current record's "hashtag" value
- * @method Event      setAddress()       Sets the current record's "address" value
- * @method Event      setPostcode()      Sets the current record's "postcode" value
- * @method Event      setConference()    Sets the current record's "Conference" value
+ * @method integer             getConferenceId()  Returns the current record's "conference_id" value
+ * @method integer             getLocationId()    Returns the current record's "location_id" value
+ * @method string              getTitle()         Returns the current record's "title" value
+ * @method string              getDescription()   Returns the current record's "description" value
+ * @method string              getUrl()           Returns the current record's "url" value
+ * @method string              getHashtag()       Returns the current record's "hashtag" value
+ * @method string              getAddress()       Returns the current record's "address" value
+ * @method string              getPostcode()      Returns the current record's "postcode" value
+ * @method Conference          getConference()    Returns the current record's "Conference" value
+ * @method Doctrine_Collection getAttending()     Returns the current record's "Attending" collection
+ * @method Doctrine_Collection getFavouriters()   Returns the current record's "Favouriters" collection
+ * @method Doctrine_Collection getOrganisers()    Returns the current record's "Organisers" collection
+ * @method Doctrine_Collection getSpeakers()      Returns the current record's "Speakers" collection
+ * @method Doctrine_Collection getWatchers()      Returns the current record's "Watchers" collection
+ * @method Event               setConferenceId()  Sets the current record's "conference_id" value
+ * @method Event               setLocationId()    Sets the current record's "location_id" value
+ * @method Event               setTitle()         Sets the current record's "title" value
+ * @method Event               setDescription()   Sets the current record's "description" value
+ * @method Event               setUrl()           Sets the current record's "url" value
+ * @method Event               setHashtag()       Sets the current record's "hashtag" value
+ * @method Event               setAddress()       Sets the current record's "address" value
+ * @method Event               setPostcode()      Sets the current record's "postcode" value
+ * @method Event               setConference()    Sets the current record's "Conference" value
+ * @method Event               setAttending()     Sets the current record's "Attending" collection
+ * @method Event               setFavouriters()   Sets the current record's "Favouriters" collection
+ * @method Event               setOrganisers()    Sets the current record's "Organisers" collection
+ * @method Event               setSpeakers()      Sets the current record's "Speakers" collection
+ * @method Event               setWatchers()      Sets the current record's "Watchers" collection
  * 
  * @package    speakr
  * @subpackage model
@@ -44,15 +59,15 @@ abstract class BaseEvent extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('event');
-        $this->hasColumn('conference_id', 'integer', 11, array(
+        $this->hasColumn('conference_id', 'integer', 20, array(
              'type' => 'integer',
              'notnull' => true,
-             'length' => '11',
+             'length' => '20',
              ));
-        $this->hasColumn('location_id', 'integer', 11, array(
+        $this->hasColumn('location_id', 'integer', 20, array(
              'type' => 'integer',
              'notnull' => true,
-             'length' => '11',
+             'length' => '20',
              ));
         $this->hasColumn('title', 'string', 255, array(
              'type' => 'string',
@@ -92,6 +107,31 @@ abstract class BaseEvent extends sfDoctrineRecord
         $this->hasOne('Conference', array(
              'local' => 'conference_id',
              'foreign' => 'id'));
+
+        $this->hasMany('sfGuardUser as Attending', array(
+             'refClass' => 'Attendee',
+             'local' => 'event_id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('sfGuardUser as Favouriters', array(
+             'refClass' => 'Favouriter',
+             'local' => 'event_id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('sfGuardUser as Organisers', array(
+             'refClass' => 'Organiser',
+             'local' => 'event_id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('sfGuardUser as Speakers', array(
+             'refClass' => 'Speaker',
+             'local' => 'event_id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('sfGuardUser as Watchers', array(
+             'refClass' => 'Watcher',
+             'local' => 'event_id',
+             'foreign' => 'user_id'));
 
         $sluggable0 = new Doctrine_Template_Sluggable();
         $timestampable0 = new Doctrine_Template_Timestampable();

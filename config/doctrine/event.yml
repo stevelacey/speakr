@@ -1,0 +1,74 @@
+Conference:
+  actAs:
+    Sluggable: ~
+    Timestampable: ~
+  columns:
+    title:
+      type: string(255)
+      notnull: true
+
+Event:
+  actAs:
+    Sluggable: ~
+    Timestampable: ~
+  columns:
+    conference_id:
+      type: integer(20)
+      notnull: true
+    location_id:
+      type: integer(20)
+      notnull: true
+    title:
+      type: string(255)
+      notnull: true
+    description:
+      type: string(255)
+      notnull: true
+    url:
+      type: string(255)
+      notnull: true
+    hashtag:
+      type: string(20)
+      notnull: true
+    address:
+      type: string(255)
+      notnull: true
+    postcode:
+      type: string(8)
+      notnull: true
+  relations:
+    Conference:
+      class: Conference
+      local: conference_id
+      foreign: id
+      foreignAlias: Events
+    Attending:
+      class: sfGuardUser
+      refClass: Attendee
+      local: event_id
+      foreign: user_id
+      foreignAlias: Attending
+    Favouriters:
+      class: sfGuardUser
+      refClass: Favouriter
+      local: event_id
+      foreign: user_id
+      foreignAlias: Favourites
+    Organisers:
+      class: sfGuardUser
+      refClass: Organiser
+      local: event_id
+      foreign: user_id
+      foreignAlias: Organising
+    Speakers:
+      class: sfGuardUser
+      refClass: Speaker
+      local: event_id
+      foreign: user_id
+      foreignAlias: Speaking
+    Watchers:
+      class: sfGuardUser
+      refClass: Watcher
+      local: event_id
+      foreign: user_id
+      foreignAlias: Watching
