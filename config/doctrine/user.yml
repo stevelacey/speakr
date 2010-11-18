@@ -84,15 +84,6 @@ Speaker:
       type: integer(20)
       primary: true
 
-Organiser:
-  columns:
-    user_id:
-      type: integer(20)
-      primary: true
-    event_id:
-      type: integer(20)
-      primary: true
-
 Watcher:
   columns:
     user_id:
