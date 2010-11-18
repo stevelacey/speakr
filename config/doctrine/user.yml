@@ -33,9 +33,10 @@ sfGuardUser:
 
 sfGuardUserProfile:
   actAs:
+    Sluggable: ~
     Timestampable: ~
   columns:
-    name: string(255)
+    name: string(50)
     description: string(255)
     website: string(255)
     image: string(255)

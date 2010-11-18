@@ -21,20 +21,26 @@ abstract class BasesfGuardUserProfileForm extends BaseFormDoctrine
       'website'     => new sfWidgetFormInputText(),
       'image'       => new sfWidgetFormInputText(),
       'icon'        => new sfWidgetFormInputText(),
+      'slug'        => new sfWidgetFormInputText(),
       'created_at'  => new sfWidgetFormDateTime(),
       'updated_at'  => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
       'id'          => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
-      'name'        => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'name'        => new sfValidatorString(array('max_length' => 50, 'required' => false)),
       'description' => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'website'     => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'image'       => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'icon'        => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'slug'        => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'created_at'  => new sfValidatorDateTime(),
       'updated_at'  => new sfValidatorDateTime(),
     ));
+
+    $this->validatorSchema->setPostValidator(
+      new sfValidatorDoctrineUnique(array('model' => 'sfGuardUserProfile', 'column' => array('slug')))
+    );
 
     $this->widgetSchema->setNameFormat('sf_guard_user_profile[%s]');
 

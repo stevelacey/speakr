@@ -35,9 +35,9 @@ abstract class BasesfGuardUserProfile extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('sf_guard_user_profile');
-        $this->hasColumn('name', 'string', 255, array(
+        $this->hasColumn('name', 'string', 50, array(
              'type' => 'string',
-             'length' => '255',
+             'length' => '50',
              ));
         $this->hasColumn('description', 'string', 255, array(
              'type' => 'string',
@@ -64,7 +64,9 @@ abstract class BasesfGuardUserProfile extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'id'));
 
+        $sluggable0 = new Doctrine_Template_Sluggable();
         $timestampable0 = new Doctrine_Template_Timestampable();
+        $this->actAs($sluggable0);
         $this->actAs($timestampable0);
     }
 }

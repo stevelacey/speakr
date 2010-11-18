@@ -9,24 +9,27 @@ Conference:
 
 Event:
   actAs:
-    Sluggable: ~
+    Sluggable:
+      fields: [tagline]
+      unique: true
     Timestampable: ~
   columns:
     conference_id:
       type: integer(20)
       notnull: true
+    tagline: string(50)
+    date:
+      type: timestamp
+      notnull: true
     location_id:
       type: integer(20)
-      notnull: true
-    title:
-      type: string(255)
       notnull: true
     description:
       type: string(255)
       notnull: true
-    url:
-      type: string(255)
-      notnull: true
+    url: string(255)
+    image: string(255)
+    icon: string(255)
     hashtag:
       type: string(20)
       notnull: true
