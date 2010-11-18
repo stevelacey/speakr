@@ -17,7 +17,7 @@ abstract class BaseEventForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'id'               => new sfWidgetFormInputHidden(),
       'conference_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Conference'), 'add_empty' => false)),
-      'location_id'      => new sfWidgetFormInputText(),
+      'location_id'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Location'), 'add_empty' => false)),
       'title'            => new sfWidgetFormInputText(),
       'description'      => new sfWidgetFormInputText(),
       'url'              => new sfWidgetFormInputText(),
@@ -37,7 +37,7 @@ abstract class BaseEventForm extends BaseFormDoctrine
     $this->setValidators(array(
       'id'               => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'conference_id'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Conference'))),
-      'location_id'      => new sfValidatorInteger(),
+      'location_id'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Location'))),
       'title'            => new sfValidatorString(array('max_length' => 255)),
       'description'      => new sfValidatorString(array('max_length' => 255)),
       'url'              => new sfValidatorString(array('max_length' => 255)),

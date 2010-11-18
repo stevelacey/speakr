@@ -14,6 +14,7 @@
  * @property string $address
  * @property string $postcode
  * @property Conference $Conference
+ * @property Location $Location
  * @property Doctrine_Collection $Attending
  * @property Doctrine_Collection $Favouriters
  * @property Doctrine_Collection $Organisers
@@ -30,6 +31,7 @@
  * @method string              getAddress()       Returns the current record's "address" value
  * @method string              getPostcode()      Returns the current record's "postcode" value
  * @method Conference          getConference()    Returns the current record's "Conference" value
+ * @method Location            getLocation()      Returns the current record's "Location" value
  * @method Doctrine_Collection getAttending()     Returns the current record's "Attending" collection
  * @method Doctrine_Collection getFavouriters()   Returns the current record's "Favouriters" collection
  * @method Doctrine_Collection getOrganisers()    Returns the current record's "Organisers" collection
@@ -45,6 +47,7 @@
  * @method Event               setAddress()       Sets the current record's "address" value
  * @method Event               setPostcode()      Sets the current record's "postcode" value
  * @method Event               setConference()    Sets the current record's "Conference" value
+ * @method Event               setLocation()      Sets the current record's "Location" value
  * @method Event               setAttending()     Sets the current record's "Attending" collection
  * @method Event               setFavouriters()   Sets the current record's "Favouriters" collection
  * @method Event               setOrganisers()    Sets the current record's "Organisers" collection
@@ -109,6 +112,10 @@ abstract class BaseEvent extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('Conference', array(
              'local' => 'conference_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('Location', array(
+             'local' => 'location_id',
              'foreign' => 'id'));
 
         $this->hasMany('sfGuardUser as Attending', array(

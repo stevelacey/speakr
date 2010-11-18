@@ -38,8 +38,11 @@ Event:
       notnull: true
   relations:
     Conference:
-      class: Conference
       local: conference_id
+      foreign: id
+      foreignAlias: Events
+    Location:
+      local: location_id
       foreign: id
       foreignAlias: Events
     Attending:
@@ -72,3 +75,27 @@ Event:
       local: event_id
       foreign: user_id
       foreignAlias: Watching
+
+Location:
+  actAs:
+    Sluggable: ~
+  columns:
+    country_id:
+      type: integer(20)
+      notnull: true
+    name:
+      type: string(255)
+      notnull: true
+  relations:
+    Country:
+      local: country_id
+      foreign: id
+      foreignAlias: Locations
+
+Country:
+  actAs:
+    Sluggable: ~
+  columns:
+    name:
+      type: string(255)
+      notnull: true

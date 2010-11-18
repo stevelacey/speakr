@@ -14,7 +14,7 @@ abstract class BaseEventFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'conference_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Conference'), 'add_empty' => true)),
-      'location_id'      => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'location_id'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Location'), 'add_empty' => true)),
       'title'            => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'description'      => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'url'              => new sfWidgetFormFilterInput(array('with_empty' => false)),
@@ -33,7 +33,7 @@ abstract class BaseEventFormFilter extends BaseFormFilterDoctrine
 
     $this->setValidators(array(
       'conference_id'    => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Conference'), 'column' => 'id')),
-      'location_id'      => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'location_id'      => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Location'), 'column' => 'id')),
       'title'            => new sfValidatorPass(array('required' => false)),
       'description'      => new sfValidatorPass(array('required' => false)),
       'url'              => new sfValidatorPass(array('required' => false)),
@@ -149,7 +149,7 @@ abstract class BaseEventFormFilter extends BaseFormFilterDoctrine
     return array(
       'id'               => 'Number',
       'conference_id'    => 'ForeignKey',
-      'location_id'      => 'Number',
+      'location_id'      => 'ForeignKey',
       'title'            => 'Text',
       'description'      => 'Text',
       'url'              => 'Text',
