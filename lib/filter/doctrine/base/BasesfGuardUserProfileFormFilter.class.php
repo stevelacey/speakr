@@ -13,7 +13,6 @@ abstract class BasesfGuardUserProfileFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'user_id'     => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('User'), 'add_empty' => true)),
       'name'        => new sfWidgetFormFilterInput(),
       'description' => new sfWidgetFormFilterInput(),
       'website'     => new sfWidgetFormFilterInput(),
@@ -24,7 +23,6 @@ abstract class BasesfGuardUserProfileFormFilter extends BaseFormFilterDoctrine
     ));
 
     $this->setValidators(array(
-      'user_id'     => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('User'), 'column' => 'id')),
       'name'        => new sfValidatorPass(array('required' => false)),
       'description' => new sfValidatorPass(array('required' => false)),
       'website'     => new sfValidatorPass(array('required' => false)),
@@ -52,7 +50,6 @@ abstract class BasesfGuardUserProfileFormFilter extends BaseFormFilterDoctrine
   {
     return array(
       'id'          => 'Number',
-      'user_id'     => 'ForeignKey',
       'name'        => 'Text',
       'description' => 'Text',
       'website'     => 'Text',

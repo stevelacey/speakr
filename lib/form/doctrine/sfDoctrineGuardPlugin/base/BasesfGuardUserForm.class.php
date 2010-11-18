@@ -35,6 +35,7 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       'organising_list'  => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
       'speaking_list'    => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
       'watching_list'    => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
+      'presenters_list'  => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Presentation')),
     ));
 
     $this->setValidators(array(
@@ -58,6 +59,7 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       'organising_list'  => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
       'speaking_list'    => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
       'watching_list'    => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
+      'presenters_list'  => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Presentation', 'required' => false)),
     ));
 
     $this->validatorSchema->setPostValidator(
@@ -120,6 +122,11 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       $this->setDefault('watching_list', $this->object->Watching->getPrimaryKeys());
     }
 
+    if (isset($this->widgetSchema['presenters_list']))
+    {
+      $this->setDefault('presenters_list', $this->object->Presenters->getPrimaryKeys());
+    }
+
   }
 
   protected function doSave($con = null)
@@ -131,6 +138,7 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
     $this->saveOrganisingList($con);
     $this->saveSpeakingList($con);
     $this->saveWatchingList($con);
+    $this->savePresentersList($con);
 
     parent::doSave($con);
   }
@@ -398,6 +406,44 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
     if (count($link))
     {
       $this->object->link('Watching', array_values($link));
+    }
+  }
+
+  public function savePresentersList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['presenters_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->Presenters->getPrimaryKeys();
+    $values = $this->getValue('presenters_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('Presenters', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('Presenters', array_values($link));
     }
   }
 

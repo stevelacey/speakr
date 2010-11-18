@@ -26,6 +26,7 @@
  * @property Doctrine_Collection $sfGuardUserGroup
  * @property sfGuardRememberKey $RememberKeys
  * @property sfGuardForgotPassword $ForgotPassword
+ * @property Doctrine_Collection $Presenters
  * @property sfGuardUserProfile $Profile
  * 
  * @method string                getFirstName()             Returns the current record's "first_name" value
@@ -49,6 +50,7 @@
  * @method Doctrine_Collection   getSfGuardUserGroup()      Returns the current record's "sfGuardUserGroup" collection
  * @method sfGuardRememberKey    getRememberKeys()          Returns the current record's "RememberKeys" value
  * @method sfGuardForgotPassword getForgotPassword()        Returns the current record's "ForgotPassword" value
+ * @method Doctrine_Collection   getPresenters()            Returns the current record's "Presenters" collection
  * @method sfGuardUserProfile    getProfile()               Returns the current record's "Profile" value
  * @method sfGuardUser           setFirstName()             Sets the current record's "first_name" value
  * @method sfGuardUser           setLastName()              Sets the current record's "last_name" value
@@ -71,6 +73,7 @@
  * @method sfGuardUser           setSfGuardUserGroup()      Sets the current record's "sfGuardUserGroup" collection
  * @method sfGuardUser           setRememberKeys()          Sets the current record's "RememberKeys" value
  * @method sfGuardUser           setForgotPassword()        Sets the current record's "ForgotPassword" value
+ * @method sfGuardUser           setPresenters()            Sets the current record's "Presenters" collection
  * @method sfGuardUser           setProfile()               Sets the current record's "Profile" value
  * 
  * @package    speakr
@@ -192,9 +195,14 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'user_id'));
 
+        $this->hasMany('Presentation as Presenters', array(
+             'refClass' => 'PresentationUser',
+             'local' => 'user_id',
+             'foreign' => 'presentation_id'));
+
         $this->hasOne('sfGuardUserProfile as Profile', array(
              'local' => 'id',
-             'foreign' => 'user_id'));
+             'foreign' => 'id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);

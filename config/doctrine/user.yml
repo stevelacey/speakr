@@ -35,23 +35,15 @@ sfGuardUserProfile:
   actAs:
     Timestampable: ~
   columns:
-    user_id:
-      type: integer(20)
-      notnull: true
-    name:
-      type: string(255)
-    description:
-      type: string(255)
-    website:
-      type: string(255)
-    image:
-      type: string(255)
-    icon:
-      type: string(255)
+    name: string(255)
+    description: string(255)
+    website: string(255)
+    image: string(255)
+    icon: string(255)
   relations:
     User:
       class: sfGuardUser
-      local: user_id
+      local: id
       foreign: id
       foreignAlias: Profile
       foreignType: one
@@ -84,6 +76,15 @@ Organiser:
       primary: true
 
 Speaker:
+  columns:
+    user_id:
+      type: integer(20)
+      primary: true
+    event_id:
+      type: integer(20)
+      primary: true
+
+Organiser:
   columns:
     user_id:
       type: integer(20)

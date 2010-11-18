@@ -1,0 +1,47 @@
+Presentation:
+  columns:
+    event_id:
+      type: integer(20)
+    content_id:
+      type: integer(20)
+  indexes:
+    event_id_content_id:
+      fields:
+        - event_id
+        - content_id
+      type: unique
+  relations:
+    Event:
+      class: Event
+      local: event_id
+      foreign: id
+      foreignAlias: Presentations
+    Content:
+      class: Content
+      local: content_id
+      foreign: id
+      foreignAlias: Presentations
+    Presenters:
+      class: sfGuardUser
+      refClass: PresentationUser
+      local: presentation_id
+      foreign: user_id
+      foreignAlias: Presenters
+
+PresentationUser:
+  columns:
+    presentation_id:
+      type: integer(20)
+      primary: true
+    user_id:
+      type: integer(20)
+      primary: true
+
+Content:
+  columns:
+    title:
+      type: string(255)
+      notnull: true
+    description:
+      type: string()
+      notnull: true

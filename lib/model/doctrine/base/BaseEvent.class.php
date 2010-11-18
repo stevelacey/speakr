@@ -19,6 +19,7 @@
  * @property Doctrine_Collection $Organisers
  * @property Doctrine_Collection $Speakers
  * @property Doctrine_Collection $Watchers
+ * @property Doctrine_Collection $Presentations
  * 
  * @method integer             getConferenceId()  Returns the current record's "conference_id" value
  * @method integer             getLocationId()    Returns the current record's "location_id" value
@@ -34,6 +35,7 @@
  * @method Doctrine_Collection getOrganisers()    Returns the current record's "Organisers" collection
  * @method Doctrine_Collection getSpeakers()      Returns the current record's "Speakers" collection
  * @method Doctrine_Collection getWatchers()      Returns the current record's "Watchers" collection
+ * @method Doctrine_Collection getPresentations() Returns the current record's "Presentations" collection
  * @method Event               setConferenceId()  Sets the current record's "conference_id" value
  * @method Event               setLocationId()    Sets the current record's "location_id" value
  * @method Event               setTitle()         Sets the current record's "title" value
@@ -48,6 +50,7 @@
  * @method Event               setOrganisers()    Sets the current record's "Organisers" collection
  * @method Event               setSpeakers()      Sets the current record's "Speakers" collection
  * @method Event               setWatchers()      Sets the current record's "Watchers" collection
+ * @method Event               setPresentations() Sets the current record's "Presentations" collection
  * 
  * @package    speakr
  * @subpackage model
@@ -132,6 +135,10 @@ abstract class BaseEvent extends sfDoctrineRecord
              'refClass' => 'Watcher',
              'local' => 'event_id',
              'foreign' => 'user_id'));
+
+        $this->hasMany('Presentation as Presentations', array(
+             'local' => 'id',
+             'foreign' => 'event_id'));
 
         $sluggable0 = new Doctrine_Template_Sluggable();
         $timestampable0 = new Doctrine_Template_Timestampable();
