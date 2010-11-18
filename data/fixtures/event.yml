@@ -1,0 +1,50 @@
+Event:
+  Bathcamp08:
+    Conference: Bathcamp
+    date: '2008-05-01'
+    Location: Bath
+    description: Bathcamp in 2008
+    hashtag: bathcamp
+    address: Address
+    postcode: BA1 011
+  Bathcamp09:
+    Conference: Bathcamp
+    date: '2009-03-13'
+    Location: Bath
+    description: Bathcamp in 2009
+    hashtag: bathcamp
+    address: Address
+    postcode: BA1 011
+  Bathcamp10:
+    Conference: Bathcamp
+    date: '2010-10-21'
+    tagline: Return of the Bathcamp
+    Location: Bath
+    description: Bathcamp in 2010
+    hashtag: bathcamp
+    address: Chapel Arts Centre, 9 Lower Borough Walls
+    postcode: BA1 1QR
+  WDC08:
+    Conference: WDC
+    date: '2008-10-14'
+    Location: Bristol
+    description: Web Developers Conference 2008
+    hashtag: wdc08
+    address: Watershed
+    postcode: BS1 0TU
+  WDC09:
+    Conference: WDC
+    date: '2009-10-14'
+    Location: Bristol
+    description: Web Developers Conference 2009
+    hashtag: wdc09
+    address: Watershed
+    postcode: BS1 0TU
+  WDC10:
+    Conference: WDC
+    date: '2010-10-14'
+    Location: Bristol
+    description: Web Developers Conference 2010
+    hashtag: wdc10
+    address: Exhibitions and Conferences Centre
+    postcode: BS16 1ZG

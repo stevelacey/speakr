@@ -1,0 +1,50 @@
+sfGuardUser:
+  sfGuardUser_11262212:
+    id: 11262212
+    first_name: Steve
+    last_name: Lacey
+    email_address: stevelacey
+    username: stevelacey
+    algorithm: sha1
+    salt: 8aa220d7849066a3ea685f3f8e56ccf0
+    password: f11432f815949299c27461efd41dd06cde7e487a
+    is_active: true
+    is_super_admin: true
+    last_login: '2010-11-17 21:22:48'
+    created_at: '2010-11-16 18:57:10'
+    updated_at: '2010-11-17 21:22:48'
+  sfGuardUser_14112618:
+    id: 14112618
+    first_name: Byrion
+    last_name: Smith
+    email_address: byrion
+    username: byrion
+    algorithm: sha1
+    salt: 88265c6bad96eaa647b08387ad6c91eb
+    password: 76d0e8c79bdafa10a316226ae33309b07759a552
+    is_active: true
+    is_super_admin: false
+    last_login: '2010-11-16 19:35:42'
+    created_at: '2010-11-16 19:35:42'
+    updated_at: '2010-11-16 19:35:42'
+sfGuardUserProfile:
+  sfGuardUserProfile_1:
+    id: 11262212
+    User: sfGuardUser_11262212
+    name: 'Steve Lacey'
+    description: 'Bristol based Web Developer enduring my final year of BSc Web Design at UWE.'
+    website: 'http://stevelacey.net'
+    image: 'http://a2.twimg.com/profile_images/694030230/Steve_-_Frankie___Bennies_normal.png'
+    icon: 'http://a2.twimg.com/profile_images/694030230/Steve_-_Frankie___Bennies_mini.png'
+    created_at: '2010-11-16 18:57:10'
+    updated_at: '2010-11-17 00:45:48'
+  sfGuardUserProfile_2:
+    id: 14112618
+    User: sfGuardUser_14112618
+    name: 'Byrion Smith'
+    description: 'Final year BSc Computing student with a passion for technology, programming and media.'
+    website: 'http://byrion.com'
+    image: 'http://a0.twimg.com/profile_images/739932764/3520866589_01bcb51e0a_s_normal.jpg'
+    icon: 'http://a0.twimg.com/profile_images/739932764/3520866589_01bcb51e0a_s_mini.jpg'
+    created_at: '2010-11-16 19:35:42'
+    updated_at: '2010-11-17 00:45:02'
