@@ -6,12 +6,15 @@ Conference:
     title:
       type: string(255)
       notnull: true
+    url: string(255)
+    image: string(255)
+    icon: string(255)
 
 Event:
   actAs:
     Sluggable:
       fields: [tagline]
-      unique: true
+      unique: false
     Timestampable: ~
   columns:
     conference_id:

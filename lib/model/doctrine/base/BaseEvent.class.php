@@ -171,7 +171,7 @@ abstract class BaseEvent extends sfDoctrineRecord
              array(
               0 => 'tagline',
              ),
-             'unique' => true,
+             'unique' => false,
              ));
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($sluggable0);

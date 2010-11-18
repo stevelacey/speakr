@@ -60,10 +60,6 @@ abstract class BaseEventForm extends BaseFormDoctrine
       'watchers_list'    => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser', 'required' => false)),
     ));
 
-    $this->validatorSchema->setPostValidator(
-      new sfValidatorDoctrineUnique(array('model' => 'Event', 'column' => array('slug')))
-    );
-
     $this->widgetSchema->setNameFormat('event[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
