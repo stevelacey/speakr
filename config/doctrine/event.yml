@@ -9,12 +9,11 @@ Conference:
     url: string(255)
     image: string(255)
     icon: string(255)
+  options:
+    orderBy: title DESC
 
 Event:
   actAs:
-    Sluggable:
-      fields: [tagline]
-      unique: false
     Timestampable: ~
   columns:
     conference_id:
@@ -81,6 +80,8 @@ Event:
       local: event_id
       foreign: user_id
       foreignAlias: Watching
+  options:
+    orderBy: date DESC
 
 Location:
   actAs:
@@ -97,6 +98,8 @@ Location:
       local: country_id
       foreign: id
       foreignAlias: Locations
+  options:
+    orderBy: name DESC
 
 Country:
   actAs:
@@ -105,3 +108,5 @@ Country:
     name:
       type: string(255)
       notnull: true
+  options:
+    orderBy: name DESC

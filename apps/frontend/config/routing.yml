@@ -28,6 +28,17 @@ logout:
     module: sfTwitterAuth
     action: logout
 
+event:
+  class: sfDoctrineRoute
+  url: /:slug
+  options:
+    model: Event
+    method: findBySlug
+    type: object
+  param:
+    module: event
+    action: show
+
 profile:
   class: sfDoctrineRoute
   url: /user/:username

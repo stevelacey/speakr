@@ -17,5 +17,6 @@ class homepageActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request) {
     $this->user = $this->getUser();
+    $this->events = Doctrine::getTable('Event')->getUpcoming();
   }
 }

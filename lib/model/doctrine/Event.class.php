@@ -10,6 +10,16 @@
  * @author     Your name here
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
-class Event extends BaseEvent
-{
+class Event extends BaseEvent {
+  public function getTitle() {
+    return $this->getConference()->getTitle().' '.$this->getDateTimeObject('date')->format('Y');
+  }
+
+  public function getSlug() {
+    return $this->getConference()->getSlug().'-'.$this->getDateTimeObject('date')->format('Y');
+  }
+
+  public function getWebsite() {
+    return $this->getUrl() == null ? $this->getConference()->getUrl() : $this->getUrl();
+  }
 }

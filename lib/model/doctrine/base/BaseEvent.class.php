@@ -124,6 +124,8 @@ abstract class BaseEvent extends sfDoctrineRecord
              'notnull' => true,
              'length' => '8',
              ));
+
+        $this->option('orderBy', 'date DESC');
     }
 
     public function setUp()
@@ -166,15 +168,7 @@ abstract class BaseEvent extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'event_id'));
 
-        $sluggable0 = new Doctrine_Template_Sluggable(array(
-             'fields' => 
-             array(
-              0 => 'tagline',
-             ),
-             'unique' => false,
-             ));
         $timestampable0 = new Doctrine_Template_Timestampable();
-        $this->actAs($sluggable0);
         $this->actAs($timestampable0);
     }
 }
