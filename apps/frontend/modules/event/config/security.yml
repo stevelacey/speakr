@@ -1,0 +1,8 @@
+all:
+  is_secure: true
+
+index:
+  is_secure: false
+
+show:
+  is_secure: false
