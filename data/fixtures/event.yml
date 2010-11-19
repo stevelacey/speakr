@@ -24,9 +24,25 @@ Event:
     hashtag: bathcamp
     address: Chapel Arts Centre, 9 Lower Borough Walls
     postcode: BA1 1QR
+  FOWD11:
+    Conference: FOWD
+    date: '2011-03-13'
+    Location: Bristol
+    description: Future of Web Design London 2011
+    hashtag: fowd11
+    address: Somewhere
+    postcode: BS1 2DC
+  FOWA11:
+    Conference: FOWA
+    date: '2011-02-16'
+    Location: Bristol
+    description: Future of Web Applications San Francisco 2011
+    hashtag: fowd11
+    address: Somewhere
+    postcode: 4391945
   WDC08:
     Conference: WDC
-    date: '2008-10-14'
+    date: '2008-08-22'
     Location: Bristol
     description: Web Developers Conference 2008
     hashtag: wdc08
@@ -42,7 +58,7 @@ Event:
     postcode: BS1 0TU
   WDC10:
     Conference: WDC
-    date: '2010-10-14'
+    date: '2010-11-04'
     Location: Bristol
     description: Web Developers Conference 2010
     hashtag: wdc10
