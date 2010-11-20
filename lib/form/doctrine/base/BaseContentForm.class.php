@@ -18,13 +18,23 @@ abstract class BaseContentForm extends BaseFormDoctrine
       'id'          => new sfWidgetFormInputHidden(),
       'title'       => new sfWidgetFormInputText(),
       'description' => new sfWidgetFormTextarea(),
+      'slug'        => new sfWidgetFormInputText(),
+      'created_at'  => new sfWidgetFormDateTime(),
+      'updated_at'  => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
       'id'          => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'title'       => new sfValidatorString(array('max_length' => 255)),
       'description' => new sfValidatorString(),
+      'slug'        => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'created_at'  => new sfValidatorDateTime(),
+      'updated_at'  => new sfValidatorDateTime(),
     ));
+
+    $this->validatorSchema->setPostValidator(
+      new sfValidatorDoctrineUnique(array('model' => 'Content', 'column' => array('slug')))
+    );
 
     $this->widgetSchema->setNameFormat('content[%s]');
 

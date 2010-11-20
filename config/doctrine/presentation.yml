@@ -38,6 +38,9 @@ PresentationUser:
       primary: true
 
 Content:
+  actAs:
+    Sluggable: ~
+    Timestampable: ~
   columns:
     title:
       type: string(255)

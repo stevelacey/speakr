@@ -44,5 +44,10 @@ abstract class BaseContent extends sfDoctrineRecord
         $this->hasMany('Presentation as Presentations', array(
              'local' => 'id',
              'foreign' => 'content_id'));
+
+        $sluggable0 = new Doctrine_Template_Sluggable();
+        $timestampable0 = new Doctrine_Template_Timestampable();
+        $this->actAs($sluggable0);
+        $this->actAs($timestampable0);
     }
 }
