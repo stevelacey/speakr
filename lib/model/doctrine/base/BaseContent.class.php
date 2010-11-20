@@ -36,6 +36,8 @@ abstract class BaseContent extends sfDoctrineRecord
              'notnull' => true,
              'length' => '',
              ));
+
+        $this->option('orderBy', 'title ASC');
     }
 
     public function setUp()

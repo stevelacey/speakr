@@ -50,7 +50,7 @@ abstract class BaseConference extends sfDoctrineRecord
              'length' => '255',
              ));
 
-        $this->option('orderBy', 'title DESC');
+        $this->option('orderBy', 'title ASC');
     }
 
     public function setUp()

@@ -125,7 +125,7 @@ abstract class BaseEvent extends sfDoctrineRecord
              'length' => '8',
              ));
 
-        $this->option('orderBy', 'date DESC');
+        $this->option('orderBy', 'date ASC');
     }
 
     public function setUp()

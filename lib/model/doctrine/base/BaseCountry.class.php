@@ -29,7 +29,7 @@ abstract class BaseCountry extends sfDoctrineRecord
              'length' => '255',
              ));
 
-        $this->option('orderBy', 'name DESC');
+        $this->option('orderBy', 'name ASC');
     }
 
     public function setUp()

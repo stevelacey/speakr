@@ -10,7 +10,7 @@ Conference:
     image: string(255)
     icon: string(255)
   options:
-    orderBy: title DESC
+    orderBy: title ASC
 
 Event:
   actAs:
@@ -81,7 +81,7 @@ Event:
       foreign: user_id
       foreignAlias: Watching
   options:
-    orderBy: date DESC
+    orderBy: date ASC
 
 Location:
   actAs:
@@ -99,7 +99,7 @@ Location:
       foreign: id
       foreignAlias: Locations
   options:
-    orderBy: name DESC
+    orderBy: name ASC
 
 Country:
   actAs:
@@ -109,4 +109,4 @@ Country:
       type: string(255)
       notnull: true
   options:
-    orderBy: name DESC
+    orderBy: name ASC

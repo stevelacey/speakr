@@ -48,3 +48,5 @@ Content:
     description:
       type: string()
       notnull: true
+  options:
+    orderBy: title ASC
