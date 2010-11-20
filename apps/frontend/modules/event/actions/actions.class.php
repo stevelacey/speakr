@@ -20,17 +20,15 @@ class eventActions extends sfActions {
   }
 
   public function executeNew(sfWebRequest $request) {
-    $this->form = new EventForm();
-  }
+    $this->form = new ConferenceEventForm();
 
-  public function executeCreate(sfWebRequest $request) {
-    $this->forward404Unless($request->isMethod(sfRequest::POST));
-
-    $this->form = new EventForm();
-
-    $this->processForm($request, $this->form);
-
-    $this->setTemplate('new');
+    if($request->isMethod(sfRequest::POST)) {
+      $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+      if ($this->form->isValid()) {
+        $this->form->save();
+        $this->redirect('event', $this->form->event);
+      }
+    }
   }
 
   public function executeEdit(sfWebRequest $request) {
@@ -55,14 +53,5 @@ class eventActions extends sfActions {
     $event->delete();
 
     $this->redirect('event/index');
-  }
-
-  protected function processForm(sfWebRequest $request, sfForm $form) {
-    $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
-    if ($form->isValid()) {
-      $event = $form->save();
-
-      $this->redirect('event/edit?id='.$event->getId());
-    }
   }
 }

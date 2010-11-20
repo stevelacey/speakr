@@ -28,6 +28,12 @@ logout:
     module: sfTwitterAuth
     action: logout
 
+new:
+  url: /new
+  param:
+    module: event
+    action: new
+
 event:
   class: sfDoctrineRoute
   url: /:slug

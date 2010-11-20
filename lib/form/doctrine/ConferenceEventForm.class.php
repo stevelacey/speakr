@@ -8,8 +8,14 @@
  * @author     Your name here
  * @version    SVN: $Id: sfDoctrineFormTemplate.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class ConferenceForm extends BaseConferenceForm {
+class ConferenceEventForm extends ConferenceForm {
+  public $event;
+
   public function configure() {
-    $this->useFields(array('title', 'url', 'image'));
+    parent::configure();
+
+    $this->event = new Event();
+    $this->event->setConference($this->getObject());
+    $this->embedForm('event', new EventForm($this->event));
   }
 }

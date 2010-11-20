@@ -13,7 +13,7 @@
     <header>
       <?php echo link_to('Speakr', '@homepage') ?>
       <?php if($sf_user->isAuthenticated()) : ?>
-        logged in as: <?php echo link_to(image_tag($user->getIcon()).$user, 'profile', $user) ?>, <?php echo link_to('logout', 'logout') ?>
+        <?php echo link_to('new event', 'new') ?> logged in as: <?php echo link_to(image_tag($user->getIcon()).$user, 'profile', $user) ?>, <?php echo link_to('logout', 'logout') ?>
       <?php else : ?>
         <?php echo link_to('Login with Twitter', 'login') ?>
       <?php endif ?>
