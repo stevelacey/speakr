@@ -4,3 +4,6 @@
 [submodule "plugins/sfDoctrineGuardPlugin"]
 	path = plugins/sfDoctrineGuardPlugin
 	url = https://github.com/pycmam/sfDoctrineGuardPlugin.git
+[submodule "plugins/sfTwitterAuthPlugin"]
+	path = plugins/sfTwitterAuthPlugin
+	url = git@github.com:stevelacey/sfTwitterAuthPlugin.git
