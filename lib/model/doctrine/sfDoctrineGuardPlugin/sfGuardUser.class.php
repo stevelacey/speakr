@@ -11,6 +11,30 @@
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 class sfGuardUser extends PluginsfGuardUser {
+  public function isAttending(Event $event) {
+    return $this->isRelatedToEventAs($event, 'Attendee');
+  }
+
+  public function isFavouriter(Event $event) {
+    return $this->isRelatedToEventAs($event, 'Favouriter');
+  }
+
+  public function isOrganising(Event $event) {
+    return $this->isRelatedToEventAs($event, 'Organiser');
+  }
+
+  public function isSpeaking(Event $event) {
+    return $this->isRelatedToEventAs($event, 'Speaker');
+  }
+
+  public function isWatching(Event $event) {
+    return $this->isRelatedToEventAs($event, 'Watcher');
+  }
+
+  public function isRelatedToEventAs(Event $event, $status) {
+    return Doctrine_Query::create()->from($status)->where('user_id = ?', $this->getId())->fetchOne() instanceOf $status;
+  }
+
   public function __call($method, $arguments) {
     try {
       return parent::__call($method, $arguments);

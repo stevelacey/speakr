@@ -3,9 +3,26 @@
 
 <?php echo $event->getDateTimeObject('date')->format('l jS F Y') ?>
 
-<p><?php echo $event->getDescription() ?></p>
-<a href="<?php echo $event->getWebsite() ?>">Visit Website</a>
+<?php if($sf_user->isAuthenticated()) : ?>
+  <?php if(!$attending) : ?>
+    <?php echo link_to('Attend', 'event_action', array('sf_subject' => $event, 'action' => 'attend')) ?>
+  <?php else : ?>
+    <?php echo link_to('Stop Attending', 'event_action', array('sf_subject' => $event, 'action' => 'unattend')) ?>
+  <?php endif ?>
 
-#<?php echo $event->getHashtag() ?>
-Address: <?php echo $event->getAddress() ?></td>
-<?php echo $event->getPostcode() ?>
+  <?php if(!$watching) : ?>
+    <?php echo link_to('Watch', 'event_action', array('sf_subject' => $event, 'action' => 'watch')) ?>
+  <?php else : ?>
+    <?php echo link_to('Stop Watching', 'event_action', array('sf_subject' => $event, 'action' => 'unwatch')) ?>
+  <?php endif ?>
+<?php endif ?>
+
+<p><?php echo $event->getDescription() ?></p>
+
+<p>
+  <?php echo $event->getAddress() ?><br/>
+  <?php echo $event->getPostcode() ?>
+</p>
+
+<a href="<?php echo $event->getWebsite() ?>">Visit Website</a>
+<p>#<?php echo $event->getHashtag() ?></p>

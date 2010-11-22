@@ -17,6 +17,13 @@ class eventActions extends sfActions {
 
   public function executeShow(sfWebRequest $request) {
     $this->event = $this->getRoute()->getObject();
+    $user = $this->getUser()->getGuardUser();
+
+    $this->attending = $user->isAttending($this->event);
+    $this->favouriter = $user->isFavouriter($this->event);
+    $this->organising = $user->isOrganising($this->event);
+    $this->speaking = $user->isSpeaking($this->event);
+    $this->watching = $user->isWatching($this->event);
   }
 
   public function executeNew(sfWebRequest $request) {

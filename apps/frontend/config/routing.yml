@@ -45,6 +45,17 @@ event:
     module: event
     action: show
 
+event_action:
+  class: sfDoctrineRoute
+  url: /:slug/:action
+  options:
+    model: Event
+    method: findBySlug
+    type: object
+  param:
+    module: event
+    action: [attend,watch,favourite,organise,speak,unattend,unwatch,unfavourite,unorganise,unspeak]
+
 profile:
   class: sfDoctrineRoute
   url: /user/:username
