@@ -1,0 +1,1 @@
+<?php echo link_to(get_partial('user/image_name', array('user' => $user)), 'profile', $user, array('title' => $user->getName())) ?>

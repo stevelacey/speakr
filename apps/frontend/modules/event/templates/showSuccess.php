@@ -32,13 +32,7 @@
 <p>#<?php echo $event->getHashtag() ?></p>
 
 <h3>Speakers</h3>
-
-<?php foreach($event->getSpeakers() as $speaker) : ?>
-  <?php echo link_to(image_tag($speaker->getIcon()), 'profile', $speaker) ?>
-<?php endforeach ?>
+<?php include_partial('user/image_name_list', array('users' => $event->getSpeakers())) ?>
 
 <h3>Attending</h3>
-
-<?php foreach($event->getAttending() as $attendee) : ?>
-  <?php echo link_to(image_tag($attendee->getIcon()), 'profile', $attendee) ?>
-<?php endforeach ?>
+<?php include_partial('user/image_list', array('users' => $event->getAttending())) ?>
