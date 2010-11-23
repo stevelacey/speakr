@@ -1,3 +1,4 @@
-#autoload:
-#  example:
-#    path: %sf_lib_dir%/vendor/path/to
+autoload:
+  generator:
+    path: %sf_data_dir%/generator
+    recursive: true
