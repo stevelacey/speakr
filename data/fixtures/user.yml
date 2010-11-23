@@ -27,6 +27,21 @@ sfGuardUser:
     last_login: '2010-11-16 19:35:42'
     created_at: '2010-11-16 19:35:42'
     updated_at: '2010-11-16 19:35:42'
+  sfGuardUser_64397624:
+    id: 64397624
+    first_name: Grant
+    last_name: Burton
+    email_address: grantrburton
+    username: grantrburton
+    algorithm: sha1
+    salt: f8bd8729dc1de6d20441f40cf1894980
+    password: 7116ae03fe60800b3e28a1c53367d7e19b235584
+    is_active: true
+    is_super_admin: false
+    last_login: '2010-11-23 02:09:14'
+    created_at: '2010-11-23 02:09:14'
+    updated_at: '2010-11-23 02:09:14'
+
 sfGuardUserProfile:
   sfGuardUserProfile_1:
     id: 11262212
@@ -48,3 +63,30 @@ sfGuardUserProfile:
     icon: 'http://a0.twimg.com/profile_images/739932764/3520866589_01bcb51e0a_s_mini.jpg'
     created_at: '2010-11-16 19:35:42'
     updated_at: '2010-11-17 00:45:02'
+  sfGuardUserProfile_64397624:
+    id: 64397624
+    name: 'Grant Burton'
+    description: ''
+    website: ''
+    image: 'http://a3.twimg.com/profile_images/1159892135/me_normal.png'
+    icon: 'http://a3.twimg.com/profile_images/1159892135/me_mini.png'
+    slug: grant-burton
+    created_at: '2010-11-23 02:09:14'
+    updated_at: '2010-11-23 02:34:49'
+
+Attendee:
+  Attendee_11262212_3:
+    User: sfGuardUser_11262212
+    Event: Bathcamp10
+  Attendee_11262212_4:
+    User: sfGuardUser_11262212
+    Event: FOWD11
+  sfGuardUser_14112618:
+    User: sfGuardUser_14112618
+    Event: WDC10
+  Attendee_64397624_4:
+    User: sfGuardUser_64397624
+    Event: FOWA11
+  Attendee_11262212_8:
+    User: sfGuardUser_11262212
+    Event: FOWA11
