@@ -1,0 +1,1 @@
+<p><?php echo $event->getLocation()->getName() ?> / <?php echo $event->getLocation()->getCountry()->getName() ?></p>
