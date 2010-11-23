@@ -7,15 +7,33 @@
  * 
  * @package    speakr
  * @subpackage model
- * @author     Your name here
+ * @author     Steve Lacey
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 class sfGuardUser extends PluginsfGuardUser {
+  public function attend(Event $event, $bool = true) {
+    if($bool) {
+      $event->Attending[] = $this;
+      $event->save();
+    } else {
+      Doctrine::getTable('Attendee')->findOneByEventIdAndUserId($event->getId(), $this->getId())->delete();
+    }
+  }
+
+  public function watch(Event $event, $bool = true) {
+    if(!$this->isWatching($event) && $bool) {
+      $event->Watchers[] = $this;
+      $event->save();
+    } else if($this->isWatching($event) && !$bool) {
+      Doctrine::getTable('Watcher')->findOneByEventIdAndUserId($event->getId(), $this->getId())->delete();
+    }
+  }
+
   public function isAttending(Event $event) {
     return $this->isRelatedToEventAs($event, 'Attendee');
   }
 
-  public function isFavouriter(Event $event) {
+  public function isFavouriting(Event $event) {
     return $this->isRelatedToEventAs($event, 'Favouriter');
   }
 
@@ -32,7 +50,7 @@ class sfGuardUser extends PluginsfGuardUser {
   }
 
   public function isRelatedToEventAs(Event $event, $status) {
-    return Doctrine_Query::create()->from($status)->where('user_id = ?', $this->getId())->fetchOne() instanceOf $status;
+    return Doctrine::getTable($status)->findOneByEventIdAndUserId($event->getId(), $this->getId()) instanceOf $status;
   }
 
   public function __call($method, $arguments) {

@@ -28,6 +28,11 @@
  * @property sfGuardForgotPassword $ForgotPassword
  * @property sfGuardUserProfile $Profile
  * @property Doctrine_Collection $Presenters
+ * @property Doctrine_Collection $Attendee
+ * @property Doctrine_Collection $Favouriter
+ * @property Doctrine_Collection $Organiser
+ * @property Doctrine_Collection $Speaker
+ * @property Doctrine_Collection $Watcher
  * 
  * @method string                getFirstName()             Returns the current record's "first_name" value
  * @method string                getLastName()              Returns the current record's "last_name" value
@@ -52,6 +57,11 @@
  * @method sfGuardForgotPassword getForgotPassword()        Returns the current record's "ForgotPassword" value
  * @method sfGuardUserProfile    getProfile()               Returns the current record's "Profile" value
  * @method Doctrine_Collection   getPresenters()            Returns the current record's "Presenters" collection
+ * @method Doctrine_Collection   getAttendee()              Returns the current record's "Attendee" collection
+ * @method Doctrine_Collection   getFavouriter()            Returns the current record's "Favouriter" collection
+ * @method Doctrine_Collection   getOrganiser()             Returns the current record's "Organiser" collection
+ * @method Doctrine_Collection   getSpeaker()               Returns the current record's "Speaker" collection
+ * @method Doctrine_Collection   getWatcher()               Returns the current record's "Watcher" collection
  * @method sfGuardUser           setFirstName()             Sets the current record's "first_name" value
  * @method sfGuardUser           setLastName()              Sets the current record's "last_name" value
  * @method sfGuardUser           setEmailAddress()          Sets the current record's "email_address" value
@@ -75,6 +85,11 @@
  * @method sfGuardUser           setForgotPassword()        Sets the current record's "ForgotPassword" value
  * @method sfGuardUser           setProfile()               Sets the current record's "Profile" value
  * @method sfGuardUser           setPresenters()            Sets the current record's "Presenters" collection
+ * @method sfGuardUser           setAttendee()              Sets the current record's "Attendee" collection
+ * @method sfGuardUser           setFavouriter()            Sets the current record's "Favouriter" collection
+ * @method sfGuardUser           setOrganiser()             Sets the current record's "Organiser" collection
+ * @method sfGuardUser           setSpeaker()               Sets the current record's "Speaker" collection
+ * @method sfGuardUser           setWatcher()               Sets the current record's "Watcher" collection
  * 
  * @package    speakr
  * @subpackage model
@@ -139,6 +154,7 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
               0 => 'is_active',
              ),
              ));
+        $this->option('orderBy', 'first_name, last_name ASC');
     }
 
     public function setUp()
@@ -203,6 +219,26 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'refClass' => 'PresentationUser',
              'local' => 'user_id',
              'foreign' => 'presentation_id'));
+
+        $this->hasMany('Attendee', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('Favouriter', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('Organiser', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('Speaker', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('Watcher', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);

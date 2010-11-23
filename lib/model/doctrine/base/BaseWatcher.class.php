@@ -7,11 +7,17 @@
  * 
  * @property integer $user_id
  * @property integer $event_id
+ * @property Event $Event
+ * @property sfGuardUser $User
  * 
- * @method integer getUserId()   Returns the current record's "user_id" value
- * @method integer getEventId()  Returns the current record's "event_id" value
- * @method Watcher setUserId()   Sets the current record's "user_id" value
- * @method Watcher setEventId()  Sets the current record's "event_id" value
+ * @method integer     getUserId()   Returns the current record's "user_id" value
+ * @method integer     getEventId()  Returns the current record's "event_id" value
+ * @method Event       getEvent()    Returns the current record's "Event" value
+ * @method sfGuardUser getUser()     Returns the current record's "User" value
+ * @method Watcher     setUserId()   Sets the current record's "user_id" value
+ * @method Watcher     setEventId()  Sets the current record's "event_id" value
+ * @method Watcher     setEvent()    Sets the current record's "Event" value
+ * @method Watcher     setUser()     Sets the current record's "User" value
  * 
  * @package    speakr
  * @subpackage model
@@ -38,6 +44,12 @@ abstract class BaseWatcher extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        
+        $this->hasOne('Event', array(
+             'local' => 'event_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('sfGuardUser as User', array(
+             'local' => 'user_id',
+             'foreign' => 'id'));
     }
 }

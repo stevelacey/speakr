@@ -30,13 +30,14 @@ sfGuardUser:
       local: user_id
       foreign: event_id
       foreignAlias: Watchers
+  options:
+    orderBy: first_name, last_name ASC
 
 sfGuardUserProfile:
   actAs:
     Sluggable: ~
     Timestampable: ~
   columns:
-    name: string(50)
     description: string(255)
     website: string(255)
     image: string(255)
@@ -57,6 +58,15 @@ Attendee:
     event_id:
       type: integer(20)
       primary: true
+  relations:
+    Event:
+      class: Event
+      local: event_id
+      foreign: id
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreign: id
 
 Favouriter:
   columns:
@@ -66,6 +76,15 @@ Favouriter:
     event_id:
       type: integer(20)
       primary: true
+  relations:
+    Event:
+      class: Event
+      local: event_id
+      foreign: id
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreign: id
 
 Organiser:
   columns:
@@ -75,6 +94,15 @@ Organiser:
     event_id:
       type: integer(20)
       primary: true
+  relations:
+    Event:
+      class: Event
+      local: event_id
+      foreign: id
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreign: id
 
 Speaker:
   columns:
@@ -84,6 +112,15 @@ Speaker:
     event_id:
       type: integer(20)
       primary: true
+  relations:
+    Event:
+      class: Event
+      local: event_id
+      foreign: id
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreign: id
 
 Watcher:
   columns:
@@ -93,3 +130,12 @@ Watcher:
     event_id:
       type: integer(20)
       primary: true
+  relations:
+    Event:
+      class: Event
+      local: event_id
+      foreign: id
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreign: id
