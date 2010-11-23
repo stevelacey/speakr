@@ -34,6 +34,18 @@ new:
     module: event
     action: new
 
+event_action:
+  class: sfDoctrineRoute
+  url: /:slug/:verb/:action
+  options:
+    model: Event
+    method: findBySlug
+    type: object
+  param:
+    module: event
+    action: [attend,watch,favourite,organise,speak]
+    verb: [do, dont]
+
 event:
   class: sfDoctrineRoute
   url: /:slug
@@ -44,17 +56,6 @@ event:
   param:
     module: event
     action: show
-
-event_action:
-  class: sfDoctrineRoute
-  url: /:slug/:action
-  options:
-    model: Event
-    method: findBySlug
-    type: object
-  param:
-    module: event
-    action: [attend,watch,favourite,organise,speak,unattend,unwatch,unfavourite,unorganise,unspeak]
 
 profile:
   class: sfDoctrineRoute

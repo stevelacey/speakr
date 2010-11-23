@@ -8,7 +8,7 @@
  * @author     Steve Lacey
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class eventActions extends sfActions {
+class eventActions extends myEventActions {
   public function executeIndex(sfWebRequest $request) {
     $this->events = Doctrine::getTable('Event')
       ->createQuery('a')
@@ -17,13 +17,15 @@ class eventActions extends sfActions {
 
   public function executeShow(sfWebRequest $request) {
     $this->event = $this->getRoute()->getObject();
-    $user = $this->getUser()->getGuardUser();
-
-    $this->attending = $user->isAttending($this->event);
-    $this->favouriter = $user->isFavouriter($this->event);
-    $this->organising = $user->isOrganising($this->event);
-    $this->speaking = $user->isSpeaking($this->event);
-    $this->watching = $user->isWatching($this->event);
+    
+    if($this->getUser()->isAuthenticated()) {
+      $user = $this->getUser()->getGuardUser();
+      $this->attending = $user->isAttending($this->event);
+      $this->favouriter = $user->isFavouriting($this->event);
+      $this->organising = $user->isOrganising($this->event);
+      $this->speaking = $user->isSpeaking($this->event);
+      $this->watching = $user->isWatching($this->event);
+    }
   }
 
   public function executeNew(sfWebRequest $request) {

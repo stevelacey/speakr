@@ -16,7 +16,7 @@ class homepageActions extends sfActions
   * @param sfRequest $request A request object
   */
   public function executeIndex(sfWebRequest $request) {
-    $this->user = $this->getUser();
+    $this->user = $this->getUser()->getGuardUser();
     $this->events = Doctrine::getTable('Event')->getUpcoming();
   }
 }
