@@ -11,6 +11,14 @@
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 class sfGuardUser extends PluginsfGuardUser {
+  public function getTwitterUsername() {
+    return '@'.$this->getUsername();
+  }
+
+  public function getUrl() {
+    return sfConfig::get('app_twitter_url').'/'.$this->getUsername();
+  }
+
   public function attend(Event $event, $bool = true) {
     if($bool) {
       $event->Attending[] = $this;
