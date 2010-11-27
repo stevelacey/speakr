@@ -6,3 +6,6 @@ index:
 
 show:
   is_secure: false
+
+map:
+  is_secure: false

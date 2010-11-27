@@ -28,6 +28,15 @@ class eventActions extends myEventActions {
     }
   }
 
+  public function executeMap(sfWebRequest $request) {
+    $event = $this->getRoute()->getObject();
+
+    $url = 'http://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($event->getFormattedAddress()).'&sensor=false';
+    $web = new sfWebBrowser();
+
+    return $this->renderText($web->get($url)->getResponseText());
+  }
+
   public function executeNew(sfWebRequest $request) {
     $this->form = new ConferenceEventForm();
 

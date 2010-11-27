@@ -15,6 +15,10 @@ class Event extends BaseEvent {
     return $this->getConference()->getTitle().' '.$this->getDateTimeObject('date')->format('Y');
   }
 
+  public function getFormattedAddress() {
+    return $this->getAddress().', '.$this->getLocation().', '.$this->getPostcode().', '.$this->getLocation()->getCountry();
+  }
+
   public function getSlug() {
     return $this->getConference()->getSlug().'-'.$this->getDateTimeObject('date')->format('Y');
   }
