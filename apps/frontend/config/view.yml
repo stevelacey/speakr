@@ -14,8 +14,7 @@ default:
 
   javascripts:
     - http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js
-    - Event.js
-    - main.js
+    - main: {position: last}
 
   has_layout: true
   layout: layout

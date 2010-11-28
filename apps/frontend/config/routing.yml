@@ -55,8 +55,9 @@ event_action:
     type: object
   param:
     module: event
-    action: [attend,watch,favourite,organise,speak]
-    verb: [do, dont]
+  requirements:
+    action: attend|watch|favourite|organise|speak
+    verb: do|dont
 
 event:
   class: sfDoctrineRoute
