@@ -30,6 +30,7 @@ class myEventActions extends sfActions {
   }
 
   public function go(sfWebRequest $request, $relation) {
+    $request->checkCSRFProtection();
     call_user_func_array(array($this->getUser()->getGuardUser(), $relation), array($this->getRoute()->getObject(), $request->getParameter('verb') == 'do'));
     $this->redirect($this->getUser()->getReferer($request->getReferer()));
   }

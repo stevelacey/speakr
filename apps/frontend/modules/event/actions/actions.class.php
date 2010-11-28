@@ -17,6 +17,7 @@ class eventActions extends myEventActions {
 
   public function executeShow(sfWebRequest $request) {
     $this->event = $this->getRoute()->getObject();
+    $this->form = new SpeakerForm();
 
     if($this->getUser()->isAuthenticated()) {
       $user = $this->getUser()->getGuardUser();

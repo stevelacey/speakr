@@ -6,15 +6,21 @@
 
   <?php if($sf_user->isAuthenticated()) : ?>
     <?php if(!$attending) : ?>
-      <?php echo link_to('Attend', 'event_action', array('sf_subject' => $event, 'action' => 'attend', 'verb' => 'do')) ?>
+      <?php echo link_to('Attend', 'event_action', array('sf_subject' => $event, 'action' => 'attend', 'verb' => 'do'), array('method' => 'post')) ?>
     <?php else : ?>
-      <?php echo link_to('Stop Attending', 'event_action', array('sf_subject' => $event, 'action' => 'attend', 'verb' => 'dont')) ?>
+      <?php echo link_to('Stop Attending', 'event_action', array('sf_subject' => $event, 'action' => 'attend', 'verb' => 'dont'), array('method' => 'post')) ?>
     <?php endif ?>
 
-    <?php if(!$watching) : ?>
-      <?php echo link_to('Watch', 'event_action', array('sf_subject' => $event, 'action' => 'watch', 'verb' => 'do')) ?>
+    <?php if(!$speaking) : ?>
+      <?php echo link_to('Speak', 'event_action', array('sf_subject' => $event, 'action' => 'speak', 'verb' => 'do'), array('method' => 'post')) ?>
     <?php else : ?>
-      <?php echo link_to('Stop Watching', 'event_action', array('sf_subject' => $event, 'action' => 'watch', 'verb' => 'dont')) ?>
+      <?php echo link_to('Stop Speaking', 'event_action', array('sf_subject' => $event, 'action' => 'speak', 'verb' => 'dont'), array('method' => 'post')) ?>
+    <?php endif ?>
+    
+    <?php if(!$watching) : ?>
+      <?php echo link_to('Watch', 'event_action', array('sf_subject' => $event, 'action' => 'watch', 'verb' => 'do'), array('method' => 'post')) ?>
+    <?php else : ?>
+      <?php echo link_to('Stop Watching', 'event_action', array('sf_subject' => $event, 'action' => 'watch', 'verb' => 'dont'), array('method' => 'post')) ?>
     <?php endif ?>
   <?php endif ?>
 

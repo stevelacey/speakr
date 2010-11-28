@@ -28,6 +28,15 @@ class sfGuardUser extends PluginsfGuardUser {
     }
   }
 
+  public function speak(Event $event, $bool = true) {
+    if($bool) {
+      $event->Speakers[] = $this;
+      $event->save();
+    } else {
+      Doctrine::getTable('Speaker')->findOneByEventIdAndUserId($event->getId(), $this->getId())->delete();
+    }
+  }
+
   public function watch(Event $event, $bool = true) {
     if(!$this->isWatching($event) && $bool) {
       $event->Watchers[] = $this;

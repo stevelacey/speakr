@@ -58,6 +58,7 @@ event_action:
   requirements:
     action: attend|watch|favourite|organise|speak
     verb: do|dont
+    sf_method: post
 
 event:
   class: sfDoctrineRoute
