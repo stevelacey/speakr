@@ -2,3 +2,5 @@ autoload:
   generator:
     path: %sf_data_dir%/generator
     recursive: true
+  google:
+    path: %sf_lib_dir%/vendor/google

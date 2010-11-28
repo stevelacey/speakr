@@ -1,13 +1,9 @@
-$(function(){
+$(function() {
   if($('article.event').length) {
-    var event = new Event($('h1:first').text());
-
     $.getJSON(window.location + '/map.json', {}, function(data) {
-      if(data.status == 'OK') {
+      event = data.event;
 
-        event.latitude = data.results[0].geometry.location.lat;
-        event.longitude = data.results[0].geometry.location.lng;
-
+      if(event.latitude && event.longitude) {
         var centerCoord = new google.maps.LatLng(event.latitude, event.longitude);
 
         var map = new google.maps.Map($('<div/>', {'id': 'map'}).appendTo('article').get(0), {

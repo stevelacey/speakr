@@ -17,7 +17,7 @@ class eventActions extends myEventActions {
 
   public function executeShow(sfWebRequest $request) {
     $this->event = $this->getRoute()->getObject();
-    
+
     if($this->getUser()->isAuthenticated()) {
       $user = $this->getUser()->getGuardUser();
       $this->attending = $user->isAttending($this->event);
@@ -30,11 +30,20 @@ class eventActions extends myEventActions {
 
   public function executeMap(sfWebRequest $request) {
     $event = $this->getRoute()->getObject();
+    
+    $google = new GoogleMapsAPI();
+    $geodata = $google->geocode(array('address' => $event->getFormattedAddress()));
+    
+    $map = new StdClass();
+    $map->event = new StdClass();
+    $map->event->title = $event->getTitle();
 
-    $url = 'http://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($event->getFormattedAddress()).'&sensor=false';
-    $web = new sfWebBrowser();
+    if($geodata->status == 'OK') {
+      $map->event->latitude = $geodata->results[0]->geometry->location->lat;
+      $map->event->longitude = $geodata->results[0]->geometry->location->lng;
+    }
 
-    return $this->renderText($web->get($url)->getResponseText());
+    return $this->renderText(json_encode($map));
   }
 
   public function executeNew(sfWebRequest $request) {
