@@ -36,7 +36,10 @@
   </p>
 
   <a href="<?php echo $event->getWebsite() ?>">Visit Website</a>
-  <p>#<?php echo $event->getHashtag() ?></p>
+  
+  <?php if($event->getHashtag()) : ?>
+    <p>#<span class="hashtag"><?php echo $event->getHashtag() ?></span></p>
+  <?php endif ?>
 
   <h3>Speakers</h3>
   <?php include_partial('user/image_name_list', array('users' => $event->getSpeakers())) ?>

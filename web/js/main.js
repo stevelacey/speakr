@@ -1,5 +1,8 @@
-var gInfoWindow;
 var map;
+var gInfoWindow;
+var response = [];
+
+var poi = ['coffee', 'hotel', 'internet cafe'];
 
 var icons = {
   'coffee': new google.maps.MarkerImage(
@@ -22,58 +25,95 @@ var icons = {
   )
 };
 
-var gSmallShadow = new google.maps.MarkerImage(
-  "http://labs.google.com/ridefinder/images/mm_20_shadow.png",
-  new google.maps.Size(22, 20),
-  new google.maps.Point(0, 0),
-  new google.maps.Point(6, 20)
-);
-
-var poi = ['coffee', 'hotel', 'internet cafe'];
-var response = [];
-      
 $(function() {
   if($('article.event').length) {
-    $.getJSON(window.location + '/map.json', {}, function(data) {
-      event = data.event;
-
-      if(event.latitude && event.longitude) {
-        var centerCoord = new google.maps.LatLng(event.latitude, event.longitude);
-
-        map = new google.maps.Map($('<div/>', {'id': 'map'}).appendTo('article').get(0), {
-          zoom: 16,
-          center: centerCoord,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        });
-
-        var marker = new google.maps.Marker({
-          position: new google.maps.LatLng(event.latitude, event.longitude),
-          map: map,
-          title: event.title,
-          icon: new google.maps.MarkerImage(
-            "/images/map/marker.png",
-            new google.maps.Size(40, 43),
-            new google.maps.Point(0, 0),
-            new google.maps.Point(6, 20)
-          ),
-          zIndex: 1
-        });
-
-        addMarkerListener(marker, new google.maps.InfoWindow({
-          content: '<h3>' + event.title + '</h3>'
-        }));
-
-        for(var i in poi) {
-          var search = new GlocalSearch();
-          response[poi[i]] = search;
-          search.setCenterPoint(map.getCenter());
-          search.setSearchCompleteCallback(null, searchCallback, [poi[i]]);
-          search.execute(poi[i]);
-        }
-      }
-    });
+    getGoogleMap();
+    getTwitterFeed();
   }
 });
+
+function getGoogleMap() {
+  $.getJSON(window.location + '/map.json', {}, function(data) {
+    if(data.event.latitude && data.event.longitude) {
+
+      $('<div/>', {'class': 'map'}).append($('<h3/>', {text: 'Map'})).append($('<div/>', {'class': 'canvas'})).appendTo('article');
+
+      var centerCoord = new google.maps.LatLng(data.event.latitude, data.event.longitude);
+
+      map = new google.maps.Map($('.map div').get(0), {
+        zoom: 16,
+        center: centerCoord,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(data.event.latitude, data.event.longitude),
+        map: map,
+        title: data.event.title,
+        icon: new google.maps.MarkerImage(
+          "/images/map/marker.png",
+          new google.maps.Size(40, 43),
+          new google.maps.Point(0, 0),
+          new google.maps.Point(6, 20)
+        ),
+        zIndex: 1
+      });
+
+      addMarkerListener(marker, new google.maps.InfoWindow({
+        content: '<h3>' + data.event.title + '</h3>'
+      }));
+
+      for(var i in poi) {
+        var search = new GlocalSearch();
+        response[poi[i]] = search;
+        search.setCenterPoint(map.getCenter());
+        search.setSearchCompleteCallback(null, searchCallback, [poi[i]]);
+        search.execute(poi[i]);
+      }
+    }
+  });
+}
+
+function getTwitterFeed() {
+  if($('.hashtag').length) {
+    $('<div/>', {'class': 'tweets'}).append($('<h3/>', {text: 'Tweets'})).appendTo('body');
+    getTweets();
+  }
+}
+
+function getTweets() {
+  $.ajax({
+    url: 'http://search.twitter.com/search.json?q=' + $('.hashtag').text() + '&rpp=10',
+    dataType: 'jsonp',
+    success: function(json) {
+      var tweets = $('.tweets');
+      
+      if(json.results.length) {
+        if(!tweets.find('ol').length) {
+          tweets.append($('<ol/>')).find('p').fadeOut();
+        }
+        
+        for(i in json.results) {
+          var tweet = json.results[i];
+
+          if(!$(tweets).find('ol li[rel="' + tweet.id + '"]').length) {
+            var content = tweet.from_user + ': ' + tweet.text;
+            tweets.find('ol').prepend($('<li/>', {text: content, rel: tweet.id}).fadeIn()).find('li:gt(9)').fadeOut();
+          }
+        }
+      }
+      
+      if(!tweets.find('p').length && !tweets.find('ol').length) {
+        tweets.append($('<p/>', {text: 'No Tweets Found'}));
+      }
+
+      setTimeout('getTweets()', 10000);
+    },
+    error: function() {
+      setTimeout('getTweets()', 10000);
+    }
+  });
+}
 
 function searchCallback(poi) {
   if (response[poi].results) {
@@ -89,7 +129,12 @@ function addMarker(poi, data, icon) {
     map: map,
     title: data.title,
     icon: icon,
-    shadow: gSmallShadow,
+    shadow: new google.maps.MarkerImage(
+      "http://labs.google.com/ridefinder/images/mm_20_shadow.png",
+      new google.maps.Size(22, 20),
+      new google.maps.Point(0, 0),
+      new google.maps.Point(6, 20)
+    ),
     zIndex: 0
   });
 
