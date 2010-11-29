@@ -16,6 +16,8 @@ class ConferenceEventForm extends ConferenceForm {
 
     $this->event = new Event();
     $this->event->setConference($this->getObject());
-    $this->embedForm('event', new EventForm($this->event));
+    $eventform = new EventForm($this->event);
+    $eventform->useFields(array('date', 'location_id', 'url'));
+    $this->embedForm('event', $eventform);
   }
 }

@@ -22,14 +22,9 @@
         <td><?php echo $form['title']->renderError() ?></td>
       </tr>
       <tr>
-        <th><?php echo $form['url']->renderLabel() ?></th>
-        <td><?php echo $form['url'] ?></td>
-        <td><?php echo $form['url']->renderError() ?></td>
-      </tr>
-      <tr>
-        <th><?php echo $form['event']['tagline']->renderLabel() ?></th>
-        <td><?php echo $form['event']['tagline'] ?></td>
-        <td><?php echo $form['event']['tagline']->renderError() ?></td>
+        <th><?php echo $form['event']['url']->renderLabel() ?></th>
+        <td><?php echo $form['event']['url'] ?></td>
+        <td><?php echo $form['event']['url']->renderError() ?></td>
       </tr>
       <tr>
         <th><?php echo $form['event']['date']->renderLabel() ?></th>
@@ -40,36 +35,6 @@
         <th><?php echo $form['event']['location_id']->renderLabel() ?></th>
         <td><?php echo $form['event']['location_id'] ?></td>
         <td><?php echo $form['event']['location_id']->renderError() ?></td>
-      </tr>
-      <tr>
-        <th><?php echo $form['event']['description']->renderLabel() ?></th>
-        <td><?php echo $form['event']['description'] ?></td>
-        <td><?php echo $form['event']['description']->renderError() ?></td>
-      </tr>
-      <tr>
-        <th><?php echo $form['event']['url']->renderLabel() ?></th>
-        <td><?php echo $form['event']['url'] ?></td>
-        <td><?php echo $form['event']['url']->renderError() ?></td>
-      </tr>
-      <tr>
-        <th><?php echo $form['event']['image']->renderLabel() ?></th>
-        <td><?php echo $form['event']['image'] ?></td>
-        <td><?php echo $form['event']['image']->renderError() ?></td>
-      </tr>
-      <tr>
-        <th><?php echo $form['event']['hashtag']->renderLabel() ?></th>
-        <td><?php echo $form['event']['hashtag'] ?></td>
-        <td><?php echo $form['event']['hashtag']->renderError() ?></td>
-      </tr>
-      <tr>
-        <th><?php echo $form['event']['address']->renderLabel() ?></th>
-        <td><?php echo $form['event']['address'] ?></td>
-        <td><?php echo $form['event']['address']->renderError() ?></td>
-      </tr>
-      <tr>
-        <th><?php echo $form['event']['postcode']->renderLabel() ?></th>
-        <td><?php echo $form['event']['postcode'] ?></td>
-        <td><?php echo $form['event']['postcode']->renderError() ?></td>
       </tr>
     </tbody>
   </table>
