@@ -26,21 +26,13 @@ Event:
     location_id:
       type: integer(20)
       notnull: true
-    description:
-      type: string(255)
-      notnull: true
+    description: string()
     url: string(255)
     image: string(255)
     icon: string(255)
-    hashtag:
-      type: string(20)
-      notnull: true
-    address:
-      type: string(255)
-      notnull: true
-    postcode:
-      type: string(8)
-      notnull: true
+    hashtag: string(50)
+    address: string(255)
+    postcode: string(8)
   relations:
     Conference:
       local: conference_id

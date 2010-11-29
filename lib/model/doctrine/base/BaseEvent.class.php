@@ -156,10 +156,9 @@ abstract class BaseEvent extends sfDoctrineRecord
              'notnull' => true,
              'length' => '20',
              ));
-        $this->hasColumn('description', 'string', 255, array(
+        $this->hasColumn('description', 'string', null, array(
              'type' => 'string',
-             'notnull' => true,
-             'length' => '255',
+             'length' => '',
              ));
         $this->hasColumn('url', 'string', 255, array(
              'type' => 'string',
@@ -173,19 +172,16 @@ abstract class BaseEvent extends sfDoctrineRecord
              'type' => 'string',
              'length' => '255',
              ));
-        $this->hasColumn('hashtag', 'string', 20, array(
+        $this->hasColumn('hashtag', 'string', 50, array(
              'type' => 'string',
-             'notnull' => true,
-             'length' => '20',
+             'length' => '50',
              ));
         $this->hasColumn('address', 'string', 255, array(
              'type' => 'string',
-             'notnull' => true,
              'length' => '255',
              ));
         $this->hasColumn('postcode', 'string', 8, array(
              'type' => 'string',
-             'notnull' => true,
              'length' => '8',
              ));
 
