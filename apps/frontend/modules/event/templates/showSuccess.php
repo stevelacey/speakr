@@ -35,18 +35,28 @@
     <?php echo $event->getPostcode() ?>
   </p>
 
-  <a href="<?php echo $event->getWebsite() ?>">Visit Website</a>
+  <?php if($event->getWebsite()) : ?>
+    <a href="<?php echo $event->getWebsite() ?>">Visit Website</a>
+  <?php endif ?>
   
   <?php if($event->getHashtag()) : ?>
     <p>#<span class="hashtag"><?php echo $event->getHashtag() ?></span></p>
   <?php endif ?>
 
   <h3>Speakers</h3>
-  <?php include_partial('user/image_name_list', array('users' => $event->getSpeakers())) ?>
+  <?php if($event->getSpeakers()->count()) : ?>
+    <?php include_partial('user/image_name_list', array('users' => $event->getSpeakers())) ?>
+  <?php else : ?>
+    <p>None listed, why not add some speakers?</p>
+  <?php endif ?>
 
-  <h3>Attending</h3>
-  <?php include_partial('user/image_list', array('users' => $event->getAttending())) ?>
+  <?php if($event->getAttending()->count()) : ?>
+    <h3>Attending</h3>
+    <?php include_partial('user/image_list', array('users' => $event->getAttending())) ?>
+  <?php endif ?>
 
-  <h3>Presentations</h3>
-  <?php include_partial('presentation/list', array('presentations' => $event->getPresentations())) ?>
+  <?php if($event->getPresentations()->count()) : ?>
+    <h3>Presentations</h3>
+    <?php include_partial('presentation/list', array('presentations' => $event->getPresentations())) ?>
+  <?php endif ?>
 </article>
