@@ -20,4 +20,14 @@ class Content extends BaseContent {
       where('c.id = ?', $this->getId())->
       execute();
   }
+
+  public function getSpeakerSlug() {
+    $speakers = array();
+
+    foreach($this->getSpeakers() as $speaker) {
+      $speakers[] = $speaker->getUsername();
+    }
+
+    return implode('-and-', $speakers);
+  }
 }

@@ -34,11 +34,22 @@ new:
     module: event
     action: new
 
+profile:
+  class: sfDoctrineRoute
+  url: /user/:username
+  options:
+    model: sfGuardUser
+    type: object
+  param:
+    module: user
+    action: show
+
 presentation:
   class: sfDoctrineRoute
-  url: /presentation/:slug
+  url: /:speaker_slug/:slug
   options:
     model: Content
+    method: findBySpeakerSlugAndSlug
     type: object
   param:
     module: presentation
@@ -79,14 +90,4 @@ event:
     type: object
   param:
     module: event
-    action: show
-
-profile:
-  class: sfDoctrineRoute
-  url: /user/:username
-  options:
-    model: sfGuardUser
-    type: object
-  param:
-    module: user
     action: show
