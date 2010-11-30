@@ -26,6 +26,7 @@ class sfGuardUser extends PluginsfGuardUser {
       leftJoin('s.Event e')->
       leftJoin('e.Speaker sf')->
       where('sf.user_id = ?', $this->getId())->
+      andWhere('u.id != ?', $this->getId())->
       execute();
   }
 
