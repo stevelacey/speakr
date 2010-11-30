@@ -22,12 +22,12 @@
  * @property Doctrine_Collection $Organising
  * @property Doctrine_Collection $Speaking
  * @property Doctrine_Collection $Watching
+ * @property Doctrine_Collection $Presentations
  * @property Doctrine_Collection $sfGuardUserPermission
  * @property Doctrine_Collection $sfGuardUserGroup
  * @property sfGuardRememberKey $RememberKeys
  * @property sfGuardForgotPassword $ForgotPassword
  * @property sfGuardUserProfile $Profile
- * @property Doctrine_Collection $Speakers
  * @property Doctrine_Collection $PresentationUser
  * @property Doctrine_Collection $Attendee
  * @property Doctrine_Collection $Favouriter
@@ -52,12 +52,12 @@
  * @method Doctrine_Collection   getOrganising()            Returns the current record's "Organising" collection
  * @method Doctrine_Collection   getSpeaking()              Returns the current record's "Speaking" collection
  * @method Doctrine_Collection   getWatching()              Returns the current record's "Watching" collection
+ * @method Doctrine_Collection   getPresentations()         Returns the current record's "Presentations" collection
  * @method Doctrine_Collection   getSfGuardUserPermission() Returns the current record's "sfGuardUserPermission" collection
  * @method Doctrine_Collection   getSfGuardUserGroup()      Returns the current record's "sfGuardUserGroup" collection
  * @method sfGuardRememberKey    getRememberKeys()          Returns the current record's "RememberKeys" value
  * @method sfGuardForgotPassword getForgotPassword()        Returns the current record's "ForgotPassword" value
  * @method sfGuardUserProfile    getProfile()               Returns the current record's "Profile" value
- * @method Doctrine_Collection   getSpeakers()              Returns the current record's "Speakers" collection
  * @method Doctrine_Collection   getPresentationUser()      Returns the current record's "PresentationUser" collection
  * @method Doctrine_Collection   getAttendee()              Returns the current record's "Attendee" collection
  * @method Doctrine_Collection   getFavouriter()            Returns the current record's "Favouriter" collection
@@ -81,12 +81,12 @@
  * @method sfGuardUser           setOrganising()            Sets the current record's "Organising" collection
  * @method sfGuardUser           setSpeaking()              Sets the current record's "Speaking" collection
  * @method sfGuardUser           setWatching()              Sets the current record's "Watching" collection
+ * @method sfGuardUser           setPresentations()         Sets the current record's "Presentations" collection
  * @method sfGuardUser           setSfGuardUserPermission() Sets the current record's "sfGuardUserPermission" collection
  * @method sfGuardUser           setSfGuardUserGroup()      Sets the current record's "sfGuardUserGroup" collection
  * @method sfGuardUser           setRememberKeys()          Sets the current record's "RememberKeys" value
  * @method sfGuardUser           setForgotPassword()        Sets the current record's "ForgotPassword" value
  * @method sfGuardUser           setProfile()               Sets the current record's "Profile" value
- * @method sfGuardUser           setSpeakers()              Sets the current record's "Speakers" collection
  * @method sfGuardUser           setPresentationUser()      Sets the current record's "PresentationUser" collection
  * @method sfGuardUser           setAttendee()              Sets the current record's "Attendee" collection
  * @method sfGuardUser           setFavouriter()            Sets the current record's "Favouriter" collection
@@ -198,6 +198,11 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'local' => 'user_id',
              'foreign' => 'event_id'));
 
+        $this->hasMany('Presentation as Presentations', array(
+             'refClass' => 'PresentationUser',
+             'local' => 'user_id',
+             'foreign' => 'presentation_id'));
+
         $this->hasMany('sfGuardUserPermission', array(
              'local' => 'id',
              'foreign' => 'user_id'));
@@ -217,11 +222,6 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
         $this->hasOne('sfGuardUserProfile as Profile', array(
              'local' => 'id',
              'foreign' => 'id'));
-
-        $this->hasMany('Presentation as Speakers', array(
-             'refClass' => 'PresentationUser',
-             'local' => 'user_id',
-             'foreign' => 'presentation_id'));
 
         $this->hasMany('PresentationUser', array(
              'local' => 'id',

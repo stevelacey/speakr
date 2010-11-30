@@ -48,11 +48,5 @@
   <?php include_partial('user/image_list', array('users' => $event->getAttending())) ?>
 
   <h3>Presentations</h3>
-  <?php foreach($event->getPresentations() as $presentation) : ?>
-    <?php echo link_to($presentation, 'presentation', $presentation->getContent()) ?>
-    <div>
-      <?php include_partial('user/icon_list', array('users' => $presentation->getSpeakers())) ?>
-    </div>
-  <?php endforeach ?>
-  
+  <?php include_partial('presentation/list', array('presentations' => $event->getPresentations())) ?>
 </article>

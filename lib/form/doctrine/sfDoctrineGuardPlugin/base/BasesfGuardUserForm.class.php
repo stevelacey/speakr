@@ -15,51 +15,51 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'               => new sfWidgetFormInputHidden(),
-      'first_name'       => new sfWidgetFormInputText(),
-      'last_name'        => new sfWidgetFormInputText(),
-      'email_address'    => new sfWidgetFormInputText(),
-      'username'         => new sfWidgetFormInputText(),
-      'algorithm'        => new sfWidgetFormInputText(),
-      'salt'             => new sfWidgetFormInputText(),
-      'password'         => new sfWidgetFormInputText(),
-      'is_active'        => new sfWidgetFormInputCheckbox(),
-      'is_super_admin'   => new sfWidgetFormInputCheckbox(),
-      'last_login'       => new sfWidgetFormDateTime(),
-      'created_at'       => new sfWidgetFormDateTime(),
-      'updated_at'       => new sfWidgetFormDateTime(),
-      'groups_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardGroup')),
-      'permissions_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardPermission')),
-      'attending_list'   => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
-      'favourites_list'  => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
-      'organising_list'  => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
-      'speaking_list'    => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
-      'watching_list'    => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
-      'speakers_list'    => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Presentation')),
+      'id'                 => new sfWidgetFormInputHidden(),
+      'first_name'         => new sfWidgetFormInputText(),
+      'last_name'          => new sfWidgetFormInputText(),
+      'email_address'      => new sfWidgetFormInputText(),
+      'username'           => new sfWidgetFormInputText(),
+      'algorithm'          => new sfWidgetFormInputText(),
+      'salt'               => new sfWidgetFormInputText(),
+      'password'           => new sfWidgetFormInputText(),
+      'is_active'          => new sfWidgetFormInputCheckbox(),
+      'is_super_admin'     => new sfWidgetFormInputCheckbox(),
+      'last_login'         => new sfWidgetFormDateTime(),
+      'created_at'         => new sfWidgetFormDateTime(),
+      'updated_at'         => new sfWidgetFormDateTime(),
+      'groups_list'        => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardGroup')),
+      'permissions_list'   => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardPermission')),
+      'attending_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
+      'favourites_list'    => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
+      'organising_list'    => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
+      'speaking_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
+      'watching_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
+      'presentations_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Presentation')),
     ));
 
     $this->setValidators(array(
-      'id'               => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
-      'first_name'       => new sfValidatorString(array('max_length' => 255, 'required' => false)),
-      'last_name'        => new sfValidatorString(array('max_length' => 255, 'required' => false)),
-      'email_address'    => new sfValidatorString(array('max_length' => 255)),
-      'username'         => new sfValidatorString(array('max_length' => 128)),
-      'algorithm'        => new sfValidatorString(array('max_length' => 128, 'required' => false)),
-      'salt'             => new sfValidatorString(array('max_length' => 128, 'required' => false)),
-      'password'         => new sfValidatorString(array('max_length' => 128, 'required' => false)),
-      'is_active'        => new sfValidatorBoolean(array('required' => false)),
-      'is_super_admin'   => new sfValidatorBoolean(array('required' => false)),
-      'last_login'       => new sfValidatorDateTime(array('required' => false)),
-      'created_at'       => new sfValidatorDateTime(),
-      'updated_at'       => new sfValidatorDateTime(),
-      'groups_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardGroup', 'required' => false)),
-      'permissions_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardPermission', 'required' => false)),
-      'attending_list'   => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
-      'favourites_list'  => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
-      'organising_list'  => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
-      'speaking_list'    => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
-      'watching_list'    => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
-      'speakers_list'    => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Presentation', 'required' => false)),
+      'id'                 => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
+      'first_name'         => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'last_name'          => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'email_address'      => new sfValidatorString(array('max_length' => 255)),
+      'username'           => new sfValidatorString(array('max_length' => 128)),
+      'algorithm'          => new sfValidatorString(array('max_length' => 128, 'required' => false)),
+      'salt'               => new sfValidatorString(array('max_length' => 128, 'required' => false)),
+      'password'           => new sfValidatorString(array('max_length' => 128, 'required' => false)),
+      'is_active'          => new sfValidatorBoolean(array('required' => false)),
+      'is_super_admin'     => new sfValidatorBoolean(array('required' => false)),
+      'last_login'         => new sfValidatorDateTime(array('required' => false)),
+      'created_at'         => new sfValidatorDateTime(),
+      'updated_at'         => new sfValidatorDateTime(),
+      'groups_list'        => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardGroup', 'required' => false)),
+      'permissions_list'   => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardPermission', 'required' => false)),
+      'attending_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
+      'favourites_list'    => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
+      'organising_list'    => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
+      'speaking_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
+      'watching_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
+      'presentations_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Presentation', 'required' => false)),
     ));
 
     $this->validatorSchema->setPostValidator(
@@ -122,9 +122,9 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       $this->setDefault('watching_list', $this->object->Watching->getPrimaryKeys());
     }
 
-    if (isset($this->widgetSchema['speakers_list']))
+    if (isset($this->widgetSchema['presentations_list']))
     {
-      $this->setDefault('speakers_list', $this->object->Speakers->getPrimaryKeys());
+      $this->setDefault('presentations_list', $this->object->Presentations->getPrimaryKeys());
     }
 
   }
@@ -138,7 +138,7 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
     $this->saveOrganisingList($con);
     $this->saveSpeakingList($con);
     $this->saveWatchingList($con);
-    $this->saveSpeakersList($con);
+    $this->savePresentationsList($con);
 
     parent::doSave($con);
   }
@@ -409,14 +409,14 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
     }
   }
 
-  public function saveSpeakersList($con = null)
+  public function savePresentationsList($con = null)
   {
     if (!$this->isValid())
     {
       throw $this->getErrorSchema();
     }
 
-    if (!isset($this->widgetSchema['speakers_list']))
+    if (!isset($this->widgetSchema['presentations_list']))
     {
       // somebody has unset this widget
       return;
@@ -427,8 +427,8 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       $con = $this->getConnection();
     }
 
-    $existing = $this->object->Speakers->getPrimaryKeys();
-    $values = $this->getValue('speakers_list');
+    $existing = $this->object->Presentations->getPrimaryKeys();
+    $values = $this->getValue('presentations_list');
     if (!is_array($values))
     {
       $values = array();
@@ -437,13 +437,13 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
     $unlink = array_diff($existing, $values);
     if (count($unlink))
     {
-      $this->object->unlink('Speakers', array_values($unlink));
+      $this->object->unlink('Presentations', array_values($unlink));
     }
 
     $link = array_diff($values, $existing);
     if (count($link))
     {
-      $this->object->link('Speakers', array_values($link));
+      $this->object->link('Presentations', array_values($link));
     }
   }
 

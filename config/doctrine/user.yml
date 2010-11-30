@@ -30,6 +30,12 @@ sfGuardUser:
       local: user_id
       foreign: event_id
       foreignAlias: Watchers
+    Presentations:
+      class: Presentation
+      refClass: PresentationUser
+      local: user_id
+      foreign: presentation_id
+      foreignAlias: Speakers
   options:
     orderBy: first_name, last_name ASC
 

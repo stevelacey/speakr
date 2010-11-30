@@ -20,3 +20,8 @@
   <h2>Speaks with</h2>
   <?php include_partial('user/image_list', array('users' => $user->getSpeakers())) ?>
 <?php endif ?>
+
+<?php if($user->getPresentations()->count()) : ?>
+  <h2>Presentations</h2>
+  <?php include_partial('presentation/list', array('presentations' => $user->getPresentations())) ?>
+<?php endif ?>
