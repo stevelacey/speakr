@@ -34,6 +34,16 @@ new:
     module: event
     action: new
 
+presentation:
+  class: sfDoctrineRoute
+  url: /presentation/:slug
+  options:
+    model: Content
+    type: object
+  param:
+    module: presentation
+    action: show
+
 event_map:
   class: sfDoctrineRoute
   url: /:slug/map.:sf_format
