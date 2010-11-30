@@ -1,0 +1,17 @@
+Presentation:
+  Sample:
+    Event: WDC10
+    Content: SampleContent
+
+PresentationUser:
+  Byrion:
+    Presentation: Sample
+    sfGuardUser: sfGuardUser_14112618
+  Steve:
+    Presentation: Sample
+    sfGuardUser: sfGuardUser_11262212
+
+Content:
+  SampleContent:
+    title: Sample Content
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec risus quam, faucibus non pharetra in, iaculis nec mauris. Integer suscipit, ante sit amet rhoncus condimentum, leo augue interdum tellus, vitae accumsan nisl neque vel nisl. Vivamus tincidunt purus felis, non consequat nisl. Ut non quam risus. Suspendisse fermentum odio sed velit molestie aliquam. Praesent in felis lacus. Mauris egestas mattis mi sit amet pharetra. Nulla semper porta nisl, vel iaculis diam ullamcorper non. Aliquam eu mattis lorem. Etiam nec justo non eros convallis congue. Donec convallis hendrerit eros vel faucibus. Cras volutpat leo quis odio congue a dapibus eros porta. Praesent ac arcu elit, quis pretium lacus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eget neque et arcu scelerisque facilisis. Phasellus sed purus odio. Phasellus quis erat dui. In et sapien justo, nec interdum massa.
