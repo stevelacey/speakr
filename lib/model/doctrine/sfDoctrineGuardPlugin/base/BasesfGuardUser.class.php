@@ -28,6 +28,7 @@
  * @property sfGuardForgotPassword $ForgotPassword
  * @property sfGuardUserProfile $Profile
  * @property Doctrine_Collection $Speakers
+ * @property Doctrine_Collection $PresentationUser
  * @property Doctrine_Collection $Attendee
  * @property Doctrine_Collection $Favouriter
  * @property Doctrine_Collection $Organiser
@@ -57,6 +58,7 @@
  * @method sfGuardForgotPassword getForgotPassword()        Returns the current record's "ForgotPassword" value
  * @method sfGuardUserProfile    getProfile()               Returns the current record's "Profile" value
  * @method Doctrine_Collection   getSpeakers()              Returns the current record's "Speakers" collection
+ * @method Doctrine_Collection   getPresentationUser()      Returns the current record's "PresentationUser" collection
  * @method Doctrine_Collection   getAttendee()              Returns the current record's "Attendee" collection
  * @method Doctrine_Collection   getFavouriter()            Returns the current record's "Favouriter" collection
  * @method Doctrine_Collection   getOrganiser()             Returns the current record's "Organiser" collection
@@ -85,6 +87,7 @@
  * @method sfGuardUser           setForgotPassword()        Sets the current record's "ForgotPassword" value
  * @method sfGuardUser           setProfile()               Sets the current record's "Profile" value
  * @method sfGuardUser           setSpeakers()              Sets the current record's "Speakers" collection
+ * @method sfGuardUser           setPresentationUser()      Sets the current record's "PresentationUser" collection
  * @method sfGuardUser           setAttendee()              Sets the current record's "Attendee" collection
  * @method sfGuardUser           setFavouriter()            Sets the current record's "Favouriter" collection
  * @method sfGuardUser           setOrganiser()             Sets the current record's "Organiser" collection
@@ -219,6 +222,10 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'refClass' => 'PresentationUser',
              'local' => 'user_id',
              'foreign' => 'presentation_id'));
+
+        $this->hasMany('PresentationUser', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
 
         $this->hasMany('Attendee', array(
              'local' => 'id',

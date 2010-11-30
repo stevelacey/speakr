@@ -10,17 +10,20 @@
  * @property Event $Event
  * @property Content $Content
  * @property Doctrine_Collection $Speakers
+ * @property Doctrine_Collection $PresentationUser
  * 
- * @method integer             getEventId()    Returns the current record's "event_id" value
- * @method integer             getContentId()  Returns the current record's "content_id" value
- * @method Event               getEvent()      Returns the current record's "Event" value
- * @method Content             getContent()    Returns the current record's "Content" value
- * @method Doctrine_Collection getSpeakers()   Returns the current record's "Speakers" collection
- * @method Presentation        setEventId()    Sets the current record's "event_id" value
- * @method Presentation        setContentId()  Sets the current record's "content_id" value
- * @method Presentation        setEvent()      Sets the current record's "Event" value
- * @method Presentation        setContent()    Sets the current record's "Content" value
- * @method Presentation        setSpeakers()   Sets the current record's "Speakers" collection
+ * @method integer             getEventId()          Returns the current record's "event_id" value
+ * @method integer             getContentId()        Returns the current record's "content_id" value
+ * @method Event               getEvent()            Returns the current record's "Event" value
+ * @method Content             getContent()          Returns the current record's "Content" value
+ * @method Doctrine_Collection getSpeakers()         Returns the current record's "Speakers" collection
+ * @method Doctrine_Collection getPresentationUser() Returns the current record's "PresentationUser" collection
+ * @method Presentation        setEventId()          Sets the current record's "event_id" value
+ * @method Presentation        setContentId()        Sets the current record's "content_id" value
+ * @method Presentation        setEvent()            Sets the current record's "Event" value
+ * @method Presentation        setContent()          Sets the current record's "Content" value
+ * @method Presentation        setSpeakers()         Sets the current record's "Speakers" collection
+ * @method Presentation        setPresentationUser() Sets the current record's "PresentationUser" collection
  * 
  * @package    speakr
  * @subpackage model
@@ -67,5 +70,9 @@ abstract class BasePresentation extends sfDoctrineRecord
              'refClass' => 'PresentationUser',
              'local' => 'presentation_id',
              'foreign' => 'user_id'));
+
+        $this->hasMany('PresentationUser', array(
+             'local' => 'id',
+             'foreign' => 'presentation_id'));
     }
 }

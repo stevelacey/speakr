@@ -36,6 +36,15 @@ PresentationUser:
     user_id:
       type: integer(20)
       primary: true
+  relations:
+    Presentation:
+      class: Presentation
+      local: presentation_id
+      foreign: id
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreign: id
 
 Content:
   actAs:

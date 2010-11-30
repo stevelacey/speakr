@@ -7,11 +7,17 @@
  * 
  * @property integer $presentation_id
  * @property integer $user_id
+ * @property Presentation $Presentation
+ * @property sfGuardUser $User
  * 
  * @method integer          getPresentationId()  Returns the current record's "presentation_id" value
  * @method integer          getUserId()          Returns the current record's "user_id" value
+ * @method Presentation     getPresentation()    Returns the current record's "Presentation" value
+ * @method sfGuardUser      getUser()            Returns the current record's "User" value
  * @method PresentationUser setPresentationId()  Sets the current record's "presentation_id" value
  * @method PresentationUser setUserId()          Sets the current record's "user_id" value
+ * @method PresentationUser setPresentation()    Sets the current record's "Presentation" value
+ * @method PresentationUser setUser()            Sets the current record's "User" value
  * 
  * @package    speakr
  * @subpackage model
@@ -38,6 +44,12 @@ abstract class BasePresentationUser extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        
+        $this->hasOne('Presentation', array(
+             'local' => 'presentation_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('sfGuardUser as User', array(
+             'local' => 'user_id',
+             'foreign' => 'id'));
     }
 }

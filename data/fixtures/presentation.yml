@@ -1,15 +1,24 @@
 Presentation:
-  Sample:
+  WDCSample:
     Event: WDC10
+    Content: SampleContent
+  BCSample:
+    Event: Bathcamp10
     Content: SampleContent
 
 PresentationUser:
-  Byrion:
-    Presentation: Sample
-    sfGuardUser: sfGuardUser_14112618
-  Steve:
-    Presentation: Sample
-    sfGuardUser: sfGuardUser_11262212
+  SCWDCByrion:
+    Presentation: WDCSample
+    User: sfGuardUser_14112618
+  SCWDCSteve:
+    Presentation: WDCSample
+    User: sfGuardUser_11262212
+  BCWDCSteve:
+    Presentation: BCSample
+    User: sfGuardUser_11262212
+  BCWDCGrant:
+    Presentation: BCSample
+    User: sfGuardUser_64397624
 
 Content:
   SampleContent:
