@@ -15,3 +15,8 @@
   <h2>Watching</h2>
   <?php include_partial('event/short_list', array('events' => $user->getWatching())) ?>
 <?php endif ?>
+
+<?php if($user->getSpeakers()->count()) : ?>
+  <h2>Speaks with</h2>
+  <?php include_partial('user/image_list', array('users' => $user->getSpeakers())) ?>
+<?php endif ?>

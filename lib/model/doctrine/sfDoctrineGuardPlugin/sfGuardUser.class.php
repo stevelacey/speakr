@@ -19,6 +19,16 @@ class sfGuardUser extends PluginsfGuardUser {
     return sfConfig::get('app_twitter_url').'/'.$this->getUsername();
   }
 
+  public function getSpeakers() {
+    return Doctrine_Query::create()->
+      from('sfGuardUser u')->
+      leftJoin('u.Speaker s')->
+      leftJoin('s.Event e')->
+      leftJoin('e.Speaker sf')->
+      where('sf.user_id = ?', $this->getId())->
+      execute();
+  }
+
   public function attend(Event $event, $bool = true) {
     if($bool) {
       $event->Attending[] = $this;
