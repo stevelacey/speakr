@@ -10,6 +10,16 @@
  * @author     Steve Lacey
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
-class Presentation extends BasePresentation
-{
+class Presentation extends BasePresentation {
+  public function getTitle() {
+    return $this->getContent()->getTitle();
+  }
+
+  public function __call($method, $arguments) {
+    try {
+      return parent::__call($method, $arguments);
+    } catch (Doctrine_Record_UnknownPropertyException $e) {
+      return call_user_func_array(array($this->getContent(), $method), $arguments);
+    }
+  }
 }

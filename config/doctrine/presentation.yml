@@ -21,12 +21,12 @@ Presentation:
       local: content_id
       foreign: id
       foreignAlias: Presentations
-    Presenters:
+    Speakers:
       class: sfGuardUser
       refClass: PresentationUser
       local: presentation_id
       foreign: user_id
-      foreignAlias: Presenters
+      foreignAlias: Speakers
 
 PresentationUser:
   columns:

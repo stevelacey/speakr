@@ -15,17 +15,17 @@ abstract class BasePresentationForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'              => new sfWidgetFormInputHidden(),
-      'event_id'        => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Event'), 'add_empty' => true)),
-      'content_id'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Content'), 'add_empty' => true)),
-      'presenters_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser')),
+      'id'            => new sfWidgetFormInputHidden(),
+      'event_id'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Event'), 'add_empty' => true)),
+      'content_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Content'), 'add_empty' => true)),
+      'speakers_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser')),
     ));
 
     $this->setValidators(array(
-      'id'              => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
-      'event_id'        => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Event'), 'required' => false)),
-      'content_id'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Content'), 'required' => false)),
-      'presenters_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser', 'required' => false)),
+      'id'            => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
+      'event_id'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Event'), 'required' => false)),
+      'content_id'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Content'), 'required' => false)),
+      'speakers_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser', 'required' => false)),
     ));
 
     $this->validatorSchema->setPostValidator(
@@ -50,28 +50,28 @@ abstract class BasePresentationForm extends BaseFormDoctrine
   {
     parent::updateDefaultsFromObject();
 
-    if (isset($this->widgetSchema['presenters_list']))
+    if (isset($this->widgetSchema['speakers_list']))
     {
-      $this->setDefault('presenters_list', $this->object->Presenters->getPrimaryKeys());
+      $this->setDefault('speakers_list', $this->object->Speakers->getPrimaryKeys());
     }
 
   }
 
   protected function doSave($con = null)
   {
-    $this->savePresentersList($con);
+    $this->saveSpeakersList($con);
 
     parent::doSave($con);
   }
 
-  public function savePresentersList($con = null)
+  public function saveSpeakersList($con = null)
   {
     if (!$this->isValid())
     {
       throw $this->getErrorSchema();
     }
 
-    if (!isset($this->widgetSchema['presenters_list']))
+    if (!isset($this->widgetSchema['speakers_list']))
     {
       // somebody has unset this widget
       return;
@@ -82,8 +82,8 @@ abstract class BasePresentationForm extends BaseFormDoctrine
       $con = $this->getConnection();
     }
 
-    $existing = $this->object->Presenters->getPrimaryKeys();
-    $values = $this->getValue('presenters_list');
+    $existing = $this->object->Speakers->getPrimaryKeys();
+    $values = $this->getValue('speakers_list');
     if (!is_array($values))
     {
       $values = array();
@@ -92,13 +92,13 @@ abstract class BasePresentationForm extends BaseFormDoctrine
     $unlink = array_diff($existing, $values);
     if (count($unlink))
     {
-      $this->object->unlink('Presenters', array_values($unlink));
+      $this->object->unlink('Speakers', array_values($unlink));
     }
 
     $link = array_diff($values, $existing);
     if (count($link))
     {
-      $this->object->link('Presenters', array_values($link));
+      $this->object->link('Speakers', array_values($link));
     }
   }
 

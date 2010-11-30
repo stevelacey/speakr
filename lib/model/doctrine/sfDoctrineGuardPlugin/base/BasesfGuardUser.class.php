@@ -27,7 +27,7 @@
  * @property sfGuardRememberKey $RememberKeys
  * @property sfGuardForgotPassword $ForgotPassword
  * @property sfGuardUserProfile $Profile
- * @property Doctrine_Collection $Presenters
+ * @property Doctrine_Collection $Speakers
  * @property Doctrine_Collection $Attendee
  * @property Doctrine_Collection $Favouriter
  * @property Doctrine_Collection $Organiser
@@ -56,7 +56,7 @@
  * @method sfGuardRememberKey    getRememberKeys()          Returns the current record's "RememberKeys" value
  * @method sfGuardForgotPassword getForgotPassword()        Returns the current record's "ForgotPassword" value
  * @method sfGuardUserProfile    getProfile()               Returns the current record's "Profile" value
- * @method Doctrine_Collection   getPresenters()            Returns the current record's "Presenters" collection
+ * @method Doctrine_Collection   getSpeakers()              Returns the current record's "Speakers" collection
  * @method Doctrine_Collection   getAttendee()              Returns the current record's "Attendee" collection
  * @method Doctrine_Collection   getFavouriter()            Returns the current record's "Favouriter" collection
  * @method Doctrine_Collection   getOrganiser()             Returns the current record's "Organiser" collection
@@ -84,7 +84,7 @@
  * @method sfGuardUser           setRememberKeys()          Sets the current record's "RememberKeys" value
  * @method sfGuardUser           setForgotPassword()        Sets the current record's "ForgotPassword" value
  * @method sfGuardUser           setProfile()               Sets the current record's "Profile" value
- * @method sfGuardUser           setPresenters()            Sets the current record's "Presenters" collection
+ * @method sfGuardUser           setSpeakers()              Sets the current record's "Speakers" collection
  * @method sfGuardUser           setAttendee()              Sets the current record's "Attendee" collection
  * @method sfGuardUser           setFavouriter()            Sets the current record's "Favouriter" collection
  * @method sfGuardUser           setOrganiser()             Sets the current record's "Organiser" collection
@@ -215,7 +215,7 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'id'));
 
-        $this->hasMany('Presentation as Presenters', array(
+        $this->hasMany('Presentation as Speakers', array(
              'refClass' => 'PresentationUser',
              'local' => 'user_id',
              'foreign' => 'presentation_id'));

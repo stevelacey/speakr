@@ -35,7 +35,7 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       'organising_list'  => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
       'speaking_list'    => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
       'watching_list'    => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
-      'presenters_list'  => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Presentation')),
+      'speakers_list'    => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Presentation')),
     ));
 
     $this->setValidators(array(
@@ -59,7 +59,7 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       'organising_list'  => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
       'speaking_list'    => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
       'watching_list'    => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
-      'presenters_list'  => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Presentation', 'required' => false)),
+      'speakers_list'    => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Presentation', 'required' => false)),
     ));
 
     $this->validatorSchema->setPostValidator(
@@ -122,9 +122,9 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       $this->setDefault('watching_list', $this->object->Watching->getPrimaryKeys());
     }
 
-    if (isset($this->widgetSchema['presenters_list']))
+    if (isset($this->widgetSchema['speakers_list']))
     {
-      $this->setDefault('presenters_list', $this->object->Presenters->getPrimaryKeys());
+      $this->setDefault('speakers_list', $this->object->Speakers->getPrimaryKeys());
     }
 
   }
@@ -138,7 +138,7 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
     $this->saveOrganisingList($con);
     $this->saveSpeakingList($con);
     $this->saveWatchingList($con);
-    $this->savePresentersList($con);
+    $this->saveSpeakersList($con);
 
     parent::doSave($con);
   }
@@ -409,14 +409,14 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
     }
   }
 
-  public function savePresentersList($con = null)
+  public function saveSpeakersList($con = null)
   {
     if (!$this->isValid())
     {
       throw $this->getErrorSchema();
     }
 
-    if (!isset($this->widgetSchema['presenters_list']))
+    if (!isset($this->widgetSchema['speakers_list']))
     {
       // somebody has unset this widget
       return;
@@ -427,8 +427,8 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       $con = $this->getConnection();
     }
 
-    $existing = $this->object->Presenters->getPrimaryKeys();
-    $values = $this->getValue('presenters_list');
+    $existing = $this->object->Speakers->getPrimaryKeys();
+    $values = $this->getValue('speakers_list');
     if (!is_array($values))
     {
       $values = array();
@@ -437,13 +437,13 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
     $unlink = array_diff($existing, $values);
     if (count($unlink))
     {
-      $this->object->unlink('Presenters', array_values($unlink));
+      $this->object->unlink('Speakers', array_values($unlink));
     }
 
     $link = array_diff($values, $existing);
     if (count($link))
     {
-      $this->object->link('Presenters', array_values($link));
+      $this->object->link('Speakers', array_values($link));
     }
   }
 

@@ -32,7 +32,7 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
       'organising_list'  => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
       'speaking_list'    => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
       'watching_list'    => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
-      'presenters_list'  => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Presentation')),
+      'speakers_list'    => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Presentation')),
     ));
 
     $this->setValidators(array(
@@ -55,7 +55,7 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
       'organising_list'  => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
       'speaking_list'    => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
       'watching_list'    => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
-      'presenters_list'  => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Presentation', 'required' => false)),
+      'speakers_list'    => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Presentation', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('sf_guard_user_filters[%s]');
@@ -179,7 +179,7 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
           ->andWhereIn('Watcher.event_id', $values);
   }
 
-  public function addPresentersListColumnQuery(Doctrine_Query $query, $field, $values)
+  public function addSpeakersListColumnQuery(Doctrine_Query $query, $field, $values)
   {
     if (!is_array($values))
     {
@@ -223,7 +223,7 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
       'organising_list'  => 'ManyKey',
       'speaking_list'    => 'ManyKey',
       'watching_list'    => 'ManyKey',
-      'presenters_list'  => 'ManyKey',
+      'speakers_list'    => 'ManyKey',
     );
   }
 }

@@ -9,18 +9,18 @@
  * @property integer $content_id
  * @property Event $Event
  * @property Content $Content
- * @property Doctrine_Collection $Presenters
+ * @property Doctrine_Collection $Speakers
  * 
  * @method integer             getEventId()    Returns the current record's "event_id" value
  * @method integer             getContentId()  Returns the current record's "content_id" value
  * @method Event               getEvent()      Returns the current record's "Event" value
  * @method Content             getContent()    Returns the current record's "Content" value
- * @method Doctrine_Collection getPresenters() Returns the current record's "Presenters" collection
+ * @method Doctrine_Collection getSpeakers()   Returns the current record's "Speakers" collection
  * @method Presentation        setEventId()    Sets the current record's "event_id" value
  * @method Presentation        setContentId()  Sets the current record's "content_id" value
  * @method Presentation        setEvent()      Sets the current record's "Event" value
  * @method Presentation        setContent()    Sets the current record's "Content" value
- * @method Presentation        setPresenters() Sets the current record's "Presenters" collection
+ * @method Presentation        setSpeakers()   Sets the current record's "Speakers" collection
  * 
  * @package    speakr
  * @subpackage model
@@ -63,7 +63,7 @@ abstract class BasePresentation extends sfDoctrineRecord
              'local' => 'content_id',
              'foreign' => 'id'));
 
-        $this->hasMany('sfGuardUser as Presenters', array(
+        $this->hasMany('sfGuardUser as Speakers', array(
              'refClass' => 'PresentationUser',
              'local' => 'presentation_id',
              'foreign' => 'user_id'));
