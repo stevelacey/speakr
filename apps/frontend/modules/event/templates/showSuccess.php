@@ -28,7 +28,7 @@
     <img src="http://logo.stevelacey.net/<?php echo $event->getWebsite() ?>"/>
   </div>
 
-  <p><?php echo $event->getDescription() ?></p>
+  <p><?php echo $event->getRawValue()->getDescription() ?></p>
 
   <p>
     <?php echo $event->getAddress() ?><br/>
