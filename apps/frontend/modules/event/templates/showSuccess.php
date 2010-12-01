@@ -24,9 +24,11 @@
     <?php endif ?>
   <?php endif ?>
 
-  <div>
-    <img src="http://logo.stevelacey.net/<?php echo $event->getWebsite() ?>"/>
-  </div>
+  <?php if($event->getWebsite()) : ?>
+    <div>
+      <?php echo link_to(image_tag('http://logo.stevelacey.net/'.$event->getWebsite(), array('alt' => $event->getTitle())), $event->getWebsite(), array('title' => $event->getTitle())) ?>
+    </div>
+  <?php endif ?>
 
   <p><?php echo $event->getRawValue()->getDescription() ?></p>
 
