@@ -1,36 +1,48 @@
-var map;
-var gInfoWindow;
-var response = [];
-
-var poi = ['coffee', 'hotel', 'internet cafe'];
-
-var icons = {
-  'coffee': new google.maps.MarkerImage(
-    "http://labs.google.com/ridefinder/images/mm_20_brown.png",
-    new google.maps.Size(12, 20),
-    new google.maps.Point(0, 0),
-    new google.maps.Point(6, 20)
-  ),
-  'hotel': new google.maps.MarkerImage(
-    "http://labs.google.com/ridefinder/images/mm_20_red.png",
-    new google.maps.Size(12, 20),
-    new google.maps.Point(0, 0),
-    new google.maps.Point(6, 20)
-  ),
-  'internet cafe': new google.maps.MarkerImage(
-    "http://labs.google.com/ridefinder/images/mm_20_gray.png",
-    new google.maps.Size(12, 20),
-    new google.maps.Point(0, 0),
-    new google.maps.Point(6, 20)
-  )
-};
-
 $(function() {
   if($('article.event').length) {
     getGoogleMap();
     getTwitterFeed();
   }
+
+  $('.user_search').each(function() {
+    $(this).find('input.query').keyup(function() {
+      userSearch($(this).val());
+    });
+    $(this).submit(function() {
+      userSearch($(this).find('input.query').val());
+      event.preventDefault();
+    });
+  });
 });
+
+if(typeof(google) != 'undefined') {
+  var map;
+  var gInfoWindow;
+  var response = [];
+
+  var poi = ['coffee', 'hotel', 'internet cafe'];
+
+  var icons = {
+    'coffee': new google.maps.MarkerImage(
+      "http://labs.google.com/ridefinder/images/mm_20_brown.png",
+      new google.maps.Size(12, 20),
+      new google.maps.Point(0, 0),
+      new google.maps.Point(6, 20)
+    ),
+    'hotel': new google.maps.MarkerImage(
+      "http://labs.google.com/ridefinder/images/mm_20_red.png",
+      new google.maps.Size(12, 20),
+      new google.maps.Point(0, 0),
+      new google.maps.Point(6, 20)
+    ),
+    'internet cafe': new google.maps.MarkerImage(
+      "http://labs.google.com/ridefinder/images/mm_20_gray.png",
+      new google.maps.Size(12, 20),
+      new google.maps.Point(0, 0),
+      new google.maps.Point(6, 20)
+    )
+  };
+}
 
 function getGoogleMap() {
   $.getJSON(window.location + '/map.json', {}, function(data) {
@@ -112,6 +124,22 @@ function getTweets() {
     error: function() {
       setTimeout('getTweets()', 10000);
     }
+  });
+}
+
+function userSearch(query) {
+  $.getJSON('/user/search/' + query, {}, function(users) {
+    var list = $('<ol/>');
+
+    for(var i in users) {
+      var user = users[i];
+      list.append($('<li/>', {text: user.name}));
+    }
+
+    $('.user_search').each(function() {
+      $(this).find('ol').remove();
+      $(this).append(list);
+    })
   });
 }
 

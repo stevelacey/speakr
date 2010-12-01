@@ -5,6 +5,22 @@ class userActions extends sfActions {
     $this->user = $this->getRoute()->getObject();
   }
 
+  public function executeSearch(sfWebRequest $request) {
+    $users = array();
+
+    if($request->hasParameter('query')) {
+      foreach(Doctrine::getTable('sfGuardUser')->search($request->getParameter('query')) as $user) {
+        $users[] = array(
+          'username' => $user->getUsername(),
+          'name' => $user->getName(),
+          'image' => $user->getImage()
+        );
+      }
+    }
+    
+    return $this->renderText(json_encode($users));
+  }
+
   public function executeEdit(sfWebRequest $request) {
     $this->user = $this->getUser()->getGuardUser();
     $this->form = new sfGuardUserForm($this->user);

@@ -43,11 +43,13 @@
     <p>#<span class="hashtag"><?php echo $event->getHashtag() ?></span></p>
   <?php endif ?>
 
-  <h3>Speakers</h3>
-  <?php if($event->getSpeakers()->count()) : ?>
-    <?php include_partial('user/image_name_list', array('users' => $event->getSpeakers())) ?>
-  <?php else : ?>
-    <p>None listed, why not add some speakers?</p>
+  <?php if($sf_user->isAuthenticated() || (!$sf_user->isAuthenticated() && $event->getSpeakers()->count())) : ?>
+    <h3><?php echo link_to('Speakers', 'speakers', $event) ?></h3>
+    <?php if($event->getSpeakers()->count()) : ?>
+      <?php include_partial('user/image_name_list', array('users' => $event->getSpeakers())) ?>
+    <?php else : ?>
+      <p>None listed, why not <?php echo link_to('add some speakers', 'speakers', $event) ?>?</p>
+    <?php endif ?>
   <?php endif ?>
 
   <?php if($event->getAttending()->count()) : ?>

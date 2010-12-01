@@ -34,6 +34,20 @@ new:
     module: event
     action: new
 
+user_search:
+  url: /user/search
+  param:
+    module: user
+    action: search
+    sf_format: json
+
+user_search_query:
+  url: /user/search/:query
+  param:
+    module: user
+    action: search
+    sf_format: json
+
 profile:
   class: sfDoctrineRoute
   url: /user/:username
@@ -43,6 +57,17 @@ profile:
   param:
     module: user
     action: show
+
+speakers:
+  class: sfDoctrineRoute
+  url: /:slug/speakers
+  options:
+    model: Event
+    method: findBySlug
+    type: object
+  param:
+    module: event
+    action: speakers
 
 presentation:
   class: sfDoctrineRoute

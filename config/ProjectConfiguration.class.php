@@ -10,9 +10,9 @@ class ProjectConfiguration extends sfProjectConfiguration {
   }
 
   public function getEnvironment() {
-    if(strpos($_SERVER['HTTP_HOST'], 'i7.stevelacey.net' ) !== false) {
+    if(stristr($_SERVER['HTTP_HOST'], 'i7.stevelacey.net' )) {
       return 'dev';
-    } else if(strpos($_SERVER['HTTP_HOST'], 'dev.speakr.co.uk' ) !== false) {
+    } else if(stristr($_SERVER['HTTP_HOST'], 'dev.speakr.co.uk' )) {
       return 'demo';
     } else {
       return 'live';

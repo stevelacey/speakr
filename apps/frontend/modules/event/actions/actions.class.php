@@ -17,7 +17,6 @@ class eventActions extends myEventActions {
 
   public function executeShow(sfWebRequest $request) {
     $this->event = $this->getRoute()->getObject();
-    $this->form = new SpeakerForm();
 
     if($this->getUser()->isAuthenticated()) {
       $user = $this->getUser()->getGuardUser();
@@ -27,6 +26,10 @@ class eventActions extends myEventActions {
       $this->speaking = $user->isSpeaking($this->event);
       $this->watching = $user->isWatching($this->event);
     }
+  }
+
+  public function executeSpeakers(sfWebRequest $request) {
+    $this->event = $this->getRoute()->getObject();
   }
 
   public function executeMap(sfWebRequest $request) {
