@@ -133,7 +133,11 @@ function userSearch(query) {
 
     for(var i in users) {
       var user = users[i];
-      list.append($('<li/>', {text: user.name}));
+      var text = ' ' + user.name + ' (@' + user.username + ') ';
+      list.append($('<li/>', {text: text})
+        .prepend($('<img/>', {src: user.image, alt: text, title: text}))
+        .append($('<a/>', {text: 'Add as speaker!', href: window.location + '/add/' + user.username}))
+      );
     }
 
     $('.user_search').each(function() {

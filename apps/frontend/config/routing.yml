@@ -92,6 +92,30 @@ event_map:
     action: map
     sf_format: json
 
+event_speaker_add:
+  class: sfDoctrineRoute
+  url: /:slug/speakers/add/:username
+  options:
+    model: Event
+    method: findBySlug
+    type: object
+  param:
+    module: event
+    action: addSpeaker
+
+event_speaker_remove:
+  class: sfDoctrineRoute
+  url: /:slug/speakers/remove/:username
+  options:
+    model: Event
+    method: findBySlug
+    type: object
+  param:
+    module: event
+    action: removeSpeaker
+  requirements:
+    sf_method: post
+
 event_action:
   class: sfDoctrineRoute
   url: /:slug/:verb/:action
