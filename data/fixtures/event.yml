@@ -64,3 +64,33 @@ Event:
     hashtag: wdc10
     address: Exhibitions and Conferences Centre
     postcode: BS16 1ZG
+  OpenWebGaming10:
+    Conference: OpenWebGaming
+    date: '2010-12-06'
+    Location: London
+    description: |
+      <p>Mozilla Labs Gaming is hosting an Open Web Gaming Special - in London this time, with Six to Start!</p>
+      <p>This Labs Night will be all about games being developed and played on the Open Web - expect lots of cool demos, talks and interesting people to hang out with.</p>
+
+      <ul>
+        <li>We have a growing list of fabulous speakers for the evening including:</li>
+        <li>Ian Millington</li>
+        <li>Christian Heilmann (Mozilla)</li>
+        <li>Rik Lomas (Picklive/Lomalogue)</li>
+        <li>Rob Hawkes (Rawkets)</li>
+        <li>Ernesto Jimenez (Six to Start)</li>
+        <li>and more</li>
+      </ul>
+
+      <p>If you are working on some cool gaming-related stuff, want to demo something or hold a talk, please contact us at gameon [at] mozilla.com.</p>
+
+      <p>We will be meeting on Monday 6th December at the Bar Music Hall in Shoreditch, a short walk from Old Street and Shoreditch High Street tube stations. Doors open at 6:30pm, with talks beginning at 7:15pm (each lasting 10 minutes).</p>
+
+      <p>Anyone is welcome to attend, but please sign up soon so we know how many people to expect. Refreshments (including drinks) will be provided for everyone.</p>
+
+      <p>Follow @MozLabs @SixtoStart and #GameOn10 on Twitter for latest news and updates.</p>
+      <p>Mozilla Labs Gaming is hosting an Open Web Gaming Special - in London this time, with Six to Start</p>
+    url: 'http://www.sixtostart.com/onetoread/2010/open-web-gaming-with-mozilla-and-six-to-start'
+    hashtag: GameOn10
+    address: 134 Curtain Road
+    postcode: EC2A 3AR

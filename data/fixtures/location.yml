@@ -5,3 +5,9 @@ Location:
   Bristol:
     name: Bristol
     Country: UK
+  London:
+    name: London
+    Country: UK
+  Nottingham:
+    name: Nottingham
+    Country: UK
