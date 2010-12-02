@@ -21,6 +21,22 @@ class userActions extends sfActions {
     return $this->renderText(json_encode($users));
   }
 
+  public function executeTwitterSearch(sfWebRequest $request) {
+    $users = array();
+
+    if($request->hasParameter('query')) {
+      foreach(Twitter::getConnection()->get('users/search', array('q' => $request->getParameter('query'))) as $user) {
+        $users[] = array(
+          'username' => $user->screen_name,
+          'name' => $user->name,
+          'image' => $user->profile_image_url
+        );
+      }
+    }
+
+    return $this->renderText(json_encode($users));
+  }
+
   public function executeEdit(sfWebRequest $request) {
     $this->user = $this->getUser()->getGuardUser();
     $this->form = new sfGuardUserForm($this->user);

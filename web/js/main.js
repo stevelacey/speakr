@@ -5,17 +5,11 @@ $(function() {
   }
 
   $('.user_search').each(function() {
-    $(this).find('input.query').keyup(function() {
-      userSearch($(this).val());
-    });
-    $(this).submit(function() {
-      userSearch($(this).find('input.query').val());
-      event.preventDefault();
-    });
+    $(this).submit(userSearchAction);
   });
 });
 
-if(typeof(google) != 'undefined') {
+if(typeof(google.maps) != 'undefined') {
   var map;
   var gInfoWindow;
   var response = [];
@@ -42,6 +36,16 @@ if(typeof(google) != 'undefined') {
       new google.maps.Point(6, 20)
     )
   };
+}
+
+var userSearchAction = function(event) {
+  localUserSearch($(this).find('input.query').val());
+  event.preventDefault();
+}
+
+var twitterSearchAction = function(event) {
+  twitterUserSearch($(this).find('input.query').val());
+  event.preventDefault();
 }
 
 function getGoogleMap() {
@@ -127,8 +131,34 @@ function getTweets() {
   });
 }
 
-function userSearch(query) {
+function localUserSearch(query) {
   $.getJSON('/user/search/' + query, {}, function(users) {
+    var list = $('<ol/>');
+
+    for(var i in users) {
+      var user = users[i];
+      var text = ' ' + user.name + ' (@' + user.username + ') ';
+      list.append($('<li/>', {text: text})
+        .prepend($('<img/>', {src: user.image, alt: text, title: text}))
+        .append($('<a/>', {text: 'Add as speaker!', href: window.location + '/add/' + user.username}))
+      );
+    }
+
+    list.append($('<a/>', {text: 'Try Twitter?', href: '#'}).click(function(event) {
+      $('.user_search').unbind('submit', userSearchAction).submit(twitterSearchAction).find('ol, a').remove();
+      twitterUserSearch(query);
+      event.preventDefault();
+    }));
+
+    $('.user_search').each(function() {
+      $(this).find('ol, a').remove();
+      $(this).append(list);
+    });
+  });
+}
+
+function twitterUserSearch(query) {
+  $.getJSON('/user/twitter/search/' + query, {}, function(users) {
     var list = $('<ol/>');
 
     for(var i in users) {
@@ -143,7 +173,7 @@ function userSearch(query) {
     $('.user_search').each(function() {
       $(this).find('ol').remove();
       $(this).append(list);
-    })
+    });
   });
 }
 

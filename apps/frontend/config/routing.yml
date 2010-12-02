@@ -48,6 +48,20 @@ user_search_query:
     action: search
     sf_format: json
 
+user_twitter_search:
+  url: /user/twitter/search
+  param:
+    module: user
+    action: twitterSearch
+    sf_format: json
+
+user_twitter_search_query:
+  url: /user/twitter/search/:query
+  param:
+    module: user
+    action: twitterSearch
+    sf_format: json
+
 profile:
   class: sfDoctrineRoute
   url: /user/:username
