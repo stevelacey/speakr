@@ -1,9 +1,9 @@
 [submodule "lib/vendor/symfony"]
 	path = lib/vendor/symfony
-	url = https://github.com/vjousse/symfony-1.3---1.4.git
+	url = git://github.com/symfony/symfony1.git
 [submodule "plugins/sfDoctrineGuardPlugin"]
 	path = plugins/sfDoctrineGuardPlugin
-	url = https://github.com/pycmam/sfDoctrineGuardPlugin.git
+	url = git://github.com/pycmam/sfDoctrineGuardPlugin.git
 [submodule "plugins/sfTwitterAuthPlugin"]
 	path = plugins/sfTwitterAuthPlugin
 	url = git@github.com:stevelacey/sfTwitterAuthPlugin.git

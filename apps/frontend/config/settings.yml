@@ -1,32 +1,32 @@
 all:
   .settings:
     # Form security secret (CSRF protection)
-    csrf_secret:            c8ffa7fbd7cda56c5739a0ca56f1778b13981a26
+    csrf_secret: c8ffa7fbd7cda56c5739a0ca56f1778b13981a26
 
     # Output escaping settings
-    escaping_strategy:      true
-    escaping_method:        ESC_SPECIALCHARS
+    escaping_strategy: true
+    escaping_method: ESC_SPECIALCHARS
 
     # Enable the database manager
-    use_database:           true
+    use_database: true
 
-    no_script_name:         true
-    enabled_modules:        [default, sfTwitterAuth]
+    enabled_modules: [default, sfTwitterAuth]
+    no_script_name: true
 
 live:
   .settings:
-    logging_enabled:        false
+    logging_enabled: false
 
 dev:
   .settings:
-    error_reporting:        <?php echo (E_ALL | E_STRICT)."\n" ?>
-    web_debug:              true
-    cache:                  false
-    etag:                   false
+    error_reporting: <?php echo (E_ALL | E_STRICT)."\n" ?>
+    web_debug: true
+    cache: false
+    etag: false
 
 test:
   .settings:
-    error_reporting:        <?php echo ((E_ALL | E_STRICT) ^ E_NOTICE)."\n" ?>
-    cache:                  false
-    web_debug:              false
-    etag:                   false
+    error_reporting: <?php echo ((E_ALL | E_STRICT) ^ E_NOTICE)."\n" ?>
+    cache: false
+    web_debug: false
+    etag: false
