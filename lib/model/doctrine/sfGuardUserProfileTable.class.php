@@ -1,7 +1,7 @@
 <?php
 
 
-class sfGuardUserProfileTable extends PluginsfGuardUserProfileTable
+class sfGuardUserProfileTable extends Doctrine_Table
 {
     
     public static function getInstance()

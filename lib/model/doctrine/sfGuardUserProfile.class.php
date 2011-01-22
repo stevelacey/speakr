@@ -10,7 +10,7 @@
  * @author     Steve Lacey
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
-class sfGuardUserProfile extends PluginsfGuardUserProfile {
+class sfGuardUserProfile extends BasesfGuardUserProfile {
   public function __call($method, $arguments) {
     if(in_array($method, array('getImage', 'getIcon'))) {
       if(parent::__call($method, $arguments) == null) {

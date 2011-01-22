@@ -46,7 +46,6 @@ sfGuardUserProfile:
   sfGuardUserProfile_1:
     id: 11262212
     User: sfGuardUser_11262212
-    name: 'Steve Lacey'
     description: 'Bristol based Web Developer enduring my final year of BSc Web Design at UWE.'
     website: 'http://stevelacey.net'
     image: 'http://a2.twimg.com/profile_images/694030230/Steve_-_Frankie___Bennies_normal.png'
@@ -56,7 +55,6 @@ sfGuardUserProfile:
   sfGuardUserProfile_2:
     id: 14112618
     User: sfGuardUser_14112618
-    name: 'Byrion Smith'
     description: 'Final year BSc Computing student with a passion for technology, programming and media.'
     website: 'http://byrion.com'
     image: 'http://a0.twimg.com/profile_images/739932764/3520866589_01bcb51e0a_s_normal.jpg'
@@ -65,7 +63,7 @@ sfGuardUserProfile:
     updated_at: '2010-11-17 00:45:02'
   sfGuardUserProfile_64397624:
     id: 64397624
-    name: 'Grant Burton'
+    User: sfGuardUser_64397624
     description: ''
     website: ''
     image: 'http://a3.twimg.com/profile_images/1159892135/me_normal.png'

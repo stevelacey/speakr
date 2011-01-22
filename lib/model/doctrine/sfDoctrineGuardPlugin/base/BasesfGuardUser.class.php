@@ -27,8 +27,8 @@
  * @property Doctrine_Collection $sfGuardUserGroup
  * @property sfGuardRememberKey $RememberKeys
  * @property sfGuardForgotPassword $ForgotPassword
- * @property sfGuardUserProfile $Profile
  * @property Doctrine_Collection $PresentationUser
+ * @property sfGuardUserProfile $Profile
  * @property Doctrine_Collection $Attendee
  * @property Doctrine_Collection $Favouriter
  * @property Doctrine_Collection $Organiser
@@ -57,8 +57,8 @@
  * @method Doctrine_Collection   getSfGuardUserGroup()      Returns the current record's "sfGuardUserGroup" collection
  * @method sfGuardRememberKey    getRememberKeys()          Returns the current record's "RememberKeys" value
  * @method sfGuardForgotPassword getForgotPassword()        Returns the current record's "ForgotPassword" value
- * @method sfGuardUserProfile    getProfile()               Returns the current record's "Profile" value
  * @method Doctrine_Collection   getPresentationUser()      Returns the current record's "PresentationUser" collection
+ * @method sfGuardUserProfile    getProfile()               Returns the current record's "Profile" value
  * @method Doctrine_Collection   getAttendee()              Returns the current record's "Attendee" collection
  * @method Doctrine_Collection   getFavouriter()            Returns the current record's "Favouriter" collection
  * @method Doctrine_Collection   getOrganiser()             Returns the current record's "Organiser" collection
@@ -86,8 +86,8 @@
  * @method sfGuardUser           setSfGuardUserGroup()      Sets the current record's "sfGuardUserGroup" collection
  * @method sfGuardUser           setRememberKeys()          Sets the current record's "RememberKeys" value
  * @method sfGuardUser           setForgotPassword()        Sets the current record's "ForgotPassword" value
- * @method sfGuardUser           setProfile()               Sets the current record's "Profile" value
  * @method sfGuardUser           setPresentationUser()      Sets the current record's "PresentationUser" collection
+ * @method sfGuardUser           setProfile()               Sets the current record's "Profile" value
  * @method sfGuardUser           setAttendee()              Sets the current record's "Attendee" collection
  * @method sfGuardUser           setFavouriter()            Sets the current record's "Favouriter" collection
  * @method sfGuardUser           setOrganiser()             Sets the current record's "Organiser" collection
@@ -219,13 +219,13 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'user_id'));
 
-        $this->hasOne('sfGuardUserProfile as Profile', array(
-             'local' => 'id',
-             'foreign' => 'id'));
-
         $this->hasMany('PresentationUser', array(
              'local' => 'id',
              'foreign' => 'user_id'));
+
+        $this->hasOne('sfGuardUserProfile as Profile', array(
+             'local' => 'id',
+             'foreign' => 'id'));
 
         $this->hasMany('Attendee', array(
              'local' => 'id',
