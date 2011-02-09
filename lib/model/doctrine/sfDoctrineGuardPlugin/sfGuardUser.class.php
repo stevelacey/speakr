@@ -11,25 +11,6 @@
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 class sfGuardUser extends PluginsfGuardUser {
-  public function getTwitterUsername() {
-    return '@'.$this->getUsername();
-  }
-
-  public function getUrl() {
-    return sfConfig::get('app_twitter_url').'/'.$this->getUsername();
-  }
-
-  public function getSpeakers() {
-    return Doctrine_Query::create()->
-      from('sfGuardUser u')->
-      leftJoin('u.Speaker s')->
-      leftJoin('s.Event e')->
-      leftJoin('e.Speaker sf')->
-      where('sf.user_id = ?', $this->getId())->
-      andWhere('u.id != ?', $this->getId())->
-      execute();
-  }
-
   public function attend(Event $event, $bool = true) {
     if($bool) {
       $event->Attending[] = $this;
@@ -55,6 +36,25 @@ class sfGuardUser extends PluginsfGuardUser {
     } else if($this->isWatching($event) && !$bool) {
       Doctrine::getTable('Watcher')->findOneByEventIdAndUserId($event->getId(), $this->getId())->delete();
     }
+  }
+
+  public function getTwitterUsername() {
+    return '@'.$this->getUsername();
+  }
+
+  public function getUrl() {
+    return sfConfig::get('app_twitter_url').'/'.$this->getUsername();
+  }
+
+  public function getSpeakers() {
+    return Doctrine_Query::create()->
+      from('sfGuardUser u')->
+      leftJoin('u.Speaker s')->
+      leftJoin('s.Event e')->
+      leftJoin('e.Speaker sf')->
+      where('sf.user_id = ?', $this->getId())->
+      andWhere('u.id != ?', $this->getId())->
+      execute();
   }
 
   public function isAttending(Event $event) {

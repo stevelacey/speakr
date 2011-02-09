@@ -36,6 +36,8 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       'speaking_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
       'watching_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
       'presentations_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Presentation')),
+      'following_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser')),
+      'followers_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser')),
     ));
 
     $this->setValidators(array(
@@ -60,6 +62,8 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       'speaking_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
       'watching_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
       'presentations_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Presentation', 'required' => false)),
+      'following_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser', 'required' => false)),
+      'followers_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser', 'required' => false)),
     ));
 
     $this->validatorSchema->setPostValidator(
@@ -127,6 +131,16 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       $this->setDefault('presentations_list', $this->object->Presentations->getPrimaryKeys());
     }
 
+    if (isset($this->widgetSchema['following_list']))
+    {
+      $this->setDefault('following_list', $this->object->Following->getPrimaryKeys());
+    }
+
+    if (isset($this->widgetSchema['followers_list']))
+    {
+      $this->setDefault('followers_list', $this->object->Followers->getPrimaryKeys());
+    }
+
   }
 
   protected function doSave($con = null)
@@ -139,6 +153,8 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
     $this->saveSpeakingList($con);
     $this->saveWatchingList($con);
     $this->savePresentationsList($con);
+    $this->saveFollowingList($con);
+    $this->saveFollowersList($con);
 
     parent::doSave($con);
   }
@@ -444,6 +460,82 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
     if (count($link))
     {
       $this->object->link('Presentations', array_values($link));
+    }
+  }
+
+  public function saveFollowingList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['following_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->Following->getPrimaryKeys();
+    $values = $this->getValue('following_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('Following', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('Following', array_values($link));
+    }
+  }
+
+  public function saveFollowersList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['followers_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->Followers->getPrimaryKeys();
+    $values = $this->getValue('followers_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('Followers', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('Followers', array_values($link));
     }
   }
 

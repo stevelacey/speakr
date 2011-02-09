@@ -5,6 +5,13 @@ class sfGuardUserTable extends PluginsfGuardUserTable {
     return Doctrine_Core::getTable('sfGuardUser');
   }
 
+  public function findByIds($ids) {
+    return Doctrine_Query::create()->
+      from('sfGuardUser u')->
+      whereIn('u.id', $ids)->
+      execute();
+  }
+
   public function search($query) {
     return Doctrine_Query::create()->
       from('sfGuardUser u')->

@@ -36,6 +36,12 @@ sfGuardUser:
       local: user_id
       foreign: presentation_id
       foreignAlias: Speakers
+    Following:
+      class: sfGuardUser
+      refClass: Friend
+      local: follower_id
+      foreign: following_id
+      foreignAlias: Followers
   options:
     orderBy: first_name, last_name ASC
 
@@ -144,4 +150,22 @@ Watcher:
     User:
       class: sfGuardUser
       local: user_id
+      foreign: id
+
+Friend:
+  columns:
+    follower_id:
+      type: integer(20)
+      primary: true
+    following_id:
+      type: integer(20)
+      primary: true
+  relations:
+    Follower:
+      class: sfGuardUser
+      local: follower_id
+      foreign: id
+    Following:
+      class: sfGuardUser
+      local: following_id
       foreign: id

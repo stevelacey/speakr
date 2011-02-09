@@ -23,6 +23,8 @@
  * @property Doctrine_Collection $Speaking
  * @property Doctrine_Collection $Watching
  * @property Doctrine_Collection $Presentations
+ * @property Doctrine_Collection $Following
+ * @property Doctrine_Collection $Followers
  * @property Doctrine_Collection $sfGuardUserPermission
  * @property Doctrine_Collection $sfGuardUserGroup
  * @property sfGuardRememberKey $RememberKeys
@@ -34,6 +36,7 @@
  * @property Doctrine_Collection $Organiser
  * @property Doctrine_Collection $Speaker
  * @property Doctrine_Collection $Watcher
+ * @property Doctrine_Collection $Friend
  * 
  * @method string                getFirstName()             Returns the current record's "first_name" value
  * @method string                getLastName()              Returns the current record's "last_name" value
@@ -53,6 +56,8 @@
  * @method Doctrine_Collection   getSpeaking()              Returns the current record's "Speaking" collection
  * @method Doctrine_Collection   getWatching()              Returns the current record's "Watching" collection
  * @method Doctrine_Collection   getPresentations()         Returns the current record's "Presentations" collection
+ * @method Doctrine_Collection   getFollowing()             Returns the current record's "Following" collection
+ * @method Doctrine_Collection   getFollowers()             Returns the current record's "Followers" collection
  * @method Doctrine_Collection   getSfGuardUserPermission() Returns the current record's "sfGuardUserPermission" collection
  * @method Doctrine_Collection   getSfGuardUserGroup()      Returns the current record's "sfGuardUserGroup" collection
  * @method sfGuardRememberKey    getRememberKeys()          Returns the current record's "RememberKeys" value
@@ -64,6 +69,7 @@
  * @method Doctrine_Collection   getOrganiser()             Returns the current record's "Organiser" collection
  * @method Doctrine_Collection   getSpeaker()               Returns the current record's "Speaker" collection
  * @method Doctrine_Collection   getWatcher()               Returns the current record's "Watcher" collection
+ * @method Doctrine_Collection   getFriend()                Returns the current record's "Friend" collection
  * @method sfGuardUser           setFirstName()             Sets the current record's "first_name" value
  * @method sfGuardUser           setLastName()              Sets the current record's "last_name" value
  * @method sfGuardUser           setEmailAddress()          Sets the current record's "email_address" value
@@ -82,6 +88,8 @@
  * @method sfGuardUser           setSpeaking()              Sets the current record's "Speaking" collection
  * @method sfGuardUser           setWatching()              Sets the current record's "Watching" collection
  * @method sfGuardUser           setPresentations()         Sets the current record's "Presentations" collection
+ * @method sfGuardUser           setFollowing()             Sets the current record's "Following" collection
+ * @method sfGuardUser           setFollowers()             Sets the current record's "Followers" collection
  * @method sfGuardUser           setSfGuardUserPermission() Sets the current record's "sfGuardUserPermission" collection
  * @method sfGuardUser           setSfGuardUserGroup()      Sets the current record's "sfGuardUserGroup" collection
  * @method sfGuardUser           setRememberKeys()          Sets the current record's "RememberKeys" value
@@ -93,6 +101,7 @@
  * @method sfGuardUser           setOrganiser()             Sets the current record's "Organiser" collection
  * @method sfGuardUser           setSpeaker()               Sets the current record's "Speaker" collection
  * @method sfGuardUser           setWatcher()               Sets the current record's "Watcher" collection
+ * @method sfGuardUser           setFriend()                Sets the current record's "Friend" collection
  * 
  * @package    speakr
  * @subpackage model
@@ -203,6 +212,16 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'local' => 'user_id',
              'foreign' => 'presentation_id'));
 
+        $this->hasMany('sfGuardUser as Following', array(
+             'refClass' => 'Friend',
+             'local' => 'follower_id',
+             'foreign' => 'following_id'));
+
+        $this->hasMany('sfGuardUser as Followers', array(
+             'refClass' => 'Friend',
+             'local' => 'following_id',
+             'foreign' => 'follower_id'));
+
         $this->hasMany('sfGuardUserPermission', array(
              'local' => 'id',
              'foreign' => 'user_id'));
@@ -246,6 +265,10 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
         $this->hasMany('Watcher', array(
              'local' => 'id',
              'foreign' => 'user_id'));
+
+        $this->hasMany('Friend', array(
+             'local' => 'id',
+             'foreign' => 'follower_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);

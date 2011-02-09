@@ -33,6 +33,8 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
       'speaking_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
       'watching_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Event')),
       'presentations_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Presentation')),
+      'following_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser')),
+      'followers_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser')),
     ));
 
     $this->setValidators(array(
@@ -56,6 +58,8 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
       'speaking_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
       'watching_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Event', 'required' => false)),
       'presentations_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Presentation', 'required' => false)),
+      'following_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser', 'required' => false)),
+      'followers_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('sf_guard_user_filters[%s]');
@@ -195,6 +199,38 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
           ->andWhereIn('PresentationUser.presentation_id', $values);
   }
 
+  public function addFollowingListColumnQuery(Doctrine_Query $query, $field, $values)
+  {
+    if (!is_array($values))
+    {
+      $values = array($values);
+    }
+
+    if (!count($values))
+    {
+      return;
+    }
+
+    $query->leftJoin('r.Friend Friend')
+          ->andWhereIn('Friend.following_id', $values);
+  }
+
+  public function addFollowersListColumnQuery(Doctrine_Query $query, $field, $values)
+  {
+    if (!is_array($values))
+    {
+      $values = array($values);
+    }
+
+    if (!count($values))
+    {
+      return;
+    }
+
+    $query->leftJoin('r.Friend Friend')
+          ->andWhereIn('Friend.follower_id', $values);
+  }
+
   public function getModelName()
   {
     return 'sfGuardUser';
@@ -224,6 +260,8 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
       'speaking_list'      => 'ManyKey',
       'watching_list'      => 'ManyKey',
       'presentations_list' => 'ManyKey',
+      'following_list'     => 'ManyKey',
+      'followers_list'     => 'ManyKey',
     );
   }
 }
