@@ -11,6 +11,44 @@
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 class sfGuardUser extends PluginsfGuardUser {
+  public function getFriendEvents() {
+    return Doctrine::getTable('Event')->findByUserFollowing($this);
+  }
+
+  public function getFriendsAttendingOrSpeaking(Event $event) {
+    return Doctrine_Query::create()->
+      from('sfGuardUser u')->
+      leftJoin('u.Profile p')->
+      leftJoin('u.Friend f on f.following_id = u.id')->
+      leftJoin('u.Attendee a on a.user_id = f.following_id')->
+      leftJoin('u.Speaker s on s.user_id = f.following_id')->
+      andWhere('f.follower_id = ?', $this->getId())->
+      andWhere('a.event_id = ? or s.event_id = ?', array($event->getId(), $event->getId()))->
+      execute();
+  }
+
+  public function getFriendsAttending(Event $event) {
+    return Doctrine_Query::create()->
+      from('sfGuardUser u')->
+      leftJoin('u.Profile p')->
+      leftJoin('u.Friend f on f.following_id = u.id')->
+      leftJoin('u.Attendee a on a.user_id = f.following_id')->
+      andWhere('f.follower_id = ?', $this->getId())->
+      andWhere('a.event_id = ?', $event->getId())->
+      execute();
+  }
+
+  public function getFriendsSpeaking(Event $event) {
+    return Doctrine_Query::create()->
+      from('sfGuardUser u')->
+      leftJoin('u.Profile p')->
+      leftJoin('u.Friend f on f.following_id = u.id')->
+      leftJoin('u.Speaker s on s.user_id = f.following_id')->
+      andWhere('f.follower_id = ?', $this->getId())->
+      andWhere('s.event_id = ?', $event->getId())->
+      execute();
+  }
+
   public function attend(Event $event, $bool = true) {
     if($bool) {
       $event->Attending[] = $this;
