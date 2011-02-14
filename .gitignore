@@ -6,3 +6,4 @@ web/uploads/*
 !web/uploads/.gitignore
 config/databases.yml
 apps/frontend/config/app.yml
+web/css/*

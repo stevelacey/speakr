@@ -7,3 +7,6 @@
 [submodule "plugins/sfTwitterAuthPlugin"]
 	path = plugins/sfTwitterAuthPlugin
 	url = git@github.com:stevelacey/sfTwitterAuthPlugin.git
+[submodule "plugins/sfSassyCssPlugin"]
+	path = plugins/sfSassyCssPlugin
+	url = git://github.com/vicb/sfSassyCssPlugin.git
