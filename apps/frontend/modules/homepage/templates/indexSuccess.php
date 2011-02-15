@@ -6,7 +6,7 @@
 <?php else : ?>
   <div class="upcoming">
     <h2>Friends Events</h2>
-    <?php include_partial('event/short_list', array('events' => $user->getFriendEvents())) ?>
+    <?php include_partial('event/short_list', array('events' => $user->getFriendsEvents())) ?>
   </div>
   <div class="upcoming">
     <h2>Your Schedule</h2>

@@ -11,7 +11,11 @@
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 class sfGuardUser extends PluginsfGuardUser {
-  public function getFriendEvents() {
+  public function __toString() {
+    return $this->getName().' (@'.$this->getUsername().')';
+  }
+  
+  public function getFriendsEvents() {
     return Doctrine::getTable('Event')->findByUserFollowing($this);
   }
 

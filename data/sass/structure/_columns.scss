@@ -1,0 +1,57 @@
+.columns {
+  width: 100%;
+  margin: 10px 0;
+  @include clearfix;
+
+  .column {
+    display: block;
+    float: left;
+    margin: 0;
+    padding: 0;
+    @include box-sizing(border-box);
+  }
+
+  ul.column {
+    padding-left: 40px;
+  }
+
+  &.two {
+    > .column {
+      width: 50%;
+
+      &:first-child {
+        padding-right: 15px;
+      }
+
+      &:last-child {
+        padding-left: 15px;
+      }
+
+      &.wide {
+        width: 66.66%;
+      }
+
+      &.thin {
+        width: 33.33%;
+      }
+    }
+  }
+
+  &.three {
+    > .column {
+      width: 33.33%;
+    }
+  }
+
+  &.four {
+    > .column {
+      width: 25%;
+    }
+  }
+
+  &.five {
+    > .column {
+      width: 20%;
+    }
+  }
+}

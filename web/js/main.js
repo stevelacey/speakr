@@ -52,7 +52,7 @@ function getGoogleMap() {
   $.getJSON(window.location + '/map.json', {}, function(data) {
     if(data.event.latitude && data.event.longitude) {
 
-      $('<div/>', {'class': 'map'}).append($('<h3/>', {text: 'Map'})).append($('<div/>', {'class': 'canvas'})).appendTo('article');
+      $('<div/>', {'class': 'map'}).append($('<h3/>', {text: 'Map'})).append($('<div/>', {'class': 'canvas'})).appendTo('.location');
 
       var centerCoord = new google.maps.LatLng(data.event.latitude, data.event.longitude);
 
@@ -91,22 +91,22 @@ function getGoogleMap() {
 }
 
 function getTwitterFeed() {
-  if($('.hashtag').length) {
-    $('<div/>', {'class': 'tweets'}).append($('<h3/>', {text: 'Tweets'})).appendTo('body');
+  if($('.twitter .hashtag').length) {
     getTweets();
   }
 }
 
 function getTweets() {
   $.ajax({
-    url: 'http://search.twitter.com/search.json?q=' + $('.hashtag').text() + '&rpp=10',
+    url: 'http://search.twitter.com/search.json?q=' + $('.twitter .hashtag').text() + '&rpp=10',
     dataType: 'jsonp',
     success: function(json) {
-      var tweets = $('.tweets');
+      var tweets = $('.twitter');
       
       if(json.results.length) {
         if(!tweets.find('ol').length) {
-          tweets.append($('<ol/>')).find('p').fadeOut();
+          tweets.find('h2').text('Tweets #' + $('.twitter .hashtag').text());
+          tweets.append($('<ol/>')).find('p').remove();
         }
         
         for(i in json.results) {

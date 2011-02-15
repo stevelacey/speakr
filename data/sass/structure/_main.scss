@@ -1,0 +1,102 @@
+@mixin page-width {
+  width: 80%;
+  min-width: 960px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+@import "_positions";
+
+@mixin image-expand($width, $height) {
+  position: relative;
+  padding-top: $height;
+  overflow: hidden;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: $width / -2;
+  }
+}
+
+@mixin button {
+  cursor: pointer;
+  text-decoration: none;
+  @include transition(transform, .1s, ease-in-out);
+
+  &:active {
+    @include transform(translate(0, 2px));
+  }
+}
+
+@mixin sexy-button($color) {
+  @include sexy-button-style($color);
+  @include button;
+  @include box-shadow(0 15px 20px rgba(0, 0, 0, .2));
+
+  @include transition-property-two(box-shadow, transform);
+  @include transition-duration-two(.2s, .2s);
+  @include transition-timing-function-two(ease-in-out, ease-in-out);
+
+  &:hover, &:focus {
+    @include background-image-linear-gradient-three-stops(0%, rgba(0,0,0,0.05), 50%, rgba(0,0,0,0.05), 55%, rgba(255,255,255,0.1));
+    text-decoration: none;
+  }
+
+  &:active {
+    @include background-image-linear-gradient-three-stops(0%, rgba(0,0,0,0.15), 50%, rgba(0,0,0,0.15), 55%, rgba(0,0,0,0.05));
+    @include box-shadow(0 12px 20px rgba(0, 0, 0, .15));
+  }
+}
+
+@mixin sexy-button-style($color) {
+  @include background-image-linear-gradient-three-stops(0%, transparent, 50%, transparent, 55%, rgba(255,255,255,0.2));
+  background-color: $color;
+  border: 0;
+  @include border-radius(6px);
+  display: block;
+  float: left;
+  height: 32px;
+  padding: 0 12px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  line-height: 30px;
+  @include box-sizing(border-box);
+}
+
+@mixin disabled-sexy-button {
+  @include sexy-button-style(#BBB);
+}
+
+@mixin sexy-3d-button {
+  display: inline-block;
+  padding: 8px 10px;
+  font-weight: bold;
+  color: #FFF;
+
+  @include background-linear-gradient(0%, #3194c6, 100%, #5bacd6);
+  @include border-radius(8px);
+  @include box-shadow(0 8px 0 #1a74a1, 0 15px 20px rgba(0,0,0,.35));
+
+  @include transition-property-two(box-shadow, transform);
+  @include transition-duration-two(.2s, .2s);
+  @include transition-timing-function-two(ease-in-out, ease-in-out);
+
+  &:active {
+    @include box-shadow(0 8px 0 #1a74a1, 0 12px 10px rgba(0,0,0,.3));
+    @include transform(translate(0, 4px));
+  }
+}
+
+@mixin clearfix {
+  &:before {
+    content: "\0020"; display: block; height: 0; visibility: hidden;
+  }
+  &:after {
+    content: "\0020"; display: block; height: 0; visibility: hidden;
+    clear: both;
+  }
+  zoom: 1;
+}

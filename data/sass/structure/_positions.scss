@@ -1,0 +1,43 @@
+@mixin top($top: 0) {
+  position: absolute;
+  top: 0;
+}
+
+@mixin bottom($bottom: 0) {
+  position: absolute;
+  bottom: 0;
+}
+
+@mixin left($left: 0) {
+  position: absolute;
+  left: 0;
+}
+
+@mixin right($right: 0) {
+  position: absolute;
+  right: 0;
+}
+
+@mixin top-left($top: 0, $left: 0) {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@mixin top-right($top: 0, $right: 0) {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+@mixin bottom-left($bottom: 0, $left: 0) {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+@mixin bottom-right($bottom: 0, $right: 0) {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}

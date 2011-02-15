@@ -10,3 +10,6 @@
 [submodule "plugins/sfSassyCssPlugin"]
 	path = plugins/sfSassyCssPlugin
 	url = git://github.com/vicb/sfSassyCssPlugin.git
+[submodule "data/sass/css3"]
+	path = data/sass/css3
+	url = git@github.com:stevelacey/sass-css3-mixins.git

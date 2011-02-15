@@ -1,3 +1,102 @@
+body {
+  font-family: arial;
+
+  > header, > article, > div, > .columns, > footer {
+    width: 980px !important;
+    margin: 0 auto;
+  }
+
+  header {
+    height: 100px;
+  }
+}
+
+@import "css3/_main";
+
+@import "structure/_main";
+@import "structure/_columns";
+
+em {
+  font-style: normal;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+ol, ul {
+  padding-left: 0;
+}
+
+a {
+  color: #1F65BC;
+  text-decoration: none;
+}
+
+.event {
+  .logo {
+  }
+
+  .actions {
+    a {
+      @include sexy-button(#1F65BC);
+      width: 140px;
+      height: 48px;
+      margin: 0 10px 10px 0;
+      line-height: 48px;
+    }
+
+    @include clearfix;
+  }
+}
+
+.users {
+  &.details {
+    li {
+      width: 200px;
+      height: 48px;
+      line-height: 24px;
+
+      a {
+        position: relative;
+        height: 48px;
+        padding-left: 56px;
+        color: #000;
+
+        img {
+          width: 48px;
+          height: 48px;
+          @include top-left;
+        }
+
+        em, span {
+          display: block;
+        }
+
+        span {
+          font-size: 12px;
+          color: #555;
+        }
+      }
+    }
+  }
+
+  li {
+    display: block;
+    float: left;
+    width: 48px;
+    height: 48px;
+    margin: 0 10px 10px 0;
+    @include box-sizing(border-box);
+
+    a {
+      display: block;
+    }
+  }
+
+  @include clearfix;
+}
+
 .map .canvas {
   width: 600px;
   height: 300px;
