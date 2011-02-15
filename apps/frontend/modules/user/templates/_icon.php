@@ -1,1 +1,1 @@
-<?php echo image_tag($user->getIcon(), array('alt' => $user->getName())) ?>
+<?php echo image_tag($user->getIcon(), array('alt' => $user)) ?>
