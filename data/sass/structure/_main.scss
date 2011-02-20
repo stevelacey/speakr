@@ -26,31 +26,34 @@
   @include transition(transform, .1s, ease-in-out);
 
   &:active {
-    @include transform(translate(0, 2px));
+    @include translate(0, 2px);
   }
 }
 
 @mixin sexy-button($color) {
   @include sexy-button-style($color);
   @include button;
-  @include box-shadow(0 15px 20px rgba(0, 0, 0, .2));
+  @include box-shadow(rgba(0, 0, 0, .2), 0, 15px, 20px, 0);
 
-  @include transition-property-two(box-shadow, transform);
-  @include transition-duration-two(.2s, .2s);
-  @include transition-timing-function-two(ease-in-out, ease-in-out);
+  @include transition-property("box-shadow, transform");
+  @include transition-duration(".2s, .2s");
+  @include transition-timing-function("ease-in-out, ease-in-out");
 
   &:hover, &:focus {
+    @include linear-gradient(color-stops(0%, rgba(0,0,0,0.05), 50%, rgba(0,0,0,0.05), 55%, rgba(255,255,255,0.1)));
     @include background-image-linear-gradient-three-stops(0%, rgba(0,0,0,0.05), 50%, rgba(0,0,0,0.05), 55%, rgba(255,255,255,0.1));
     text-decoration: none;
   }
 
   &:active {
+    @include linear-gradient(color-stops(0%, rgba(0,0,0,0.15), 50%, rgba(0,0,0,0.15), 55%, rgba(0,0,0,0.05)));
     @include background-image-linear-gradient-three-stops(0%, rgba(0,0,0,0.15), 50%, rgba(0,0,0,0.15), 55%, rgba(0,0,0,0.05));
-    @include box-shadow(0 12px 20px rgba(0, 0, 0, .15));
+    @include box-shadow(rgba(0, 0, 0, .15), 0, 12px, 20px, 0);
   }
 }
 
 @mixin sexy-button-style($color) {
+  @include linear-gradient(color-stops(transparent, transparent 50%, rgba(255,255,255,0.2) 55%));
   @include background-image-linear-gradient-three-stops(0%, transparent, 50%, transparent, 55%, rgba(255,255,255,0.2));
   background-color: $color;
   border: 0;
@@ -80,13 +83,13 @@
   @include border-radius(8px);
   @include box-shadow(0 8px 0 #1a74a1, 0 15px 20px rgba(0,0,0,.35));
 
-  @include transition-property-two(box-shadow, transform);
-  @include transition-duration-two(.2s, .2s);
-  @include transition-timing-function-two(ease-in-out, ease-in-out);
+  @include transition-property("box-shadow, transform");
+  @include transition-duration(".2s, .2s");
+  @include transition-timing-function("ease-in-out, ease-in-out");
 
   &:active {
     @include box-shadow(0 8px 0 #1a74a1, 0 12px 10px rgba(0,0,0,.3));
-    @include transform(translate(0, 4px));
+    @include translate(0, 4px);
   }
 }
 

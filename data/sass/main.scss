@@ -11,7 +11,9 @@ body {
   }
 }
 
-@import "css3/_main";
+@import "compass";
+
+@import "css3/_background.scss";
 
 @import "structure/_main";
 @import "structure/_columns";
