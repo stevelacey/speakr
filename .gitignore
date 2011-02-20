@@ -5,6 +5,8 @@ config/databases.yml
 cache/*
 !cache/.gitignore
 
+data/sass/.sass-cache
+
 log/*
 !log/.gitignore
 
