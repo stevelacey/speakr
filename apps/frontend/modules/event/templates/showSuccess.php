@@ -81,12 +81,19 @@
         </section>
       <?php endif ?>
 
-      <?php if($event->getHashtag()) : ?>
-        <section class="twitter">
-          <h2>Twitter Hashtag</h2>
+      <section class="twitter">
+        <h2>Twitter</h2>
+        <?php if($event->getHashtag()) : ?>
           <p>#<span class="hashtag"><?php echo $event->getHashtag() ?></span></p>
-        </section>
-      <?php endif ?>
+        <?php endif ?>
+        
+        <form action="<?php echo url_for('event_update', array('action' => 'hashtag', 'sf_subject' => $event)) ?>" method="post">
+          <?php echo $forms['hashtag']['hashtag']->renderHelp() ?>
+          <?php echo $forms['hashtag']['hashtag'] ?>
+          <?php echo $forms['hashtag']->renderHiddenFields(false) ?>
+          <input type="submit" value="Set Hashtag"/>
+        </form>
+      </section>
     </aside>
   </div>
 </article>

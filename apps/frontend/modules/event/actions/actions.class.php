@@ -9,14 +9,9 @@
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
 class eventActions extends myEventActions {
-  public function executeIndex(sfWebRequest $request) {
-    $this->events = Doctrine::getTable('Event')
-      ->createQuery('a')
-      ->execute();
-  }
-
   public function executeShow(sfWebRequest $request) {
     $this->event = $this->getRoute()->getObject();
+    $this->forms = array();
 
     if($this->getUser()->isAuthenticated()) {
       $user = $this->getUser()->getGuardUser();
@@ -25,6 +20,8 @@ class eventActions extends myEventActions {
       $this->organising = $user->isOrganising($this->event);
       $this->speaking = $user->isSpeaking($this->event);
       $this->watching = $user->isWatching($this->event);
+
+      $this->forms['hashtag'] = new EventHashtagForm($this->event);
     }
   }
 
@@ -62,27 +59,19 @@ class eventActions extends myEventActions {
     }
   }
 
-  public function executeEdit(sfWebRequest $request) {
-    $this->forward404Unless($event = Doctrine::getTable('Event')->find(array($request->getParameter('id'))), sprintf('Object event does not exist (%s).', $request->getParameter('id')));
-    $this->form = new EventForm($event);
-  }
+  /* Update Actions */
 
-  public function executeUpdate(sfWebRequest $request) {
-    $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-    $this->forward404Unless($event = Doctrine::getTable('Event')->find(array($request->getParameter('id'))), sprintf('Object event does not exist (%s).', $request->getParameter('id')));
-    $this->form = new EventForm($event);
+  public function executeHashtag(sfWebRequest $request) {
+    $event = $this->getRoute()->getObject();
+    $this->form = new EventHashtagForm($event);
 
-    $this->processForm($request, $this->form);
+    if($request->isMethod(sfRequest::POST)) {
+      $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+      if ($this->form->isValid()) {
+        $this->form->save();
+      }
+    }
 
-    $this->setTemplate('edit');
-  }
-
-  public function executeDelete(sfWebRequest $request) {
-    $request->checkCSRFProtection();
-
-    $this->forward404Unless($event = Doctrine::getTable('Event')->find(array($request->getParameter('id'))), sprintf('Object event does not exist (%s).', $request->getParameter('id')));
-    $event->delete();
-
-    $this->redirect('event/index');
+    $this->redirect('event', $event);
   }
 }

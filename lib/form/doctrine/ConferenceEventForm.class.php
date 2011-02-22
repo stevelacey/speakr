@@ -12,9 +12,9 @@ class ConferenceEventForm extends ConferenceForm {
   public function configure() {
     parent::configure();
 
-    $event = new Event();
-    $event->setConference($this->getObject());
+    $this->event = new Event();
+    $this->event->setConference($this->getObject());
 
-    $this->embedForm('event', new EventForm($event));
+    $this->embedForm('event', new EventForm($this->event));
   }
 }

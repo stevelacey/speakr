@@ -139,16 +139,48 @@ function getTweets() {
       
       if(json.results.length) {
         if(!tweets.find('ol').length) {
-          tweets.find('h2').text('Tweets #' + $('.twitter .hashtag').text());
-          tweets.append($('<ol/>')).find('p').remove();
+          tweets.find('h2')
+            .text('Tweets #' + $('.twitter .hashtag').text() + ' ')
+            .append(
+              $('<small/>').append(
+                $('<a/>', {text: 'Wrong?'}).click(function() {
+                  tweets.find('form').slideToggle(200);
+                })
+              )
+            );
+          
+          tweets
+            .find('p')
+              .remove()
+              .end()
+            .find('form')
+              .hide()
+              .end()
+            .append($('<ol/>'));
         }
+
+        var template = '{0}<br/><small>from <a href="http://twitter.com/{1}">{1}</a> {2}</small>';
         
         for(i in json.results) {
           var tweet = json.results[i];
+          
+          tweet.html = tweet.text.parseURL().parseUsername().parseHashtag();
 
           if(!$(tweets).find('ol li[rel="' + tweet.id + '"]').length) {
-            var content = tweet.from_user + ': ' + tweet.text;
-            tweets.find('ol').prepend($('<li/>', {text: content, rel: tweet.id}).fadeIn()).find('li:gt(9)').fadeOut();
+
+            tweets.find('ol').append(
+              $('<li/>', {
+                html: template.format(
+                  tweet.html,
+                  tweet.from_user,
+                  $.timeago(dateFormat(tweet.created_at, "isoUtcDateTime"))
+                ),
+                rel: tweet.id
+              })
+                .fadeIn()
+              )
+                .find('li:gt(9)')
+                  .fadeOut();
           }
         }
       }
@@ -257,3 +289,42 @@ function addMarkerListener(marker, infowindow) {
     infowindow.open(map, marker);
   });
 }
+
+
+
+
+
+
+
+
+
+
+
+String.prototype.parseURL = function () {
+	return this.replace(/[A-Za-z]+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&\?\/.=]+/g, function (url) {
+		return url.link(url);
+	});
+};
+
+String.prototype.parseUsername = function () {
+	return this.replace(/[@]+[A-Za-z0-9-_]+/g, function (u) {
+		var username = u.replace("@", "")
+		return u.link("http://twitter.com/" + username);
+	});
+};
+
+String.prototype.parseHashtag = function () {
+	return this.replace(/[#]+[A-Za-z0-9-_]+/g, function (t) {
+		var tag = t.replace("#", "%23")
+		return t.link("http://search.twitter.com/search?q=" + tag);
+	});
+};
+
+String.prototype.format = function () {
+	var s = this,
+        i = arguments.length;
+	while (i--) {
+		s = s.replace(new RegExp('\\{' + i + '\\}', 'gm'), arguments[i]);
+	}
+	return s;
+};

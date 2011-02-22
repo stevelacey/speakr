@@ -144,6 +144,19 @@ event_action:
     verb: do|dont
     sf_method: post
 
+event_update:
+  class: sfDoctrineRoute
+  url: /:slug/update/:action
+  options:
+    model: Event
+    method: findBySlug
+    type: object
+  param:
+    module: event
+  requirements:
+    action: hashtag
+    sf_method: post
+
 event:
   class: sfDoctrineRoute
   url: /:slug

@@ -10,7 +10,6 @@
  */
 class EventForm extends BaseEventForm {
   public function configure() {
-//    $this->useFields(array('tagline', 'date', 'description', 'url', 'image', 'hashtag', 'address', 'postcode'));
     $this->widgetSchema['date'] = new sfWidgetFormI18nDate(array(
       'format' => '%day%/%month%/%year%',
       'culture' => 'en'
