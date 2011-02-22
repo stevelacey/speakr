@@ -6,14 +6,6 @@
 <input type="hidden" name="sf_method" value="put" />
 <?php endif; ?>
   <table>
-    <tfoot>
-      <tr>
-        <td colspan="2">
-          <?php echo $form->renderHiddenFields(false) ?>
-          <input type="submit" value="Save" />
-        </td>
-      </tr>
-    </tfoot>
     <tbody>
       <?php echo $form->renderGlobalErrors() ?>
       <tr>
@@ -32,10 +24,19 @@
         <td><?php echo $form['event']['date']->renderError() ?></td>
       </tr>
       <tr>
-        <th><?php echo $form['event']['location_id']->renderLabel() ?></th>
-        <td><?php echo $form['event']['location_id'] ?></td>
-        <td><?php echo $form['event']['location_id']->renderError() ?></td>
+        <th><?php echo $form['event']['location']->renderLabel() ?></th>
+        <td><?php echo $form['event']['location'] ?></td>
+        <td><?php echo $form['event']['location']->renderError() ?></td>
+        <td><?php echo $form['event']['woeid'] ?></td>
       </tr>
     </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2">
+          <?php echo $form->renderHiddenFields(false) ?>
+          <input type="submit" value="Add Event" />
+        </td>
+      </tr>
+    </tfoot>
   </table>
 </form>

@@ -10,6 +10,14 @@
  */
 class ConferenceForm extends BaseConferenceForm {
   public function configure() {
-    $this->useFields(array('title', 'url', 'image'));
+    if($this->getObject()->isNew()) {
+      unset(
+        $this['id'], $this['url'], $this['image'], $this['icon'], $this['slug']
+      );
+    }
+    
+    unset(
+      $this['created_at'], $this['updated_at']
+    );
   }
 }

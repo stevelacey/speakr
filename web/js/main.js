@@ -4,6 +4,10 @@ $(function() {
     getTwitterFeed();
   }
 
+  $('#conference_event_location').keyup(function() {
+    getLocation($(this).val());
+  })
+
   $('.user_search').each(function() {
     $(this).submit(userSearchAction);
   });
@@ -86,6 +90,36 @@ function getGoogleMap() {
         search.setSearchCompleteCallback(null, searchCallback, [poi[i]]);
         search.execute(poi[i]);
       }
+    }
+  });
+}
+
+function getLocation(text) {
+  $( "#conference_event_location" ).autocomplete({
+    source: function( request, response ) {
+      $.ajax({
+        url: 'http://query.yahooapis.com/v1/public/yql?q=select * from geo.places where text="' + request.term + '"&format=json',
+        dataType: 'jsonp',
+        delay: 100,
+        success: function(data) {
+          var places = data.query.results.place;
+          response($.map($.isArray(places) ? places : [places], function(item) {
+            return {
+              label: item.name + ', ' + item.admin1.content + ', ' + item.country.content,
+              value: item.woeid
+            }
+          }));
+        }
+      });
+    },
+    select: function(event, ui) {
+      $('#conference_event_woeid').val(ui.item.value);
+      $(this).val(ui.item.label);
+      event.preventDefault();
+    },
+    focus: function(event, ui) {
+      $(this).val(ui.item.label);
+      event.preventDefault();
     }
   });
 }
