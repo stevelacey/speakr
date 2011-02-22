@@ -15,7 +15,7 @@
       <?php if($sf_user->isAuthenticated()) : ?>
         <?php echo link_to('new event', 'new') ?> logged in as: <?php echo link_to(image_tag($user->getIcon()).$user, 'profile', $user) ?>, <?php echo link_to('logout', 'logout') ?>
       <?php else : ?>
-        <?php echo link_to('Login with Twitter', 'login') ?>
+        <?php include_partial('sfTwitterAuth/signin_button') ?>
       <?php endif ?>
     </header>
     <?php echo $sf_content ?>

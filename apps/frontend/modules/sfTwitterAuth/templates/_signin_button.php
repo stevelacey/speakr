@@ -1,0 +1,1 @@
+<?php echo link_to('Sign in with Twitter', 'login', array(), array('class' => 'sign-in-with-twitter')) ?>

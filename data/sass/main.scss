@@ -1,3 +1,7 @@
+@import "compass";
+@import "structure/_main";
+@import "structure/_columns";
+
 body {
   font-family: arial;
 
@@ -8,15 +12,14 @@ body {
 
   header {
     height: 100px;
+
+    .sign-in-with-twitter {
+      float: right;
+    }
+
+    @include clearfix;
   }
 }
-
-@import "compass";
-
-@import "css3/_background.scss";
-
-@import "structure/_main";
-@import "structure/_columns";
 
 a {
   cursor: pointer;
@@ -42,6 +45,10 @@ ol, ul {
 a {
   color: #1F65BC;
   text-decoration: none;
+}
+
+.welcome {
+  @include clearfix;
 }
 
 .event {
