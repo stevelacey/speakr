@@ -64,7 +64,11 @@
   @include box-sizing(border-box);
 }
 
-.sign-in-with-twitter {
+@mixin disabled-sexy-button {
+  @include sexy-button-style(#BBB);
+}
+
+@mixin sign-in-with-twitter {
   $color: #1D88B4;
   $image: url("/images/twitter.png") no-repeat 10px 50%;
 
@@ -85,10 +89,6 @@
     @include background($image, linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.05) 55%));
     background-color: $color;
   }
-}
-
-@mixin disabled-sexy-button {
-  @include sexy-button-style(#BBB);
 }
 
 @mixin sexy-3d-button {

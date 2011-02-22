@@ -51,6 +51,10 @@ a {
   @include clearfix;
 }
 
+.sign-in-with-twitter {
+  @include sign-in-with-twitter;
+}
+
 .event {
   .logo {
   }
