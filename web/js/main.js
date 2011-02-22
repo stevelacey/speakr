@@ -139,23 +139,21 @@ function getTweets() {
       
       if(json.results.length) {
         if(!tweets.find('ol').length) {
-          tweets.find('h2')
-            .text('Tweets #' + $('.twitter .hashtag').text() + ' ')
-            .append(
+          tweets.find('h2').text('Tweets #' + $('.twitter .hashtag').text() + ' ');
+          
+          if(tweets.find('form').length) {
+            tweets.find('h2').append(
               $('<small/>').append(
                 $('<a/>', {text: 'Wrong?'}).click(function() {
                   tweets.find('form').slideToggle(200);
                 })
               )
             );
+          }
           
           tweets
-            .find('p')
-              .remove()
-              .end()
-            .find('form')
-              .hide()
-              .end()
+            .find('p').remove().end()
+            .find('form').hide().end()
             .append($('<ol/>'));
         }
 
@@ -163,24 +161,18 @@ function getTweets() {
         
         for(i in json.results) {
           var tweet = json.results[i];
-          
-          tweet.html = tweet.text.parseURL().parseUsername().parseHashtag();
 
           if(!$(tweets).find('ol li[rel="' + tweet.id + '"]').length) {
-
             tweets.find('ol').append(
               $('<li/>', {
                 html: template.format(
-                  tweet.html,
+                  tweet.text.parseTweet(),
                   tweet.from_user,
                   $.timeago(dateFormat(tweet.created_at, "isoUtcDateTime"))
                 ),
                 rel: tweet.id
-              })
-                .fadeIn()
-              )
-                .find('li:gt(9)')
-                  .fadeOut();
+              }).fadeIn()
+            ).find('li:gt(9)').fadeOut();
           }
         }
       }
@@ -290,15 +282,11 @@ function addMarkerListener(marker, infowindow) {
   });
 }
 
+/* Tweet String Parsers */
 
-
-
-
-
-
-
-
-
+String.prototype.parseTweet = function () {
+	return this.parseURL().parseUsername().parseHashtag();
+};
 
 String.prototype.parseURL = function () {
 	return this.replace(/[A-Za-z]+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&\?\/.=]+/g, function (url) {

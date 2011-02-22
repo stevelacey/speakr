@@ -86,13 +86,15 @@
         <?php if($event->getHashtag()) : ?>
           <p>#<span class="hashtag"><?php echo $event->getHashtag() ?></span></p>
         <?php endif ?>
-        
-        <form action="<?php echo url_for('event_update', array('action' => 'hashtag', 'sf_subject' => $event)) ?>" method="post">
-          <?php echo $forms['hashtag']['hashtag']->renderHelp() ?>
-          <?php echo $forms['hashtag']['hashtag'] ?>
-          <?php echo $forms['hashtag']->renderHiddenFields(false) ?>
-          <input type="submit" value="Set Hashtag"/>
-        </form>
+
+        <?php if($sf_user->isAuthenticated()) : ?>
+          <form action="<?php echo url_for('event_update', array('action' => 'hashtag', 'sf_subject' => $event)) ?>" method="post">
+            <?php echo $forms['hashtag']['hashtag']->renderHelp() ?>
+            <?php echo $forms['hashtag']['hashtag'] ?>
+            <?php echo $forms['hashtag']->renderHiddenFields(false) ?>
+            <input type="submit" value="Set Hashtag"/>
+          </form>
+        <?php endif ?>
       </section>
     </aside>
   </div>
