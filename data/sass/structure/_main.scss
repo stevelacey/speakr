@@ -40,18 +40,20 @@
   @include transition-timing-function("ease-in-out, ease-in-out");
 
   &:hover, &:focus {
-    @include background(linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05) 50%, rgba(255,255,255,0.1) 55%));
+    @include background(linear-gradient(bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.05) 50%, rgba(255,255,255,0.1) 55%));
+    background-color: $color;
     text-decoration: none;
   }
 
   &:active {
-    @include background(linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.05) 55%));
+    @include background(linear-gradient(bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.05) 55%));
+    background-color: $color;
     @include box-shadow(rgba(0, 0, 0, .15) 0 12px 20px 0);
   }
 }
 
 @mixin sexy-button-style($color) {
-  @include background(linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(255,255,255,0.2) 55%));
+  @include background(linear-gradient(bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(255,255,255,0.2) 55%));
   background-color: $color;
   border: 0;
   @include border-radius(6px);
@@ -75,18 +77,18 @@
   @include sexy-button($color);
 
   background: $image;
-  @include background($image, linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(255,255,255,0.2) 55%));
+  @include background($image, linear-gradient(bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(255,255,255,0.2) 55%));
   background-color: $color;
 
   padding: 10px 12px 10px 40px;
 
   &:hover, &:focus {
-    @include background($image, linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05) 50%, rgba(255,255,255,0.1) 55%));
+    @include background($image, linear-gradient(bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.05) 50%, rgba(255,255,255,0.1) 55%));
     background-color: $color;
   }
 
   &:active {
-    @include background($image, linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.05) 55%));
+    @include background($image, linear-gradient(bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.05) 55%));
     background-color: $color;
   }
 }
