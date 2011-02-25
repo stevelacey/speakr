@@ -3,7 +3,7 @@ Conference:
     Sluggable: ~
     Timestampable: ~
   columns:
-    title:
+    name:
       type: string(255)
       notnull: true
     url: string(255)

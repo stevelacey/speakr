@@ -13,7 +13,7 @@ abstract class BaseConferenceFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'title'      => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'name'       => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'url'        => new sfWidgetFormFilterInput(),
       'image'      => new sfWidgetFormFilterInput(),
       'icon'       => new sfWidgetFormFilterInput(),
@@ -23,7 +23,7 @@ abstract class BaseConferenceFormFilter extends BaseFormFilterDoctrine
     ));
 
     $this->setValidators(array(
-      'title'      => new sfValidatorPass(array('required' => false)),
+      'name'       => new sfValidatorPass(array('required' => false)),
       'url'        => new sfValidatorPass(array('required' => false)),
       'image'      => new sfValidatorPass(array('required' => false)),
       'icon'       => new sfValidatorPass(array('required' => false)),
@@ -50,7 +50,7 @@ abstract class BaseConferenceFormFilter extends BaseFormFilterDoctrine
   {
     return array(
       'id'         => 'Number',
-      'title'      => 'Text',
+      'name'       => 'Text',
       'url'        => 'Text',
       'image'      => 'Text',
       'icon'       => 'Text',
