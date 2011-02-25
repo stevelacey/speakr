@@ -18,11 +18,8 @@ class EventForm extends BaseEventForm {
     $this->widgetSchema['location'] = new sfWidgetFormInputText();
     $this->widgetSchema['woeid'] = new sfWidgetFormInputText();
 
-    if($this->getObject()->isNew()) {
-      unset($this['id'], $this['conference_id'], $this['tagline'], $this['description'], $this['hashtag'], $this['address'], $this['postcode']);
-    }
-
     unset(
+      $this['id'], $this['conference_id'], $this['tagline'], $this['description'], $this['hashtag'], $this['address'], $this['postcode'],
       $this['city_id'], $this['image'], $this['icon'],
       $this['attending_list'], $this['favouriters_list'], $this['organisers_list'], $this['speakers_list'], $this['watchers_list'],
       $this['created_at'], $this['updated_at']

@@ -13,6 +13,5 @@ class EventHashtagForm extends EventForm {
     $this->useFields(array('hashtag'));
     $this->widgetSchema->setHelp('hashtag', 'Tell us the hashtag for this event and we\'ll pull the tweets for all to see.');
     $this->getWidgetSchema()->getFormFormatter()->setHelpFormat('<p>%help%</p>');
-    unset($this['id']);
   }
 }

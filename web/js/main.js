@@ -98,7 +98,7 @@ function getLocation(text) {
   $( "#conference_event_location" ).autocomplete({
     source: function( request, response ) {
       $.ajax({
-        url: 'http://query.yahooapis.com/v1/public/yql?q=select * from geo.places where text="' + request.term + '"&format=json',
+        url: 'http://query.yahooapis.com/v1/public/yql?q=select * from geo.places where text="' + request.term + '" and placetype="town"&format=json',
         dataType: 'jsonp',
         delay: 100,
         success: function(data) {

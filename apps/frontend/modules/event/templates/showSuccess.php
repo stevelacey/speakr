@@ -12,7 +12,7 @@
     </div>
     <div class="logo thin column">
       <?php if($event->getWebsite()) : ?>
-        <?php echo link_to(image_tag('http://logo.stevelacey.net/'.$event->getWebsite(), array('alt' => $event->getTitle())), $event->getWebsite(), array('title' => $event->getTitle())) ?>
+        <?php echo link_to(image_tag('http://logo.stevelacey.net/'.$event->getWebsite(), array('alt' => $event->getName())), $event->getWebsite(), array('title' => $event->getName())) ?>
       <?php endif ?>
     </div>
   </header>
