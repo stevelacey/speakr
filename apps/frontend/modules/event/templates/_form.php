@@ -14,9 +14,9 @@
         <td><?php echo $form['name']->renderError() ?></td>
       </tr>
       <tr>
-        <th><?php echo $form['event']['url']->renderLabel() ?></th>
-        <td><?php echo $form['event']['url'] ?></td>
-        <td><?php echo $form['event']['url']->renderError() ?></td>
+        <th><?php echo $form['event']['website']->renderLabel() ?></th>
+        <td><?php echo $form['event']['website'] ?></td>
+        <td><?php echo $form['event']['website']->renderError() ?></td>
       </tr>
       <tr>
         <th><?php echo $form['event']['date']->renderLabel() ?></th>

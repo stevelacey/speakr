@@ -1,15 +1,15 @@
 Conference:
   Bathcamp:
-    title: Bathcamp
-    url: http://www.bathcamp.org
+    name: Bathcamp
+    website: http://www.bathcamp.org
   FOWD:
-    title: Future of Web Design
-    url: http://futureofwebdesign.com
+    name: Future of Web Design
+    website: http://futureofwebdesign.com
   FOWA:
-    title: Future of Web Apps
-    url: http://futureofwebapps.com
+    name: Future of Web Apps
+    website: http://futureofwebapps.com
   WDC:
-    title: Web Developers Conference
-    url: http://www.webdevconf.com
+    name: Web Developers Conference
+    website: http://www.webdevconf.com
   OpenWebGaming:
-    title: Open Web Gaming Special Event (Mozilla Labs/Six to Start)
+    name: Open Web Gaming Special Event (Mozilla Labs/Six to Start)

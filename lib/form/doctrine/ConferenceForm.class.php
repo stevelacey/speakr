@@ -12,7 +12,7 @@ class ConferenceForm extends BaseConferenceForm {
   public function configure() {
     if($this->getObject()->isNew()) {
       unset(
-        $this['id'], $this['url'], $this['image'], $this['icon'], $this['slug']
+        $this['id'], $this['website'], $this['image'], $this['icon'], $this['slug']
       );
     }
     

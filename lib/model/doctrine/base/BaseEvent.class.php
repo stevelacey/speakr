@@ -10,7 +10,7 @@
  * @property timestamp $date
  * @property integer $location_id
  * @property string $description
- * @property string $url
+ * @property string $website
  * @property string $image
  * @property string $icon
  * @property string $hashtag
@@ -29,7 +29,7 @@
  * @method timestamp           getDate()          Returns the current record's "date" value
  * @method integer             getLocationId()    Returns the current record's "location_id" value
  * @method string              getDescription()   Returns the current record's "description" value
- * @method string              getUrl()           Returns the current record's "url" value
+ * @method string              getWebsite()       Returns the current record's "website" value
  * @method string              getImage()         Returns the current record's "image" value
  * @method string              getIcon()          Returns the current record's "icon" value
  * @method string              getHashtag()       Returns the current record's "hashtag" value
@@ -53,7 +53,7 @@
  * @method Event               setDate()          Sets the current record's "date" value
  * @method Event               setLocationId()    Sets the current record's "location_id" value
  * @method Event               setDescription()   Sets the current record's "description" value
- * @method Event               setUrl()           Sets the current record's "url" value
+ * @method Event               setWebsite()       Sets the current record's "website" value
  * @method Event               setImage()         Sets the current record's "image" value
  * @method Event               setIcon()          Sets the current record's "icon" value
  * @method Event               setHashtag()       Sets the current record's "hashtag" value
@@ -84,7 +84,7 @@
  * @method timestamp           getDate()          Returns the current record's "date" value
  * @method integer             getLocationId()    Returns the current record's "location_id" value
  * @method string              getDescription()   Returns the current record's "description" value
- * @method string              getUrl()           Returns the current record's "url" value
+ * @method string              getWebsite()       Returns the current record's "website" value
  * @method string              getImage()         Returns the current record's "image" value
  * @method string              getIcon()          Returns the current record's "icon" value
  * @method string              getHashtag()       Returns the current record's "hashtag" value
@@ -108,7 +108,7 @@
  * @method Event               setDate()          Sets the current record's "date" value
  * @method Event               setLocationId()    Sets the current record's "location_id" value
  * @method Event               setDescription()   Sets the current record's "description" value
- * @method Event               setUrl()           Sets the current record's "url" value
+ * @method Event               setWebsite()       Sets the current record's "website" value
  * @method Event               setImage()         Sets the current record's "image" value
  * @method Event               setIcon()          Sets the current record's "icon" value
  * @method Event               setHashtag()       Sets the current record's "hashtag" value
@@ -160,7 +160,7 @@ abstract class BaseEvent extends sfDoctrineRecord
              'type' => 'string',
              'length' => '',
              ));
-        $this->hasColumn('url', 'string', 255, array(
+        $this->hasColumn('website', 'string', 255, array(
              'type' => 'string',
              'length' => '255',
              ));

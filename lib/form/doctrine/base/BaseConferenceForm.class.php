@@ -17,7 +17,7 @@ abstract class BaseConferenceForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'id'         => new sfWidgetFormInputHidden(),
       'name'       => new sfWidgetFormInputText(),
-      'url'        => new sfWidgetFormInputText(),
+      'website'    => new sfWidgetFormInputText(),
       'image'      => new sfWidgetFormInputText(),
       'icon'       => new sfWidgetFormInputText(),
       'slug'       => new sfWidgetFormInputText(),
@@ -28,7 +28,7 @@ abstract class BaseConferenceForm extends BaseFormDoctrine
     $this->setValidators(array(
       'id'         => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'name'       => new sfValidatorString(array('max_length' => 255)),
-      'url'        => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'website'    => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'image'      => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'icon'       => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'slug'       => new sfValidatorString(array('max_length' => 255, 'required' => false)),

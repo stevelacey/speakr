@@ -6,11 +6,11 @@ Conference:
     name:
       type: string(255)
       notnull: true
-    url: string(255)
+    website: string(255)
     image: string(255)
     icon: string(255)
   options:
-    orderBy: title ASC
+    orderBy: name ASC
 
 Event:
   actAs:
@@ -27,7 +27,7 @@ Event:
       type: integer(20)
       notnull: true
     description: string()
-    url: string(255)
+    website: string(255)
     image: string(255)
     icon: string(255)
     hashtag: string(50)

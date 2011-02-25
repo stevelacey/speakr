@@ -14,7 +14,7 @@ abstract class BaseConferenceFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'name'       => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'url'        => new sfWidgetFormFilterInput(),
+      'website'    => new sfWidgetFormFilterInput(),
       'image'      => new sfWidgetFormFilterInput(),
       'icon'       => new sfWidgetFormFilterInput(),
       'slug'       => new sfWidgetFormFilterInput(),
@@ -24,7 +24,7 @@ abstract class BaseConferenceFormFilter extends BaseFormFilterDoctrine
 
     $this->setValidators(array(
       'name'       => new sfValidatorPass(array('required' => false)),
-      'url'        => new sfValidatorPass(array('required' => false)),
+      'website'    => new sfValidatorPass(array('required' => false)),
       'image'      => new sfValidatorPass(array('required' => false)),
       'icon'       => new sfValidatorPass(array('required' => false)),
       'slug'       => new sfValidatorPass(array('required' => false)),
@@ -51,7 +51,7 @@ abstract class BaseConferenceFormFilter extends BaseFormFilterDoctrine
     return array(
       'id'         => 'Number',
       'name'       => 'Text',
-      'url'        => 'Text',
+      'website'    => 'Text',
       'image'      => 'Text',
       'icon'       => 'Text',
       'slug'       => 'Text',
