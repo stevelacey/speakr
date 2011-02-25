@@ -23,7 +23,7 @@ Event:
     date:
       type: timestamp
       notnull: true
-    location_id:
+    city_id:
       type: integer(20)
       notnull: true
     description: string()
@@ -38,8 +38,8 @@ Event:
       local: conference_id
       foreign: id
       foreignAlias: Events
-    Location:
-      local: location_id
+    City:
+      local: city_id
       foreign: id
       foreignAlias: Events
     Attending:
@@ -75,7 +75,25 @@ Event:
   options:
     orderBy: date ASC
 
-Location:
+City:
+  actAs:
+    Sluggable: ~
+  columns:
+    region_id:
+      type: integer(20)
+      notnull: true
+    name:
+      type: string(255)
+      notnull: true
+  relations:
+    Region:
+      local: region_id
+      foreign: id
+      foreignAlias: Cities
+  options:
+    orderBy: name ASC
+
+Region:
   actAs:
     Sluggable: ~
   columns:

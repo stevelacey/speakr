@@ -23,7 +23,7 @@ class EventForm extends BaseEventForm {
     }
 
     unset(
-      $this['location_id'], $this['image'], $this['icon'],
+      $this['city_id'], $this['image'], $this['icon'],
       $this['attending_list'], $this['favouriters_list'], $this['organisers_list'], $this['speakers_list'], $this['watchers_list'],
       $this['created_at'], $this['updated_at']
     );

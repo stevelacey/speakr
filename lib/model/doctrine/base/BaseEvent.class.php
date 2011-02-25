@@ -8,7 +8,7 @@
  * @property integer $conference_id
  * @property string $tagline
  * @property timestamp $date
- * @property integer $location_id
+ * @property integer $city_id
  * @property string $description
  * @property string $website
  * @property string $image
@@ -17,7 +17,7 @@
  * @property string $address
  * @property string $postcode
  * @property Conference $Conference
- * @property Location $Location
+ * @property City $City
  * @property Doctrine_Collection $Attending
  * @property Doctrine_Collection $Favouriters
  * @property Doctrine_Collection $Organisers
@@ -27,7 +27,7 @@
  * @method integer             getConferenceId()  Returns the current record's "conference_id" value
  * @method string              getTagline()       Returns the current record's "tagline" value
  * @method timestamp           getDate()          Returns the current record's "date" value
- * @method integer             getLocationId()    Returns the current record's "location_id" value
+ * @method integer             getCityId()        Returns the current record's "city_id" value
  * @method string              getDescription()   Returns the current record's "description" value
  * @method string              getWebsite()       Returns the current record's "website" value
  * @method string              getImage()         Returns the current record's "image" value
@@ -36,7 +36,7 @@
  * @method string              getAddress()       Returns the current record's "address" value
  * @method string              getPostcode()      Returns the current record's "postcode" value
  * @method Conference          getConference()    Returns the current record's "Conference" value
- * @method Location            getLocation()      Returns the current record's "Location" value
+ * @method City                getCity()          Returns the current record's "City" value
  * @method Doctrine_Collection getAttending()     Returns the current record's "Attending" collection
  * @method Doctrine_Collection getFavouriters()   Returns the current record's "Favouriters" collection
  * @method Doctrine_Collection getOrganisers()    Returns the current record's "Organisers" collection
@@ -51,7 +51,7 @@
  * @method Event               setConferenceId()  Sets the current record's "conference_id" value
  * @method Event               setTagline()       Sets the current record's "tagline" value
  * @method Event               setDate()          Sets the current record's "date" value
- * @method Event               setLocationId()    Sets the current record's "location_id" value
+ * @method Event               setCityId()        Sets the current record's "city_id" value
  * @method Event               setDescription()   Sets the current record's "description" value
  * @method Event               setWebsite()       Sets the current record's "website" value
  * @method Event               setImage()         Sets the current record's "image" value
@@ -60,7 +60,7 @@
  * @method Event               setAddress()       Sets the current record's "address" value
  * @method Event               setPostcode()      Sets the current record's "postcode" value
  * @method Event               setConference()    Sets the current record's "Conference" value
- * @method Event               setLocation()      Sets the current record's "Location" value
+ * @method Event               setCity()          Sets the current record's "City" value
  * @method Event               setAttending()     Sets the current record's "Attending" collection
  * @method Event               setFavouriters()   Sets the current record's "Favouriters" collection
  * @method Event               setOrganisers()    Sets the current record's "Organisers" collection
@@ -82,7 +82,7 @@
  * @method integer             getConferenceId()  Returns the current record's "conference_id" value
  * @method string              getTagline()       Returns the current record's "tagline" value
  * @method timestamp           getDate()          Returns the current record's "date" value
- * @method integer             getLocationId()    Returns the current record's "location_id" value
+ * @method integer             getCityId()        Returns the current record's "city_id" value
  * @method string              getDescription()   Returns the current record's "description" value
  * @method string              getWebsite()       Returns the current record's "website" value
  * @method string              getImage()         Returns the current record's "image" value
@@ -91,7 +91,7 @@
  * @method string              getAddress()       Returns the current record's "address" value
  * @method string              getPostcode()      Returns the current record's "postcode" value
  * @method Conference          getConference()    Returns the current record's "Conference" value
- * @method Location            getLocation()      Returns the current record's "Location" value
+ * @method City                getCity()          Returns the current record's "City" value
  * @method Doctrine_Collection getAttending()     Returns the current record's "Attending" collection
  * @method Doctrine_Collection getFavouriters()   Returns the current record's "Favouriters" collection
  * @method Doctrine_Collection getOrganisers()    Returns the current record's "Organisers" collection
@@ -106,7 +106,7 @@
  * @method Event               setConferenceId()  Sets the current record's "conference_id" value
  * @method Event               setTagline()       Sets the current record's "tagline" value
  * @method Event               setDate()          Sets the current record's "date" value
- * @method Event               setLocationId()    Sets the current record's "location_id" value
+ * @method Event               setCityId()        Sets the current record's "city_id" value
  * @method Event               setDescription()   Sets the current record's "description" value
  * @method Event               setWebsite()       Sets the current record's "website" value
  * @method Event               setImage()         Sets the current record's "image" value
@@ -115,7 +115,7 @@
  * @method Event               setAddress()       Sets the current record's "address" value
  * @method Event               setPostcode()      Sets the current record's "postcode" value
  * @method Event               setConference()    Sets the current record's "Conference" value
- * @method Event               setLocation()      Sets the current record's "Location" value
+ * @method Event               setCity()          Sets the current record's "City" value
  * @method Event               setAttending()     Sets the current record's "Attending" collection
  * @method Event               setFavouriters()   Sets the current record's "Favouriters" collection
  * @method Event               setOrganisers()    Sets the current record's "Organisers" collection
@@ -151,7 +151,7 @@ abstract class BaseEvent extends sfDoctrineRecord
              'type' => 'timestamp',
              'notnull' => true,
              ));
-        $this->hasColumn('location_id', 'integer', 20, array(
+        $this->hasColumn('city_id', 'integer', 20, array(
              'type' => 'integer',
              'notnull' => true,
              'length' => '20',
@@ -195,8 +195,8 @@ abstract class BaseEvent extends sfDoctrineRecord
              'local' => 'conference_id',
              'foreign' => 'id'));
 
-        $this->hasOne('Location', array(
-             'local' => 'location_id',
+        $this->hasOne('City', array(
+             'local' => 'city_id',
              'foreign' => 'id'));
 
         $this->hasMany('sfGuardUser as Attending', array(

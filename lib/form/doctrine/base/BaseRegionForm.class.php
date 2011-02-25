@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Location form base class.
+ * Region form base class.
  *
- * @method Location getObject() Returns the current form's model object
+ * @method Region getObject() Returns the current form's model object
  *
  * @package    speakr
  * @subpackage form
  * @author     Steve Lacey
  * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 24171 2009-11-19 16:37:50Z Kris.Wallsmith $
  */
-abstract class BaseLocationForm extends BaseFormDoctrine
+abstract class BaseRegionForm extends BaseFormDoctrine
 {
   public function setup()
   {
@@ -29,10 +29,10 @@ abstract class BaseLocationForm extends BaseFormDoctrine
     ));
 
     $this->validatorSchema->setPostValidator(
-      new sfValidatorDoctrineUnique(array('model' => 'Location', 'column' => array('slug')))
+      new sfValidatorDoctrineUnique(array('model' => 'Region', 'column' => array('slug')))
     );
 
-    $this->widgetSchema->setNameFormat('location[%s]');
+    $this->widgetSchema->setNameFormat('region[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
 
@@ -43,7 +43,7 @@ abstract class BaseLocationForm extends BaseFormDoctrine
 
   public function getModelName()
   {
-    return 'Location';
+    return 'Region';
   }
 
 }

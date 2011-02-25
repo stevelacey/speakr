@@ -35,7 +35,7 @@ abstract class BaseCountry extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('Location as Locations', array(
+        $this->hasMany('Region as Locations', array(
              'local' => 'id',
              'foreign' => 'country_id'));
 

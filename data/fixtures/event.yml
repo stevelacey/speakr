@@ -2,7 +2,7 @@ Event:
   Bathcamp08:
     Conference: Bathcamp
     date: '2008-05-01'
-    Location: Bath
+    City: Bath
     description: Bathcamp in 2008
     hashtag: bathcamp
     address: Address
@@ -10,7 +10,7 @@ Event:
   Bathcamp09:
     Conference: Bathcamp
     date: '2009-03-13'
-    Location: Bath
+    City: Bath
     description: Bathcamp in 2009
     hashtag: bathcamp
     address: Address
@@ -19,7 +19,7 @@ Event:
     Conference: Bathcamp
     date: '2010-10-21'
     tagline: Return of the Bathcamp
-    Location: Bath
+    City: Bath
     description: Bathcamp in 2010
     hashtag: bathcamp
     address: Chapel Arts Centre, 9 Lower Borough Walls
@@ -27,7 +27,7 @@ Event:
   FOWD11:
     Conference: FOWD
     date: '2011-03-13'
-    Location: Bristol
+    City: Bristol
     description: Future of Web Design London 2011
     hashtag: fowd11
     address: Somewhere
@@ -35,7 +35,7 @@ Event:
   FOWA11:
     Conference: FOWA
     date: '2011-02-16'
-    Location: Bristol
+    City: Bristol
     description: Future of Web Applications San Francisco 2011
     hashtag: fowd11
     address: Somewhere
@@ -43,7 +43,7 @@ Event:
   WDC08:
     Conference: WDC
     date: '2008-08-22'
-    Location: Bristol
+    City: Bristol
     description: Web Developers Conference 2008
     hashtag: wdc08
     address: Watershed
@@ -51,7 +51,7 @@ Event:
   WDC09:
     Conference: WDC
     date: '2009-10-14'
-    Location: Bristol
+    City: Bristol
     description: Web Developers Conference 2009
     hashtag: wdc09
     address: Watershed
@@ -59,7 +59,7 @@ Event:
   WDC10:
     Conference: WDC
     date: '2010-11-04'
-    Location: Bristol
+    City: Bristol
     description: Web Developers Conference 2010
     hashtag: wdc10
     address: Exhibitions and Conferences Centre
@@ -67,7 +67,7 @@ Event:
   OpenWebGaming10:
     Conference: OpenWebGaming
     date: '2010-12-06'
-    Location: London
+    City: London
     description: |
       <p>Mozilla Labs Gaming is hosting an Open Web Gaming Special - in London this time, with Six to Start!</p>
       <p>This Labs Night will be all about games being developed and played on the Open Web - expect lots of cool demos, talks and interesting people to hang out with.</p>

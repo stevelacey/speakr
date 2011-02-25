@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Location filter form base class.
+ * Region filter form base class.
  *
  * @package    speakr
  * @subpackage filter
  * @author     Steve Lacey
  * @version    SVN: $Id: sfDoctrineFormFilterGeneratedTemplate.php 24171 2009-11-19 16:37:50Z Kris.Wallsmith $
  */
-abstract class BaseLocationFormFilter extends BaseFormFilterDoctrine
+abstract class BaseRegionFormFilter extends BaseFormFilterDoctrine
 {
   public function setup()
   {
@@ -24,7 +24,7 @@ abstract class BaseLocationFormFilter extends BaseFormFilterDoctrine
       'slug'       => new sfValidatorPass(array('required' => false)),
     ));
 
-    $this->widgetSchema->setNameFormat('location_filters[%s]');
+    $this->widgetSchema->setNameFormat('region_filters[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
 
@@ -35,7 +35,7 @@ abstract class BaseLocationFormFilter extends BaseFormFilterDoctrine
 
   public function getModelName()
   {
-    return 'Location';
+    return 'Region';
   }
 
   public function getFields()

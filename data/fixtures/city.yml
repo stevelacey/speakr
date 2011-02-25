@@ -1,13 +1,13 @@
-Location:
+City:
   Bath:
     name: Bath
-    Country: UK
+    Region: England
   Bristol:
     name: Bristol
-    Country: UK
+    Region: England
   London:
     name: London
-    Country: UK
+    Region: England
   Nottingham:
     name: Nottingham
-    Country: UK
+    Region: England
