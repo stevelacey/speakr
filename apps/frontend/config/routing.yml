@@ -88,7 +88,6 @@ presentation:
   url: /:speaker_slug/:slug
   options:
     model: Content
-    method: findBySpeakerSlugAndSlug
     type: object
   param:
     module: presentation
