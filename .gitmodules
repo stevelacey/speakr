@@ -7,12 +7,6 @@
 [submodule "plugins/sfTwitterAuthPlugin"]
 	path = plugins/sfTwitterAuthPlugin
 	url = git@github.com:stevelacey/sfTwitterAuthPlugin.git
-[submodule "plugins/sfSassyCssPlugin"]
-	path = plugins/sfSassyCssPlugin
-	url = git://github.com/vicb/sfSassyCssPlugin.git
 [submodule "plugins/sfWebBrowserPlugin"]
 	path = plugins/sfWebBrowserPlugin
 	url =  git://github.com/diem-project/sfWebBrowserPlugin.git
-[submodule "data/sass/css3"]
-	path = data/sass/css3
-	url = git@github.com:stevelacey/sass-css3-mixins.git
