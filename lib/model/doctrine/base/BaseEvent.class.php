@@ -7,7 +7,8 @@
  * 
  * @property integer $conference_id
  * @property string $tagline
- * @property timestamp $date
+ * @property timestamp $start_at
+ * @property timestamp $end_at
  * @property integer $city_id
  * @property string $description
  * @property string $website
@@ -26,7 +27,8 @@
  * 
  * @method integer             getConferenceId()  Returns the current record's "conference_id" value
  * @method string              getTagline()       Returns the current record's "tagline" value
- * @method timestamp           getDate()          Returns the current record's "date" value
+ * @method timestamp           getStartAt()       Returns the current record's "start_at" value
+ * @method timestamp           getEndAt()         Returns the current record's "end_at" value
  * @method integer             getCityId()        Returns the current record's "city_id" value
  * @method string              getDescription()   Returns the current record's "description" value
  * @method string              getWebsite()       Returns the current record's "website" value
@@ -50,7 +52,8 @@
  * @method Doctrine_Collection getWatcher()       Returns the current record's "Watcher" collection
  * @method Event               setConferenceId()  Sets the current record's "conference_id" value
  * @method Event               setTagline()       Sets the current record's "tagline" value
- * @method Event               setDate()          Sets the current record's "date" value
+ * @method Event               setStartAt()       Sets the current record's "start_at" value
+ * @method Event               setEndAt()         Sets the current record's "end_at" value
  * @method Event               setCityId()        Sets the current record's "city_id" value
  * @method Event               setDescription()   Sets the current record's "description" value
  * @method Event               setWebsite()       Sets the current record's "website" value
@@ -81,7 +84,8 @@
  * 
  * @method integer             getConferenceId()  Returns the current record's "conference_id" value
  * @method string              getTagline()       Returns the current record's "tagline" value
- * @method timestamp           getDate()          Returns the current record's "date" value
+ * @method timestamp           getStartAt()       Returns the current record's "start_at" value
+ * @method timestamp           getEndAt()         Returns the current record's "end_at" value
  * @method integer             getCityId()        Returns the current record's "city_id" value
  * @method string              getDescription()   Returns the current record's "description" value
  * @method string              getWebsite()       Returns the current record's "website" value
@@ -105,7 +109,8 @@
  * @method Doctrine_Collection getWatcher()       Returns the current record's "Watcher" collection
  * @method Event               setConferenceId()  Sets the current record's "conference_id" value
  * @method Event               setTagline()       Sets the current record's "tagline" value
- * @method Event               setDate()          Sets the current record's "date" value
+ * @method Event               setStartAt()       Sets the current record's "start_at" value
+ * @method Event               setEndAt()         Sets the current record's "end_at" value
  * @method Event               setCityId()        Sets the current record's "city_id" value
  * @method Event               setDescription()   Sets the current record's "description" value
  * @method Event               setWebsite()       Sets the current record's "website" value
@@ -147,7 +152,11 @@ abstract class BaseEvent extends sfDoctrineRecord
              'type' => 'string',
              'length' => '50',
              ));
-        $this->hasColumn('date', 'timestamp', null, array(
+        $this->hasColumn('start_at', 'timestamp', null, array(
+             'type' => 'timestamp',
+             'notnull' => true,
+             ));
+        $this->hasColumn('end_at', 'timestamp', null, array(
              'type' => 'timestamp',
              'notnull' => true,
              ));
@@ -185,7 +194,7 @@ abstract class BaseEvent extends sfDoctrineRecord
              'length' => '8',
              ));
 
-        $this->option('orderBy', 'date ASC');
+        $this->option('orderBy', 'start_at ASC');
     }
 
     public function setUp()

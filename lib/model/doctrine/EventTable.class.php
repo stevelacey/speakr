@@ -27,8 +27,8 @@ class EventTable extends Doctrine_Table {
   public function getUpcoming() {
     return Doctrine_Query::create()->
       from('Event e')->
-      where('e.date >= ?', date('Y-m-d'))->
-      andWhere('e.date <= ?', date('Y-m-d', strtotime('+1 Year')))->
+      where('e.start_at >= ?', date('Y-m-d'))->
+      andWhere('e.start_at <= ?', date('Y-m-d', strtotime('+1 Year')))->
       execute();
   }
 
@@ -36,7 +36,7 @@ class EventTable extends Doctrine_Table {
     return Doctrine_Query::create()->
       from('Event e')->
       leftJoin('e.Conference c')->
-      where('concat_ws("-", c.slug, year(e.date)) = ?', $params['slug'])->
+      where('concat_ws("-", c.slug, year(e.start_at)) = ?', $params['slug'])->
       fetchOne();
   }
 }

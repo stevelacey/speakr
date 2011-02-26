@@ -12,7 +12,7 @@
  */
 class Event extends BaseEvent {
   public function getName() {
-    return $this->getConference()->getName().' '.$this->getDateTimeObject('date')->format('Y');
+    return $this->getConference()->getName().' '.$this->getDateTimeObject('start_at')->format('Y');
   }
 
   public function getFormattedAddress() {
@@ -26,7 +26,7 @@ class Event extends BaseEvent {
   }
 
   public function getSlug() {
-    return $this->getConference()->getSlug().'-'.$this->getDateTimeObject('date')->format('Y');
+    return $this->getConference()->getSlug().'-'.$this->getDateTimeObject('start_at')->format('Y');
   }
 
   public function getRegion() {
@@ -35,5 +35,10 @@ class Event extends BaseEvent {
 
   public function getCountry() {
     return $this->getRegion()->getCountry();
+  }
+
+  public function setup() {
+    parent::setup();
+    $this->actAs(new Doctrine_Template_HidePastEvents(array('name' => 'start_at')));
   }
 }

@@ -5,7 +5,7 @@
         <h1><?php echo $event ?></h1>
         <h2><?php echo $event->getTagline() ?></h2>
       </hgroup>
-      <time><?php echo $event->getDateTimeObject('date')->format('l jS F Y') ?></time>
+      <time><?php echo $event->getDateTimeObject('start_at')->format('l jS F Y') ?></time>
       <?php if($event->getWebsite()) : ?>
         <?php echo link_to($event->getWebsite(), $event->getWebsite()) ?>
       <?php endif ?>

@@ -20,7 +20,10 @@ Event:
       type: integer(20)
       notnull: true
     tagline: string(50)
-    date:
+    start_at:
+      type: timestamp
+      notnull: true
+    end_at:
       type: timestamp
       notnull: true
     city_id:
@@ -73,7 +76,7 @@ Event:
       foreign: user_id
       foreignAlias: Watching
   options:
-    orderBy: date ASC
+    orderBy: start_at ASC
 
 City:
   actAs:
