@@ -4,9 +4,7 @@ $(function() {
     getTwitterFeed();
   }
 
-  $('#conference_event_location').keyup(function() {
-    getLocation($(this).val());
-  })
+  getLocation();
 
   $('.user_search').each(function() {
     $(this).submit(userSearchAction);
@@ -94,8 +92,8 @@ function getGoogleMap() {
   });
 }
 
-function getLocation(text) {
-  $( "#conference_event_location" ).autocomplete({
+function getLocation() {
+  $("#conference_event_location").autocomplete({
     source: function( request, response ) {
       $.ajax({
         url: 'http://query.yahooapis.com/v1/public/yql?q=select * from geo.places where text = "' + request.term + '" and placetype = 7&format=json',
