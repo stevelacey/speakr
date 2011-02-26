@@ -29,11 +29,7 @@
         <td><?php echo $form['event']['location']->renderError() ?></td>
       </tr>
       <tr>
-        <?php if(!$form['event']['woeid']->getWidget() instanceOf sfWidgetFormInputHidden) : ?>
-          <th><?php echo $form['event']['woeid']->renderLabel() ?></th>
-        <?php endif ?>
-        <td><?php echo $form['event']['woeid'] ?></td>
-        <td><?php echo $form['event']['woeid']->renderError() ?></td>
+        <td><?php echo $form['event']['city_id'] ?></td>
       </tr>
     </tbody>
     <tfoot>

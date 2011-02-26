@@ -113,7 +113,7 @@ function getLocation(text) {
       });
     },
     select: function(event, ui) {
-      $('#conference_event_woeid').val(ui.item.value);
+      $('#conference_event_city_id').val(ui.item.value);
       $(this).val(ui.item.label);
       event.preventDefault();
     },
