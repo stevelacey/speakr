@@ -1,13 +1,17 @@
 City:
   Bath:
+    id: 12056
     name: Bath
     Region: England
   Bristol:
+    id: 13963
     name: Bristol
     Region: England
   London:
+    id: 44418
     name: London
     Region: England
   Nottingham:
+    id: 30720
     name: Nottingham
     Region: England

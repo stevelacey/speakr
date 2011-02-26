@@ -79,6 +79,9 @@ City:
   actAs:
     Sluggable: ~
   columns:
+    id:
+      type: integer
+      primary: true
     region_id:
       type: integer(20)
       notnull: true
@@ -97,6 +100,9 @@ Region:
   actAs:
     Sluggable: ~
   columns:
+    id:
+      type: integer
+      primary: true
     country_id:
       type: integer(20)
       notnull: true
@@ -107,7 +113,7 @@ Region:
     Country:
       local: country_id
       foreign: id
-      foreignAlias: Locations
+      foreignAlias: Regions
   options:
     orderBy: name ASC
 
@@ -115,6 +121,9 @@ Country:
   actAs:
     Sluggable: ~
   columns:
+    id:
+      type: integer
+      primary: true
     name:
       type: string(255)
       notnull: true

@@ -69,7 +69,7 @@ function getGoogleMap() {
       var marker = new google.maps.Marker({
         position: new google.maps.LatLng(data.event.latitude, data.event.longitude),
         map: map,
-        title: data.event.title,
+        name: data.event.name,
         icon: new google.maps.MarkerImage(
           "/images/map/marker.png",
           new google.maps.Size(40, 43),
@@ -80,7 +80,7 @@ function getGoogleMap() {
       });
 
       addMarkerListener(marker, new google.maps.InfoWindow({
-        content: '<h3>' + data.event.title + '</h3>'
+        content: '<h3>' + data.event.name + '</h3>'
       }));
 
       for(var i in poi) {
@@ -98,7 +98,7 @@ function getLocation(text) {
   $( "#conference_event_location" ).autocomplete({
     source: function( request, response ) {
       $.ajax({
-        url: 'http://query.yahooapis.com/v1/public/yql?q=select * from geo.places where text="' + request.term + '" and placetype="town"&format=json',
+        url: 'http://query.yahooapis.com/v1/public/yql?q=select * from geo.places where text = "' + request.term + '" and placetype = 7&format=json',
         dataType: 'jsonp',
         delay: 100,
         success: function(data) {
@@ -118,7 +118,6 @@ function getLocation(text) {
       event.preventDefault();
     },
     focus: function(event, ui) {
-      $(this).val(ui.item.label);
       event.preventDefault();
     }
   });

@@ -16,10 +16,24 @@ class Event extends BaseEvent {
   }
 
   public function getFormattedAddress() {
-    return $this->getAddress().', '.$this->getLocation().', '.$this->getPostcode().', '.$this->getLocation()->getCountry();
+    return implode(', ', array(
+      $this->getAddress(),
+      $this->getCity(),
+      $this->getRegion(),
+      $this->getPostcode(),
+      $this->getCountry()
+    ));
   }
 
   public function getSlug() {
     return $this->getConference()->getSlug().'-'.$this->getDateTimeObject('date')->format('Y');
+  }
+
+  public function getRegion() {
+    return $this->getCity()->getRegion();
+  }
+
+  public function getCountry() {
+    return $this->getRegion()->getCountry();
   }
 }

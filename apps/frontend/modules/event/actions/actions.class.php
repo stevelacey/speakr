@@ -37,7 +37,7 @@ class eventActions extends myEventActions {
     
     $map = new StdClass();
     $map->event = new StdClass();
-    $map->event->title = $event->getTitle();
+    $map->event->name = $event->getName();
 
     if($geodata->status == 'OK') {
       $map->event->latitude = $geodata->results[0]->geometry->location->lat;

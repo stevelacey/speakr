@@ -1,16 +1,15 @@
 CREATE TABLE attendee (user_id BIGINT, event_id BIGINT, PRIMARY KEY(user_id, event_id)) ENGINE = INNODB;
-CREATE TABLE city (id BIGINT AUTO_INCREMENT, region_id BIGINT NOT NULL, name VARCHAR(255) NOT NULL, slug VARCHAR(255), UNIQUE INDEX city_sluggable_idx (slug), INDEX region_id_idx (region_id), PRIMARY KEY(id)) ENGINE = INNODB;
+CREATE TABLE city (id BIGINT, region_id BIGINT NOT NULL, name VARCHAR(255) NOT NULL, slug VARCHAR(255), UNIQUE INDEX city_sluggable_idx (slug), INDEX region_id_idx (region_id), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE conference (id BIGINT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, website VARCHAR(255), image VARCHAR(255), icon VARCHAR(255), slug VARCHAR(255), created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, UNIQUE INDEX conference_sluggable_idx (slug), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE content (id BIGINT AUTO_INCREMENT, title VARCHAR(255) NOT NULL, description TEXT NOT NULL, slug VARCHAR(255), created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, UNIQUE INDEX content_sluggable_idx (slug), PRIMARY KEY(id)) ENGINE = INNODB;
-CREATE TABLE country (id BIGINT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, slug VARCHAR(255), UNIQUE INDEX country_sluggable_idx (slug), PRIMARY KEY(id)) ENGINE = INNODB;
+CREATE TABLE country (id BIGINT, name VARCHAR(255) NOT NULL, slug VARCHAR(255), UNIQUE INDEX country_sluggable_idx (slug), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE event (id BIGINT AUTO_INCREMENT, conference_id BIGINT NOT NULL, tagline VARCHAR(50), date DATETIME NOT NULL, city_id BIGINT NOT NULL, description TEXT, website VARCHAR(255), image VARCHAR(255), icon VARCHAR(255), hashtag VARCHAR(50), address VARCHAR(255), postcode VARCHAR(8), created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX conference_id_idx (conference_id), INDEX city_id_idx (city_id), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE favouriter (user_id BIGINT, event_id BIGINT, PRIMARY KEY(user_id, event_id)) ENGINE = INNODB;
 CREATE TABLE friend (follower_id BIGINT, following_id BIGINT, PRIMARY KEY(follower_id, following_id)) ENGINE = INNODB;
-CREATE TABLE location (id BIGINT AUTO_INCREMENT, country_id BIGINT NOT NULL, name VARCHAR(255) NOT NULL, slug VARCHAR(255), UNIQUE INDEX location_sluggable_idx (slug), INDEX country_id_idx (country_id), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE organiser (user_id BIGINT, event_id BIGINT, PRIMARY KEY(user_id, event_id)) ENGINE = INNODB;
 CREATE TABLE presentation (id BIGINT AUTO_INCREMENT, event_id BIGINT, content_id BIGINT, UNIQUE INDEX event_id_content_id_idx (event_id, content_id), INDEX event_id_idx (event_id), INDEX content_id_idx (content_id), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE presentation_user (presentation_id BIGINT, user_id BIGINT, PRIMARY KEY(presentation_id, user_id)) ENGINE = INNODB;
-CREATE TABLE region (id BIGINT AUTO_INCREMENT, country_id BIGINT NOT NULL, name VARCHAR(255) NOT NULL, slug VARCHAR(255), UNIQUE INDEX region_sluggable_idx (slug), INDEX country_id_idx (country_id), PRIMARY KEY(id)) ENGINE = INNODB;
+CREATE TABLE region (id BIGINT, country_id BIGINT NOT NULL, name VARCHAR(255) NOT NULL, slug VARCHAR(255), UNIQUE INDEX region_sluggable_idx (slug), INDEX country_id_idx (country_id), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE speaker (user_id BIGINT, event_id BIGINT, PRIMARY KEY(user_id, event_id)) ENGINE = INNODB;
 CREATE TABLE watcher (user_id BIGINT, event_id BIGINT, PRIMARY KEY(user_id, event_id)) ENGINE = INNODB;
 CREATE TABLE sf_guard_forgot_password (id BIGINT AUTO_INCREMENT, user_id BIGINT NOT NULL, unique_key VARCHAR(255), expires_at DATETIME NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX user_id_idx (user_id), PRIMARY KEY(id)) ENGINE = INNODB;
@@ -31,7 +30,6 @@ ALTER TABLE favouriter ADD CONSTRAINT favouriter_user_id_sf_guard_user_id FOREIG
 ALTER TABLE favouriter ADD CONSTRAINT favouriter_event_id_event_id FOREIGN KEY (event_id) REFERENCES event(id);
 ALTER TABLE friend ADD CONSTRAINT friend_following_id_sf_guard_user_id FOREIGN KEY (following_id) REFERENCES sf_guard_user(id);
 ALTER TABLE friend ADD CONSTRAINT friend_follower_id_sf_guard_user_id FOREIGN KEY (follower_id) REFERENCES sf_guard_user(id);
-ALTER TABLE location ADD CONSTRAINT location_country_id_country_id FOREIGN KEY (country_id) REFERENCES country(id);
 ALTER TABLE organiser ADD CONSTRAINT organiser_user_id_sf_guard_user_id FOREIGN KEY (user_id) REFERENCES sf_guard_user(id);
 ALTER TABLE organiser ADD CONSTRAINT organiser_event_id_event_id FOREIGN KEY (event_id) REFERENCES event(id);
 ALTER TABLE presentation ADD CONSTRAINT presentation_event_id_event_id FOREIGN KEY (event_id) REFERENCES event(id);
