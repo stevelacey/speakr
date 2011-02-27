@@ -53,6 +53,36 @@ user_search:
     action: search
     sf_format: json
 
+country:
+  class: sfDoctrineRoute
+  url: /in/:slug
+  options:
+    model: Country
+    type: object
+  param:
+    module: country
+    action: show
+
+region:
+  class: sfDoctrineRoute
+  url: /in/:country_slug/:slug
+  options:
+    model: Region
+    type: object
+  param:
+    module: region
+    action: show
+
+city:
+  class: sfDoctrineRoute
+  url: /in/:country_slug/:region_slug/:slug
+  options:
+    model: City
+    type: object
+  param:
+    module: city
+    action: show
+
 user_search_query:
   url: /user/search/:query
   param:

@@ -1,1 +1,1 @@
-<p><?php echo $event->getCity() ?> / <?php echo $event->getCity()->getRegion() ?> / <?php echo $event->getCity()->getRegion()->getCountry() ?></p>
+<p><?php echo link_to($event->getCity(), 'city', $event->getCity()) ?> / <?php echo link_to($event->getCity()->getRegion(), 'region', $event->getCity()->getRegion()) ?> / <?php echo link_to($event->getCity()->getRegion()->getCountry(), 'country', $event->getCity()->getRegion()->getCountry()) ?></p>

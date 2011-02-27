@@ -10,6 +10,12 @@
  * @author     Steve Lacey
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
-class City extends BaseCity
-{
+class City extends BaseCity {
+  public function getRegionSlug() {
+    return $this->getRegion()->getSlug();
+  }
+  
+  public function getCountrySlug() {
+    return $this->getRegion()->getCountry()->getSlug();
+  }
 }

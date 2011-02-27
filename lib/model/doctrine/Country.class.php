@@ -10,6 +10,14 @@
  * @author     Steve Lacey
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
-class Country extends BaseCountry
-{
+class Country extends BaseCountry {
+  public function getEvents() {
+    return Doctrine_Query::create()->
+      from('Event e')->
+      leftJoin('e.City c')->
+      leftJoin('c.Region r')->
+      leftJoin('r.Country co')->
+      where('co.id = ?', $this->getId())->
+      execute();
+  }
 }
