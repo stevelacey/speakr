@@ -1,7 +1,9 @@
 <li class="event vevent">
   <h3><?php echo link_to($event, 'event', $event, array('class' => 'summary url')) ?></h3>
   <span class="details">
-    <?php include_partial('event/location', array('event' => $event)) ?>
+    <?php if($location) : ?>
+      <?php include_partial('event/location', array('event' => $event)) ?>
+    <?php endif ?>
     <?php include_partial('event/date', array('event' => $event)) ?>
   </span>
 

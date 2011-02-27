@@ -4,6 +4,6 @@
     <h2><?php echo link_to($region->getCountry(), 'country', $region->getCountry()) ?>
   </hgroup>
   <div class="events">
-    <?php include_partial('event/short_list', array('events' => $region->getEvents())) ?>
+    <?php include_partial('event/short_list', array('events' => $region->getEvents(), 'location' => false)) ?>
   </div>
 </div>

@@ -21,6 +21,7 @@ class Region extends BaseRegion {
       leftJoin('e.City c')->
       leftJoin('c.Region r')->
       where('r.id = ?', $this->getId())->
+      andWhere('e.end_at >= ?', date('Y-m-d'))->
       execute();
   }
 }

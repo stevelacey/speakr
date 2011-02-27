@@ -18,6 +18,7 @@ class Country extends BaseCountry {
       leftJoin('c.Region r')->
       leftJoin('r.Country co')->
       where('co.id = ?', $this->getId())->
+      andWhere('e.end_at >= ?', date('Y-m-d'))->
       execute();
   }
 }

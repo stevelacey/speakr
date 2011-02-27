@@ -11,6 +11,14 @@
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 class City extends BaseCity {
+  public function getEvents() {
+    return Doctrine_Query::create()->
+      from('Event e')->
+      where('e.city_id = ?', $this->getId())->
+      andWhere('e.end_at >= ?', date('Y-m-d'))->
+      execute();
+  }
+
   public function getRegionSlug() {
     return $this->getRegion()->getSlug();
   }

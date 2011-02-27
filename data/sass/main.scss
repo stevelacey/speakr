@@ -43,6 +43,14 @@ h2 {
   margin: 1em 0 0.5em;
 }
 
+hgroup {
+  margin-bottom: 2em;
+
+  h1, h2 {
+    margin: 0;
+  }
+}
+
 ol, ul {
   margin: 0;
   padding: 1em 0;
@@ -103,8 +111,8 @@ article.event {
         }
       }
 
-      .date {
-        &:before {
+      .location {
+        &:after {
           content: " - ";
           color: #CCC;
         }
