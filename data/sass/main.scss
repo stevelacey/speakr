@@ -22,7 +22,13 @@ body {
 }
 
 a {
+  color: #1F65BC;
+  text-decoration: none;
   cursor: pointer;
+
+  &:hover, &:focus {
+    text-decoration: underline;
+  }
 }
 
 em {
@@ -42,11 +48,6 @@ ol, ul {
   padding: 1em 0;
 }
 
-a {
-  color: #1F65BC;
-  text-decoration: none;
-}
-
 .welcome {
   @include clearfix;
 }
@@ -55,7 +56,7 @@ a {
   @include sign-in-with-twitter;
 }
 
-.event {
+article.event {
   .logo {
   }
 
@@ -74,6 +75,41 @@ a {
   .map .canvas {
     width: 600px;
     height: 300px;
+  }
+}
+
+.events {
+  padding: 0;
+  list-style: none;
+
+  .event {
+    margin-bottom: 20px;
+
+    h3 {
+      margin: 0 0 2px;
+    }
+
+    .details {
+      display: block;
+      margin: 0 0 5px;
+      font-size: 14px;
+      color: #888;
+
+      a {
+        color: inherit;
+
+        &:hover, &:focus {
+          color: #1F65BC;
+        }
+      }
+
+      .date {
+        &:before {
+          content: " - ";
+          color: #CCC;
+        }
+      }
+    }
   }
 }
 

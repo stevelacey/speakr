@@ -15,6 +15,14 @@ class Event extends BaseEvent {
     return $this->getConference()->getName().' '.$this->getDateTimeObject('start_at')->format('Y');
   }
 
+  public function getStartDate($format) {
+    return $this->getDateTimeObject('start_at')->format($format);
+  }
+
+  public function getEndDate($format) {
+    return $this->getDateTimeObject('end_at')->format($format);
+  }
+
   public function getFormattedAddress() {
     return implode(', ', array(
       $this->getAddress(),
@@ -39,6 +47,6 @@ class Event extends BaseEvent {
 
   public function setup() {
     parent::setup();
-    $this->actAs(new Doctrine_Template_HidePastEvents(array('name' => 'start_at')));
+    $this->actAs(new Doctrine_Template_HidePastEvents(array('name' => 'end_at')));
   }
 }

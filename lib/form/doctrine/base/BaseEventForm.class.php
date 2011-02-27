@@ -41,7 +41,7 @@ abstract class BaseEventForm extends BaseFormDoctrine
       'id'               => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'conference_id'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Conference'))),
       'tagline'          => new sfValidatorString(array('max_length' => 50, 'required' => false)),
-      'start_at'         => new sfValidatorDateTime(),
+      'start_at'         => new sfValidatorDateTime(array('required' => false)),
       'end_at'           => new sfValidatorDateTime(),
       'city_id'          => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('City'))),
       'description'      => new sfValidatorString(array('required' => false)),

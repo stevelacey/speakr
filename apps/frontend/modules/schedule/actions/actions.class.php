@@ -16,7 +16,11 @@ class scheduleActions extends sfActions
   * @param sfRequest $request A request object
   */
   public function executeIndex(sfWebRequest $request) {
-    $this->events = $this->getUser()->getGuardUser()->getAttending();
+    if($this->getUser()->isAuthenticated()) {
+      $this->events = $this->getUser()->getGuardUser()->getEvents();
+    } else {
+      $this->events = Doctrine::getTable('Event')->getUpcoming();
+    }
   }
 
   public function executeFriends(sfWebRequest $request) {

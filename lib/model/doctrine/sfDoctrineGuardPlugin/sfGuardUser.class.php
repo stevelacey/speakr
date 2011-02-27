@@ -14,6 +14,10 @@ class sfGuardUser extends PluginsfGuardUser {
   public function __toString() {
     return $this->getName().' (@'.$this->getUsername().')';
   }
+
+  public function getEvents() {
+    return Doctrine::getTable('Event')->findByUser($this);
+  }
   
   public function getFriendsEvents() {
     return Doctrine::getTable('Event')->findByUserFollowing($this);

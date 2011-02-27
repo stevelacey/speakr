@@ -33,7 +33,7 @@ class Doctrine_Template_Listener_HidePastEvents extends Doctrine_Record_Listener
         $query = $event->getQuery();
         if ( ! $query->contains($field)) {
             $query->addWhere(
-              $field . ' < FROM_UNIXTIME(' . mktime(date('H')+1, 0, 0) . ')'
+              $field . ' > FROM_UNIXTIME(' . mktime(date('H')+1, 0, 0) . ')'
             )->addOrderBy($field . ' DESC');
         }
     }
