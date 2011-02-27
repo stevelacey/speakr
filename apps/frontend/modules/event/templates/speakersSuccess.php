@@ -1,8 +1,9 @@
 <div>
-  <h1><?php echo link_to($event, 'event', $event) ?></h1>
-  <h2><?php echo $event->getTagline() ?></h2>
-
-  <?php echo $event->getDateTimeObject('date')->format('l jS F Y') ?>
+  <hgroup>
+    <h1><?php echo link_to($event, 'event', $event) ?></h1>
+    <h2><?php echo $event->getTagline() ?></h2>
+  </hgroup>
+  <time><?php echo $event->getDateTimeObject('start_at')->format('l jS F Y') ?></time>
 
   <div>
     <img src="http://logo.stevelacey.net/<?php echo $event->getWebsite() ?>"/>
