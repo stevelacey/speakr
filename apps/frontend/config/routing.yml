@@ -1,8 +1,20 @@
 homepage:
   url: /
   param:
-    module: homepage
+    module: schedule
     action: index
+
+friends_events:
+  url: /friends
+  param:
+    module: schedule
+    action: friends
+
+upcoming_events:
+  url: /upcoming
+  param:
+    module: schedule
+    action: upcoming
 
 account:
   url: /account
