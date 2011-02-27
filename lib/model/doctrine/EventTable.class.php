@@ -12,12 +12,10 @@ class EventTable extends Doctrine_Table {
       leftJoin('e.Organiser o on o.event_id = e.id')->
       leftJoin('e.Speaker s on s.event_id = e.id')->
 
-      orWhere('a.user_id = ?', $user->getId())->
-      orWhere('o.user_id = ?', $user->getId())->
-      orWhere('s.user_id = ?', $user->getId())->
+      where('a.user_id = ? or o.user_id = ? or s.user_id = ?', array($user->getId(), $user->getId(), $user->getId()))->
+      andWhere('e.end_at >= ?', date('Y-m-d'))->
 
       groupBy('e.id')->
-      orderBy('e.start_at', 'asc')->
       execute();
   }
 
@@ -37,12 +35,10 @@ class EventTable extends Doctrine_Table {
       leftJoin('s.User su')->
       leftJoin('su.Friend fs on fs.following_id =  s.user_id')->
 
-      orWhere('fa.follower_id = ?', $user->getId())->
-      orWhere('fo.follower_id = ?', $user->getId())->
-      orWhere('fs.follower_id = ?', $user->getId())->
+      where('fa.follower_id = ? or fo.follower_id = ? or fs.follower_id = ?', array($user->getId(), $user->getId(), $user->getId()))->
+      andWhere('e.end_at >= ?', date('Y-m-d'))->
 
       groupBy('e.id')->
-      orderBy('e.start_at', 'asc')->
       execute();
   }
 

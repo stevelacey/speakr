@@ -44,9 +44,4 @@ class Event extends BaseEvent {
   public function getCountry() {
     return $this->getRegion()->getCountry();
   }
-
-  public function setup() {
-    parent::setup();
-    $this->actAs(new Doctrine_Template_HidePastEvents(array('name' => 'end_at')));
-  }
 }
