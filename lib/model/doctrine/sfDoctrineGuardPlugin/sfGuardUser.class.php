@@ -66,6 +66,26 @@ class sfGuardUser extends PluginsfGuardUser {
     }
   }
 
+  public function favourite(Event $event, $bool = true) {
+    if($event->isOngoing() || $event->isOver()) {
+      if($bool) {
+        $event->Favouriters[] = $this;
+        $event->save();
+      } else {
+        Doctrine::getTable('Favouriter')->findOneByEventIdAndUserId($event->getId(), $this->getId())->delete();
+      }
+    }
+  }
+
+  public function organise(Event $event, $bool = true) {
+    if($bool) {
+      $event->Organisers[] = $this;
+      $event->save();
+    } else {
+      Doctrine::getTable('Organiser')->findOneByEventIdAndUserId($event->getId(), $this->getId())->delete();
+    }
+  }
+
   public function speak(Event $event, $bool = true) {
     if($bool) {
       $event->Speakers[] = $this;

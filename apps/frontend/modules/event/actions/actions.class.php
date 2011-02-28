@@ -15,12 +15,6 @@ class eventActions extends myEventActions {
 
     if($this->getUser()->isAuthenticated()) {
       $user = $this->getUser()->getGuardUser();
-      $this->attending = $user->isAttending($this->event);
-      $this->favouriter = $user->isFavouriting($this->event);
-      $this->organising = $user->isOrganising($this->event);
-      $this->speaking = $user->isSpeaking($this->event);
-      $this->watching = $user->isWatching($this->event);
-
       $this->forms['hashtag'] = new EventHashtagForm($this->event);
     }
   }

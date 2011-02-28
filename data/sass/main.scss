@@ -65,6 +65,53 @@ ol, ul {
 }
 
 article.event {
+  header {
+    .icons {
+      float: right;
+
+      a {
+        display: block;
+        float: left;
+        width: 32px;
+        height: 32px;
+        margin: 0 6px 6px 0;
+        text-indent: -9999px;
+      }
+
+      .mini-actions {
+        float: left;
+
+        .favourite {
+          background: url("/images/icons/actions/favourite.png") no-repeat;
+
+          &.not-favourite {
+            background-position: 0 -32px;
+          }
+        }
+
+        .watch {
+          background: url("/images/icons/actions/watch.png") no-repeat;
+
+          &.not-watching {
+            background-position: 0 -32px;
+          }
+        }
+      }
+
+      .social {
+        float: left;
+
+        .tweet {
+          background: url("/images/icons/social/twitter.png") no-repeat;
+        }
+
+        .share {
+          background: url("/images/icons/social/facebook.png") no-repeat;
+        }
+      }
+    }
+  }
+
   .logo {
   }
 

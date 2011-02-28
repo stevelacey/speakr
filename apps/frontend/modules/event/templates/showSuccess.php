@@ -5,10 +5,25 @@
         <h1><?php echo $event ?></h1>
         <h2><?php echo $event->getTagline() ?></h2>
       </hgroup>
+
       <time><?php echo $event->getDateTimeObject('start_at')->format('l jS F Y') ?></time>
+
       <?php if($event->getWebsite()) : ?>
         <?php echo link_to($event->getWebsite(), $event->getWebsite()) ?>
       <?php endif ?>
+
+      <div class="icons">
+        <?php include_partial('social', array('event' => $event)) ?>
+        <?php if($sf_user->isAuthenticated()) : ?>
+          <aside class="mini-actions">
+            <?php include_partial('watch', array('event' => $event)) ?>
+
+            <?php if($event->isOngoing() || $event->isOver()): ?>
+              <?php include_partial('favourite', array('event' => $event)) ?>
+            <?php endif ?>
+          </aside>
+        <?php endif ?>
+      </div>
     </div>
     <div class="logo thin column">
       <?php if($event->getWebsite()) : ?>
@@ -61,23 +76,8 @@
     <aside class="thin column">
       <?php if($sf_user->isAuthenticated()) : ?>
         <section class="actions">
-          <?php if(!$attending) : ?>
-            <?php echo link_to('Attend', 'event_action', array('sf_subject' => $event, 'action' => 'attend', 'verb' => 'do'), array('method' => 'post')) ?>
-          <?php else : ?>
-            <?php echo link_to('Stop Attending', 'event_action', array('sf_subject' => $event, 'action' => 'attend', 'verb' => 'dont'), array('method' => 'post')) ?>
-          <?php endif ?>
-
-          <?php if(!$speaking) : ?>
-            <?php echo link_to('Speak', 'event_action', array('sf_subject' => $event, 'action' => 'speak', 'verb' => 'do'), array('method' => 'post')) ?>
-          <?php else : ?>
-            <?php echo link_to('Stop Speaking', 'event_action', array('sf_subject' => $event, 'action' => 'speak', 'verb' => 'dont'), array('method' => 'post')) ?>
-          <?php endif ?>
-
-          <?php if(!$watching) : ?>
-            <?php echo link_to('Watch', 'event_action', array('sf_subject' => $event, 'action' => 'watch', 'verb' => 'do'), array('method' => 'post')) ?>
-          <?php else : ?>
-            <?php echo link_to('Stop Watching', 'event_action', array('sf_subject' => $event, 'action' => 'watch', 'verb' => 'dont'), array('method' => 'post')) ?>
-          <?php endif ?>
+          <?php include_partial('attend', array('event' => $event)) ?>
+          <?php include_partial('speak', array('event' => $event)) ?>
         </section>
       <?php endif ?>
 

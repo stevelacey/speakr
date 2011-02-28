@@ -15,6 +15,24 @@ class Event extends BaseEvent {
     return $this->getConference()->getName().' '.$this->getDateTimeObject('start_at')->format('Y');
   }
 
+  public function getDate() {
+    if($this->getStartDate('dmY') == $this->getEndDate('dmY')) {
+      $date = $this->getStartDate('l jS F Y');
+    } else if($this->getStartDate('mY') == $this->getEndDate('mY')) {
+      $date = $this->getStartDate('l jS');
+    } else if($this->getStartDate('Y') == $this->getEndDate('Y')) {
+      $date = $this->getStartDate('l jS F');
+    } else {
+      $date = $this->getStartDate('l jS F Y');
+    }
+
+    if($this->getStartDate('dmY') != $this->getEndDate('dmY')) {
+      $date .= '-'.$this->getEndDate('l jS F Y');
+    }
+
+    return $date;
+  }
+
   public function getStartDate($format) {
     return $this->getDateTimeObject('start_at')->format($format);
   }
@@ -43,5 +61,17 @@ class Event extends BaseEvent {
 
   public function getCountry() {
     return $this->getRegion()->getCountry();
+  }
+
+  public function isUpcoming() {
+    return $this->getStartDate('U') >= time();
+  }
+
+  public function isOngoing() {
+    return $this->getStartDate('U') <= time() && $this->getEndDate('U') >= time();
+  }
+
+  public function isOver() {
+    return $this->getEndDate('U') <= time();
   }
 }
