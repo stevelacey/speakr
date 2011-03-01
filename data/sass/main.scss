@@ -10,11 +10,30 @@ body {
     margin: 0 auto;
   }
 
-  header {
-    height: 100px;
+  > header {
+    height: 140px;
 
-    .sign-in-with-twitter {
+    .logo {
+      $image: "speakr.png";
+      $width: image-width($image);
+      $height: image-height($image);
+
+      display: block;
+      float: left;
+      width: $width;
+      height: $height;
+      margin: 10px 0;
+      font-size: 36px;
+
+      img {
+        width: $width;
+        height: $height;
+      }
+    }
+
+    .sign-in-with-twitter, .user {
       float: right;
+      margin: 40px 0;
     }
 
     @include clearfix;
