@@ -6,10 +6,10 @@
         <h2><?php echo $event->getTagline() ?></h2>
       </hgroup>
 
-      <time><?php echo $event->getDateTimeObject('start_at')->format('l jS F Y') ?></time>
+      <?php include_partial('event/date', array('event' => $event)) ?>
 
       <?php if($event->getWebsite()) : ?>
-        <?php echo link_to($event->getWebsite(), $event->getWebsite()) ?>
+        <?php echo link_to($event->getWebsite(), $event->getWebsite(), array('class' => 'url')) ?>
       <?php endif ?>
 
       <div class="icons">
@@ -47,22 +47,43 @@
         </section>
       <?php endif ?>
 
-      <?php if($event->getPresentations()->count() /* || $event->getVideos()->count() */ ) : ?>
+      <?php if($sf_user->isAuthenticated() || (!$sf_user->isAuthenticated() && $event->hasContent())) : ?>
         <section>
           <h2>Content</h2>
-          <?php if($event->getPresentations()->count()) : ?>
-            <h3>Presentations</h3>
-            <?php include_partial('presentation/list', array('presentations' => $event->getPresentations())) ?>
+          <?php if($event->hasContent()) : ?>
+            <?php if($event->getPresentations()->count()) : ?>
+              <h3>Presentations</h3>
+              <?php include_partial('presentation/list', array('presentations' => $event->getPresentations())) ?>
+            <?php endif ?>
+          <?php else : ?>
+            <p>None listed, why not <?php echo link_to('add some content', 'speakers', $event) ?>?</p>
           <?php endif ?>
         </section>
       <?php endif ?>
 
       <section class="location">
         <h2>Location</h2>
-        <p>
-          <?php echo $event->getAddress() ?><br/>
-          <?php echo $event->getPostcode() ?>
-        </p>
+        <?php include_partial('event/location', array('event' => $event)) ?>
+        <?php if($sf_user->isAuthenticated()) : ?>
+          <form action="<?php echo url_for('event_update', array('action' => 'location', 'sf_subject' => $event)) ?>" method="post">
+            <fieldset>
+              <div>
+                <?php echo $forms['location']['address']->renderLabel() ?>
+                <?php echo $forms['location']['address'] ?>
+              </div>
+              <div>
+                <?php echo $forms['location']['postcode']->renderLabel() ?>
+                <?php echo $forms['location']['postcode'] ?>
+              </div>
+              <div>
+                <?php echo $forms['location']['city_id']->renderLabel() ?>
+                <?php echo $forms['location']['city_id'] ?>
+              </div>
+            </fieldset>
+            <?php echo $forms['location']->renderHiddenFields(false) ?>
+            <input type="submit" value="Set Location"/>
+          </form>
+        <?php endif ?>
       </section>
 
       <?php if($event->getAttending()->count()) : ?>

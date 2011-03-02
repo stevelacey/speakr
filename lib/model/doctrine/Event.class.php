@@ -63,6 +63,10 @@ class Event extends BaseEvent {
     return $this->getRegion()->getCountry();
   }
 
+  public function hasContent() {
+    return $this->getPresentations()->count() /* || $this->getVideos()->count() */ ;
+  }
+
   public function isUpcoming() {
     return $this->getStartDate('U') >= time();
   }

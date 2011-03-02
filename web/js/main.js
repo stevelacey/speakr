@@ -1,7 +1,21 @@
 $(function() {
   if($('article.event').length) {
-    getGoogleMap();
-    getTwitterFeed();
+    if($('article.event .location .street-address').length) {
+      getGoogleMap();
+    }
+
+    $('section.location').each(function () {
+      var location = this
+      $(location).find('form').hide();
+
+      $(location).find('h2').after($('<a/>', {text: 'Edit'}).click(function() {
+        $(location).find('form').slideToggle(200);
+      }));
+    });
+    
+    if($('.twitter .hashtag').length) {
+      getTweets();
+    }
   }
 
   getLocation();
@@ -54,7 +68,7 @@ function getGoogleMap() {
   $.getJSON(window.location + '/map.json', {}, function(data) {
     if(data.event.latitude && data.event.longitude) {
 
-      $('<div/>', {'class': 'map'}).append($('<h3/>', {text: 'Map'})).append($('<div/>', {'class': 'canvas'})).appendTo('.location');
+      $('<div/>', {'class': 'map'}).append($('<h3/>', {text: 'Map'})).append($('<div/>', {'class': 'canvas'})).appendTo('section.location');
 
       var centerCoord = new google.maps.LatLng(data.event.latitude, data.event.longitude);
 
@@ -119,12 +133,6 @@ function getLocation() {
       event.preventDefault();
     }
   });
-}
-
-function getTwitterFeed() {
-  if($('.twitter .hashtag').length) {
-    getTweets();
-  }
 }
 
 function getTweets() {

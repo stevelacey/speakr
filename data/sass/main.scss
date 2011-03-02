@@ -3,6 +3,7 @@
 @import "structure/_columns";
 
 body {
+  margin-bottom: 100px;
   font-family: arial;
 
   > header, > article, > div, > .columns, > footer {
@@ -52,6 +53,11 @@ a {
 
 em {
   font-style: normal;
+}
+
+fieldset {
+  border: 0;
+  padding: 0;
 }
 
 h1 {
@@ -146,6 +152,12 @@ article.event {
     @include clearfix;
   }
 
+  .location {
+    a, span {
+      display: block;
+    }
+  }
+
   .map .canvas {
     width: 600px;
     height: 300px;
@@ -178,6 +190,14 @@ article.event {
       }
 
       .location {
+        .street-address, .postal-code {
+          display: none;
+        }
+
+        .locality:after, .region:after {
+          content: ",";
+        }
+
         &:after {
           content: " - ";
           color: #CCC;
