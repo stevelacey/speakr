@@ -154,6 +154,8 @@ function getLocation() {
     focus: function(event, ui) {
       event.preventDefault();
     }
+  }).change(function() {
+    $('#event_city_id, #conference_event_city_id').val(null);
   });
 }
 

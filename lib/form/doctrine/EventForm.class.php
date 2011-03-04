@@ -31,6 +31,8 @@ class EventForm extends BaseEventForm {
 
     if(!$this->getObject()->isNew()) {
       $this->widgetSchema['location']->setDefault($this->getObject()->getLocation());
+      $this->getObject()->setCityId(null);
+
     }
 
     $this->validatorSchema['location'] = new sfValidatorString(array('required' => true));
@@ -52,10 +54,10 @@ class EventForm extends BaseEventForm {
 
         if (!$web->responseIsError()) {
           // Successful response (eg. 200, 201, etc)
-          $place = $web->getResponseXML()->results->place[0];
+          $city = Doctrine::getTable('City')->findOneById((int) $web->getResponseXML()->results->place[0]->woeid);
 
-          if($place) {
-            $values['city_id'] = (int) $place->woeid;
+          if($city instanceOf City) {
+            $values['city_id'] = $city->getId();
           } else {
             $error = new sfValidatorError($validator, 'We\'re not sure where this is, could you check you\'ve entered the location correctly?');
             throw new sfValidatorErrorSchema($validator, array('location' => $error));
