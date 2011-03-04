@@ -11,5 +11,6 @@
 class EventLocationForm extends EventForm {
   public function configure() {
     $this->useFields(array('address', 'postcode', 'city_id'));
+    $this->configureLocation();
   }
 }

@@ -51,6 +51,14 @@ class Event extends BaseEvent {
     ));
   }
 
+  public function getLocation() {
+    return implode(', ', array(
+      $this->getCity(),
+      $this->getRegion(),
+      $this->getCountry()
+    ));
+  }
+
   public function getSlug() {
     return $this->getConference()->getSlug().'-'.$this->getDateTimeObject('start_at')->format('Y');
   }

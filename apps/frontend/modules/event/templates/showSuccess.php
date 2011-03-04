@@ -81,8 +81,8 @@
                   <?php echo $forms['location']['postcode'] ?>
                 </div>
                 <div>
-                  <?php echo $forms['location']['city_id']->renderLabel() ?>
-                  <?php echo $forms['location']['city_id'] ?>
+                  <?php echo $forms['location']['location']->renderLabel() ?>
+                  <?php echo $forms['location']['location'] ?>
                 </div>
               </fieldset>
               <?php echo $forms['location']->renderHiddenFields(false) ?>

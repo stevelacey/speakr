@@ -15,21 +15,29 @@ class EventForm extends BaseEventForm {
       'culture' => 'en'
     ));
 
-    $this->widgetSchema['location'] = new sfWidgetFormInputText();
-    $this->widgetSchema['city_id'] = new sfWidgetFormInputHidden();
-
-    $this->validatorSchema['location'] = new sfValidatorString(array('required' => true));
-    $this->validatorSchema['city_id'] = new sfValidatorPass();
-
-    $this->mergePostValidator(
-      new sfValidatorCallback(array('callback' => array($this, 'checkLocation')))
-    );
+    $this->configureLocation();
 
     unset(
       $this['id'], $this['conference_id'], $this['tagline'], $this['description'], $this['hashtag'], $this['address'], $this['postcode'],
       $this['image'], $this['icon'],
       $this['attending_list'], $this['favouriters_list'], $this['organisers_list'], $this['speakers_list'], $this['watchers_list'],
       $this['created_at'], $this['updated_at']
+    );
+  }
+
+  public function configureLocation() {
+    $this->widgetSchema['location'] = new sfWidgetFormInputText();
+    $this->widgetSchema['city_id'] = new sfWidgetFormInputHidden();
+
+    if(!$this->getObject()->isNew()) {
+      $this->widgetSchema['location']->setDefault($this->getObject()->getLocation());
+    }
+
+    $this->validatorSchema['location'] = new sfValidatorString(array('required' => true));
+    $this->validatorSchema['city_id'] = new sfValidatorPass();
+
+    $this->mergePostValidator(
+      new sfValidatorCallback(array('callback' => array($this, 'checkLocation')))
     );
   }
 

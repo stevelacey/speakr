@@ -28,13 +28,11 @@
         <td><?php echo $form['event']['location'] ?></td>
         <td><?php echo $form['event']['location']->renderError() ?></td>
       </tr>
-      <tr>
-        <td><?php echo $form['event']['city_id'] ?></td>
-      </tr>
     </tbody>
     <tfoot>
       <tr>
         <td colspan="2">
+          <?php echo $form['event']['city_id'] ?>
           <?php echo $form->renderHiddenFields(false) ?>
           <input type="submit" value="Add Event" />
         </td>

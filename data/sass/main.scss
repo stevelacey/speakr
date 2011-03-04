@@ -173,6 +173,29 @@ article.event {
       @include clearfix;
     }
 
+    form {
+      fieldset {
+        margin-bottom: 4px;
+
+        div {
+          margin-bottom: 2px;
+
+          label {
+            display: block;
+            float: left;
+            width: 100px;
+            line-height: 24px;
+          }
+
+          input {
+            display: block;
+            float: left;
+            width: 200px;
+          }
+        }
+      }
+    }
+
     .address {
       height: 120px;
     }

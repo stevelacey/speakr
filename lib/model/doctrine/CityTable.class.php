@@ -54,6 +54,7 @@ class CityTable extends Doctrine_Table {
                 if($city instanceOf City && $region instanceOf Region && $country instanceOf Country) {
                   $city->setRegion($region);
                   $region->setCountry($country);
+                  $city->save();
 
                   return $city;
                 }

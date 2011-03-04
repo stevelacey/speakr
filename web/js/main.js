@@ -24,7 +24,10 @@ $(function() {
               $(this).removeClass('active');
             } else {
               $(location).find('span.location').slideUp(speed, function() {
-                $(location).find('form').slideDown(speed);
+                $(location).find('form')
+                  .slideDown(speed)
+                  .find(':input:visible:first')
+                  .focus();
               });
               $(this).addClass('active');
             }
@@ -126,7 +129,7 @@ function getGoogleMap() {
 }
 
 function getLocation() {
-  $("#conference_event_location").autocomplete({
+  $("#event_location, #conference_event_location").autocomplete({
     source: function( request, response ) {
       $.ajax({
         url: 'http://query.yahooapis.com/v1/public/yql?q=select * from geo.places where text = "' + request.term + '" and placetype = 7&format=json',
@@ -144,7 +147,7 @@ function getLocation() {
       });
     },
     select: function(event, ui) {
-      $('#conference_event_city_id').val(ui.item.value);
+      $('#event_city_id, #conference_event_city_id').val(ui.item.value);
       $(this).val(ui.item.label);
       event.preventDefault();
     },
@@ -174,10 +177,14 @@ function getTweets() {
                 var speed = 150;
 
                 if($(this).hasClass('active')) {
-                  $(tweets).find('form').slideUp(speed);
+                  $(tweets).find('form')
+                    .slideUp(speed);
                   $(this).removeClass('active');
                 } else {
-                  $(tweets).find('form').slideDown(speed);
+                  $(tweets).find('form')
+                    .slideDown(speed)
+                    .find(':input:visible:first')
+                    .focus();
                   $(this).addClass('active');
                 }
               })
