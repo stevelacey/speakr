@@ -153,9 +153,35 @@ article.event {
   }
 
   .location {
-    a, span {
+    display: block;
+
+    > a, > span {
       display: block;
+      float: left;
+      clear: both;
     }
+
+    header {
+      h2 {
+        float: left;
+      }
+
+      @include clearfix;
+    }
+
+    div {
+      @include clearfix;
+    }
+
+    .address {
+      height: 120px;
+    }
+
+    .edit {
+      margin: 25px 0 0 10px;
+    }
+
+    @include clearfix;
   }
 
   .map .canvas {
@@ -265,6 +291,16 @@ article.event {
 }
 
 .twitter {
+  header {
+    position: relative;
+
+    .edit {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+
   ol {
     list-style-type: none;
 
@@ -275,6 +311,83 @@ article.event {
 
       small {
         color: #555;
+      }
+    }
+  }
+}
+
+.edit {
+  $width: 50px;
+  $height: 26px;
+
+  background: none;
+  border: none;
+  display: block;
+  float: left;
+  position: relative;
+  width: $width;
+  height: $height;
+  padding: 0;
+  font-size: 13px;
+  color: #222;
+  line-height: 24px;
+  text-align: center;
+  cursor: pointer;
+
+  span {
+    $border-width: 1px;
+
+    border: $border-width solid #CCC;
+    @include border-radius(4px);
+    display: block;
+    position: absolute;
+    top: 0;
+    width: $width - $border-width * 2;
+    height: $height - $border-width * 2;
+
+    @include transform-style(preserve-3d);
+    @include transition(ease, 0.3s, all);
+    @include backface-visibility(hidden);
+
+    &.action {
+      @include background(linear-gradient(#EEE, #DDD));
+      background-color: #EEE;
+      z-index: 1;
+    }
+
+    &.cancel {
+      @include background(linear-gradient(#d67178, #bc1422));
+      background-color: #CC0000;
+      border-color: #661e21;
+      @include text-shadow(0 0 3px rgba(100, 30, 30, 0.5));
+      color: #FFF;
+
+      @include transform(rotateY(180deg));
+    }
+  }
+
+  &:hover, &:focus {
+    span {
+      text-decoration: none;
+
+      &.action {
+        @include background(linear-gradient(#f6f6f6, #EEE));
+      }
+
+      &.cancel {
+        @include background(linear-gradient(#e5848b, #d42636));
+      }
+    }
+  }
+
+  &.active {
+    span {
+      &.action {
+        @include transform(rotateY(180deg));
+      }
+
+      &.cancel {
+        @include transform(rotateY(0deg));
       }
     }
   }

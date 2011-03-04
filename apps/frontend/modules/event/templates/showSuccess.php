@@ -62,28 +62,34 @@
       <?php endif ?>
 
       <section class="location">
-        <h2>Location</h2>
-        <?php include_partial('event/location', array('event' => $event)) ?>
-        <?php if($sf_user->isAuthenticated()) : ?>
-          <form action="<?php echo url_for('event_update', array('action' => 'location', 'sf_subject' => $event)) ?>" method="post">
-            <fieldset>
-              <div>
-                <?php echo $forms['location']['address']->renderLabel() ?>
-                <?php echo $forms['location']['address'] ?>
-              </div>
-              <div>
-                <?php echo $forms['location']['postcode']->renderLabel() ?>
-                <?php echo $forms['location']['postcode'] ?>
-              </div>
-              <div>
-                <?php echo $forms['location']['city_id']->renderLabel() ?>
-                <?php echo $forms['location']['city_id'] ?>
-              </div>
-            </fieldset>
-            <?php echo $forms['location']->renderHiddenFields(false) ?>
-            <input type="submit" value="Set Location"/>
-          </form>
-        <?php endif ?>
+        <header>
+          <h2>Location</h2>
+        </header>
+        <section class="address">
+          <div>
+            <?php include_partial('event/location', array('event' => $event)) ?>
+          </div>
+          <?php if($sf_user->isAuthenticated()) : ?>
+            <form action="<?php echo url_for('event_update', array('action' => 'location', 'sf_subject' => $event)) ?>" method="post">
+              <fieldset>
+                <div>
+                  <?php echo $forms['location']['address']->renderLabel() ?>
+                  <?php echo $forms['location']['address'] ?>
+                </div>
+                <div>
+                  <?php echo $forms['location']['postcode']->renderLabel() ?>
+                  <?php echo $forms['location']['postcode'] ?>
+                </div>
+                <div>
+                  <?php echo $forms['location']['city_id']->renderLabel() ?>
+                  <?php echo $forms['location']['city_id'] ?>
+                </div>
+              </fieldset>
+              <?php echo $forms['location']->renderHiddenFields(false) ?>
+              <input type="submit" value="Set Location"/>
+            </form>
+          <?php endif ?>
+        </section>
       </section>
 
       <?php if($event->getAttending()->count()) : ?>
@@ -103,7 +109,9 @@
       <?php endif ?>
 
       <section class="twitter">
-        <h2>Twitter</h2>
+        <header>
+          <h2>Twitter</h2>
+        </header>
         <?php if($event->getHashtag()) : ?>
           <p>#<span class="hashtag"><?php echo $event->getHashtag() ?></span></p>
         <?php endif ?>

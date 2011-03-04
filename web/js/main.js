@@ -6,11 +6,30 @@ $(function() {
 
     $('section.location').each(function () {
       var location = this
-      $(location).find('form').hide();
 
-      $(location).find('h2').after($('<a/>', {text: 'Edit'}).click(function() {
-        $(location).find('form').slideToggle(200);
-      }));
+      if($(location).find('form').length) {
+        $(location).find('form').hide();
+
+        $(location).find('h2').after(
+          $('<button/>', {
+            html: '<span class="action">Edit</span><span class="cancel">Cancel</span>',
+            'class': 'edit'
+          }).click(function() {
+            var speed = 150;
+
+            if($(this).hasClass('active')) {
+              $(location).find('form').slideUp(speed, function() {
+                $(location).find('span.location').slideDown(speed);
+              });
+              $(this).removeClass('active');
+            } else {
+              $(location).find('span.location').slideUp(speed, function() {
+                $(location).find('form').slideDown(speed);
+              });
+              $(this).addClass('active');
+            }
+        }));
+      }
     });
     
     if($('.twitter .hashtag').length) {
@@ -68,7 +87,7 @@ function getGoogleMap() {
   $.getJSON(window.location + '/map.json', {}, function(data) {
     if(data.event.latitude && data.event.longitude) {
 
-      $('<div/>', {'class': 'map'}).append($('<h3/>', {text: 'Map'})).append($('<div/>', {'class': 'canvas'})).appendTo('section.location');
+      $('<section/>', {'class': 'map'}).append($('<h3/>', {text: 'Map'})).append($('<div/>', {'class': 'canvas'})).appendTo('section.location');
 
       var centerCoord = new google.maps.LatLng(data.event.latitude, data.event.longitude);
 
@@ -144,15 +163,24 @@ function getTweets() {
       
       if(json.results.length) {
         if(!tweets.find('ol').length) {
-          tweets.find('h2').text('Tweets #' + $('.twitter .hashtag').text() + ' ');
+          tweets.find('h2').text('Tweets #' + $('.twitter .hashtag').text());
           
           if(tweets.find('form').length) {
-            tweets.find('h2').append(
-              $('<small/>').append(
-                $('<a/>', {text: 'Wrong?'}).click(function() {
-                  tweets.find('form').slideToggle(200);
-                })
-              )
+            tweets.find('h2').after(
+              $('<button/>', {
+                html: '<span class="action">Edit</span><span class="cancel">Cancel</span>',
+                'class': 'edit'
+              }).click(function() {
+                var speed = 150;
+
+                if($(this).hasClass('active')) {
+                  $(tweets).find('form').slideUp(speed);
+                  $(this).removeClass('active');
+                } else {
+                  $(tweets).find('form').slideDown(speed);
+                  $(this).addClass('active');
+                }
+              })
             );
           }
           
