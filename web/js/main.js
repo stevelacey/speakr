@@ -199,7 +199,7 @@ function getTweets() {
             .append($('<ol/>'));
         }
 
-        var template = '{0}<br/><small>from <a href="http://twitter.com/{1}">{1}</a> {2}</small>';
+        var template = '{1}<br/><small>from <a href="http://twitter.com/{2}">{2}</a> <a href="http://twitter.com/{2}/statuses/{0}">{3}</a></small>';
         
         for(i in json.results) {
           var tweet = json.results[i];
@@ -208,6 +208,7 @@ function getTweets() {
             tweets.find('ol').append(
               $('<li/>', {
                 html: template.format(
+                  tweet.id_str,
                   tweet.text.parseTweet(),
                   tweet.from_user,
                   $.timeago(dateFormat(tweet.created_at, "isoUtcDateTime"))
