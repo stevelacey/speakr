@@ -138,7 +138,7 @@ class sfGuardUser extends PluginsfGuardUser {
     return sfConfig::get('app_twitter_url').'/'.$this->getUsername();
   }
 
-  public function getSpeakers() {
+  public function getSpeakingAlongside() {
     return Doctrine_Query::create()->
       from('sfGuardUser u')->
       leftJoin('u.Speaker s')->
@@ -146,6 +146,19 @@ class sfGuardUser extends PluginsfGuardUser {
       leftJoin('e.Speaker sf')->
       where('sf.user_id = ?', $this->getId())->
       andWhere('u.id != ?', $this->getId())->
+      andWhere('e.end_at >= ?', date('Y-m-d'))->
+      execute();
+  }
+
+  public function getSpokenAlongside() {
+    return Doctrine_Query::create()->
+      from('sfGuardUser u')->
+      leftJoin('u.Speaker s')->
+      leftJoin('s.Event e')->
+      leftJoin('e.Speaker sf')->
+      where('sf.user_id = ?', $this->getId())->
+      andWhere('u.id != ?', $this->getId())->
+      andWhere('e.end_at < ?', date('Y-m-d'))->
       execute();
   }
 

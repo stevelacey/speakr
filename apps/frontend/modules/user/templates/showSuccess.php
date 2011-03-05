@@ -15,6 +15,11 @@
         <?php include_partial('event/short_list', array('events' => $user->getSpeaking())) ?>
       <?php endif ?>
 
+      <?php if($user->getSpeakingAlongside()->count()) : ?>
+        <h3>Speaking alongside</h3>
+        <?php include_partial('user/image_list', array('users' => $user->getSpeakingAlongside())) ?>
+      <?php endif ?>
+
       <?php if($user->getAttending()->count()) : ?>
         <h3>Attending</h3>
         <?php include_partial('event/short_list', array('events' => $user->getAttending())) ?>
@@ -33,9 +38,9 @@
         <?php include_partial('user/image_list', array('users' => $user->getSpoken())) ?>
       <?php endif ?>
 
-      <?php if($user->getSpeakers()->count()) : ?>
+      <?php if($user->getSpokenAlongside()->count()) : ?>
         <h3>Spoken alongside</h3>
-        <?php include_partial('user/image_list', array('users' => $user->getSpeakers())) ?>
+        <?php include_partial('user/image_list', array('users' => $user->getSpokenAlongside())) ?>
       <?php endif ?>
 
       <?php if($user->getPresentations()->count()) : ?>
