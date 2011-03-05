@@ -12,11 +12,15 @@ class sfGuardUserTable extends PluginsfGuardUserTable {
       execute();
   }
 
-  public function search($query) {
-    return Doctrine_Query::create()->
-      from('sfGuardUser u')->
-      where('u.username like ?', '%'.$query.'%')->
-      orWhere('concat_ws(" ", u.first_name, u.last_name) like ?', '%'.$query.'%')->
-      execute();
+  public function search($keywords) {
+    $q = Doctrine_Query::create()->from('sfGuardUser u');
+    $q = $this->addSearchCriteria($q, 'u', $keywords);
+    return $q->execute();
+  }
+  
+  public function addSearchCriteria($q, $alias, $keywords) {
+    return $q->
+      orWhere($alias.'.username like ?', '%'.$keywords.'%')->
+      orWhere('concat_ws(" ", '.$alias.'.first_name, '.$alias.'.last_name) like ?', '%'.$keywords.'%');
   }
 }

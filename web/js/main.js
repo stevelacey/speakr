@@ -42,38 +42,46 @@ $(function() {
 
   getLocation();
 
+  $('.content_search').each(function() {
+    $(this).keyup(contentSearchAction);
+    $(this).submit(contentSearchAction);
+  });
+
   $('.user_search').each(function() {
     $(this).submit(userSearchAction);
   });
 });
 
-if(typeof(google.maps) != 'undefined') {
-  var map;
-  var gInfoWindow;
-  var response = [];
+var map;
+var gInfoWindow;
+var response = [];
 
-  var poi = ['coffee', 'hotel', 'internet cafe'];
+var poi = ['coffee', 'hotel', 'internet cafe'];
 
-  var icons = {
-    'coffee': new google.maps.MarkerImage(
-      "http://labs.google.com/ridefinder/images/mm_20_brown.png",
-      new google.maps.Size(12, 20),
-      new google.maps.Point(0, 0),
-      new google.maps.Point(6, 20)
-    ),
-    'hotel': new google.maps.MarkerImage(
-      "http://labs.google.com/ridefinder/images/mm_20_red.png",
-      new google.maps.Size(12, 20),
-      new google.maps.Point(0, 0),
-      new google.maps.Point(6, 20)
-    ),
-    'internet cafe': new google.maps.MarkerImage(
-      "http://labs.google.com/ridefinder/images/mm_20_gray.png",
-      new google.maps.Size(12, 20),
-      new google.maps.Point(0, 0),
-      new google.maps.Point(6, 20)
-    )
-  };
+var icons = {
+  'coffee': new google.maps.MarkerImage(
+    "http://labs.google.com/ridefinder/images/mm_20_brown.png",
+    new google.maps.Size(12, 20),
+    new google.maps.Point(0, 0),
+    new google.maps.Point(6, 20)
+  ),
+  'hotel': new google.maps.MarkerImage(
+    "http://labs.google.com/ridefinder/images/mm_20_red.png",
+    new google.maps.Size(12, 20),
+    new google.maps.Point(0, 0),
+    new google.maps.Point(6, 20)
+  ),
+  'internet cafe': new google.maps.MarkerImage(
+    "http://labs.google.com/ridefinder/images/mm_20_gray.png",
+    new google.maps.Size(12, 20),
+    new google.maps.Point(0, 0),
+    new google.maps.Point(6, 20)
+  )
+};
+
+var contentSearchAction = function(event) {
+  contentSearch($(this).find('input.query').val());
+  event.preventDefault();
 }
 
 var userSearchAction = function(event) {
@@ -263,6 +271,22 @@ function localUserSearch(query) {
   });
 }
 
+function contentSearch(query) {
+  $.getJSON('/content/search/' + query, {}, function(results) {
+    var list = $('<ol/>');
+
+    for(var i in results) {
+      var content = results[i];
+      list.append($('.content-search-result-template').jqote(content));
+    }
+
+    $('.content_search').each(function() {
+      $(this).find('ol, a').remove();
+      $(this).append(list);
+    });
+  });
+}
+
 function twitterUserSearch(query) {
   $.getJSON('/user/twitter/search/' + query, {}, function(users) {
     var list = $('<ol/>');
@@ -270,9 +294,10 @@ function twitterUserSearch(query) {
     for(var i in users) {
       var user = users[i];
       var text = ' ' + user.name + ' (@' + user.username + ') ';
-      list.append($('<li/>', {text: text})
-        .prepend($('<img/>', {src: user.image, alt: text, title: text}))
-        .append($('<a/>', {text: 'Add as speaker!', href: window.location + '/add/' + user.username}))
+      list.append(
+        $('<li/>', {text: text})
+          .prepend($('<img/>', {src: user.image, alt: text, title: text}))
+          .append($('<a/>', {text: 'Add as speaker!', href: window.location + '/add/' + user.username}))
       );
     }
 

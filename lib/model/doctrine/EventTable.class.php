@@ -76,4 +76,19 @@ class EventTable extends Doctrine_Table {
       where('concat_ws("-", c.slug, year(e.start_at)) = ?', $params['slug'])->
       fetchOne();
   }
+
+  public function search($keywords) {
+    $q = Doctrine_Query::create()->from('Event e')->leftJoin('e.Conference c');
+    $q = $this->addSearchCriteria($q, 'e', $keywords);
+    $q = Doctrine::getTable('Conference')->addSearchCriteria($q, 'c', $keywords);
+    return $q->execute();
+  }
+
+  public function addSearchCriteria($q, $alias, $keywords) {
+    return $q->
+      orWhere($alias.'.description like ?', '%'.$keywords.'%')->
+      orWhere($alias.'.tagline like ?', '%'.$keywords.'%')->
+      orWhere($alias.'.address like ?', '%'.$keywords.'%')->
+      orWhere($alias.'.website like ?', '%'.$keywords.'%');
+  }
 }

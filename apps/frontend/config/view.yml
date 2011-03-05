@@ -16,6 +16,9 @@ default:
   javascripts:
     - http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js
     - http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js
+    - http://maps.google.com/maps/api/js?sensor=true
+    - http://www.google.com/uds/api?file=uds.js&v=1.0&key=%app_google_api_key%
+    - jquery.jqote2.min.js
     - jquery.timeago.js
     - date.format.js
     - main: {position: last}

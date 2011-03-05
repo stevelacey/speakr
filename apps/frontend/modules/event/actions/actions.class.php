@@ -26,6 +26,10 @@ class eventActions extends myEventActions {
     $this->event = $this->getRoute()->getObject();
   }
 
+  public function executeAddContent(sfWebRequest $request) {
+    $this->event = $this->getRoute()->getObject();
+  }
+
   public function executeMap(sfWebRequest $request) {
     $event = $this->getRoute()->getObject();
     

@@ -29,12 +29,31 @@ class myEventActions extends sfActions {
     $this->go($request, $this->getUser()->getGuardUser(), 'watch', $request->getParameter('verb') == 'do');
   }
 
+  public function executeAddExistingContent(sfWebRequest $request) {
+    $content = Doctrine::getTable('Content')->findOneBySlug($request->getParameter('content_slug'));
+
+    if($content instanceOf Content) {
+      $presentation = new Presentation();
+      $presentation->setContent($content);
+      $presentation->setEvent($this->getRoute()->getObject());
+
+      foreach($content->getSpeakers() as $speaker) {
+        $presentation->Speakers[] = $speaker;
+      }
+
+      $presentation->save();
+      $this->redirect('event', $this->getRoute()->getObject());
+    } else {
+      $this->redirect('add_content', $this->getRoute()->getObject());
+    }
+  }
+
   public function executeAddSpeaker(sfWebRequest $request) {
     $user = Doctrine::getTable('sfGuardUser')->findOneByUsername($request->getParameter('username'));
 
     if(!$user instanceOf sfGuardUser) {
       $xml = Twitter::getConnection()->get('users/show', array('screen_name' => $request->getParameter('username')));
-      
+
       if(isset($xml->id)) {
         $user = new sfGuardUser();
         $user->setId((int) $xml->id);

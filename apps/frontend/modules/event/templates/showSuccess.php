@@ -47,16 +47,14 @@
         </section>
       <?php endif ?>
 
-      <?php if($sf_user->isAuthenticated() || (!$sf_user->isAuthenticated() && $event->hasContent())) : ?>
+      <?php if($sf_user->isAuthenticated() || (!$sf_user->isAuthenticated() && $event->getPresentations()->count())) : ?>
         <section>
           <h2>Content</h2>
-          <?php if($event->hasContent()) : ?>
-            <?php if($event->getPresentations()->count()) : ?>
-              <h3>Presentations</h3>
-              <?php include_partial('presentation/list', array('presentations' => $event->getPresentations())) ?>
-            <?php endif ?>
+          <?php if($event->getPresentations()->count()) : ?>
+            <?php include_partial('presentation/list', array('presentations' => $event->getPresentations())) ?>
+            <p><?php echo link_to('Add more content', 'add_content', $event) ?></p>
           <?php else : ?>
-            <p>None listed, why not <?php echo link_to('add some content', 'speakers', $event) ?>?</p>
+            <p>None listed, why not <?php echo link_to('add some content', 'add_content', $event) ?>?</p>
           <?php endif ?>
         </section>
       <?php endif ?>

@@ -89,6 +89,16 @@ ol, ul {
   @include sign-in-with-twitter;
 }
 
+.actions {
+  a {
+    @include sexy-button(#1F65BC);
+    width: 140px;
+    height: 48px;
+    margin: 0 10px 10px 0;
+    line-height: 48px;
+  }
+}
+
 article.event {
   header {
     .icons {
@@ -141,14 +151,6 @@ article.event {
   }
 
   .actions {
-    a {
-      @include sexy-button(#1F65BC);
-      width: 140px;
-      height: 48px;
-      margin: 0 10px 10px 0;
-      line-height: 48px;
-    }
-
     @include clearfix;
   }
 

@@ -46,6 +46,13 @@ new:
     module: event
     action: new
 
+content_search:
+  url: /content/search
+  param:
+    module: content
+    action: search
+    sf_format: json
+
 user_search:
   url: /user/search
   param:
@@ -82,6 +89,13 @@ city:
   param:
     module: city
     action: show
+
+content_search_query:
+  url: /content/search/:query
+  param:
+    module: content
+    action: search
+    sf_format: json
 
 user_search_query:
   url: /user/search/:query
@@ -125,6 +139,17 @@ speakers:
     module: event
     action: speakers
 
+add_content:
+  class: sfDoctrineRoute
+  url: /:slug/add/content
+  options:
+    model: Event
+    method: findBySlug
+    type: object
+  param:
+    module: event
+    action: addContent
+
 presentation:
   class: sfDoctrineRoute
   url: /:speaker_slug/:slug
@@ -146,6 +171,17 @@ event_map:
     module: event
     action: map
     sf_format: json
+
+event_content_add:
+  class: sfDoctrineRoute
+  url: /:slug/add/content/:content_slug
+  options:
+    model: Event
+    method: findBySlug
+    type: object
+  param:
+    module: event
+    action: addExistingContent
 
 event_speaker_add:
   class: sfDoctrineRoute
