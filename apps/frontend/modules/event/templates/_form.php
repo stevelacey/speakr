@@ -19,9 +19,14 @@
         <td><?php echo $form['event']['website']->renderError() ?></td>
       </tr>
       <tr>
-        <th><?php echo $form['event']['date']->renderLabel() ?></th>
-        <td><?php echo $form['event']['date'] ?></td>
-        <td><?php echo $form['event']['date']->renderError() ?></td>
+        <th><?php echo $form['event']['start_at']->renderLabel() ?></th>
+        <td><?php echo $form['event']['start_at'] ?></td>
+        <td><?php echo $form['event']['start_at']->renderError() ?></td>
+      </tr>
+      <tr>
+        <th><?php echo $form['event']['end_at']->renderLabel() ?></th>
+        <td><?php echo $form['event']['end_at'] ?></td>
+        <td><?php echo $form['event']['end_at']->renderError() ?></td>
       </tr>
       <tr>
         <th><?php echo $form['event']['location']->renderLabel() ?></th>

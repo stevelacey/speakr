@@ -10,10 +10,12 @@
  */
 class EventForm extends BaseEventForm {
   public function configure() {
-    $this->widgetSchema['date'] = new sfWidgetFormI18nDate(array(
-      'format' => '%day%/%month%/%year%',
-      'culture' => 'en'
-    ));
+    foreach(array('start_at', 'end_at') as $date) {
+      $this->widgetSchema[$date] = new sfWidgetFormI18nDate(array(
+        'format' => '%day%/%month%/%year%',
+        'culture' => 'en'
+      ));
+    }
 
     $this->configureLocation();
 
