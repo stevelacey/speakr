@@ -42,7 +42,7 @@
 
         <?php if($user->getSpoken()->count()) : ?>
           <h3>Spoken at</h3>
-          <?php include_partial('user/image_list', array('users' => $user->getSpoken())) ?>
+          <?php include_partial('event/short_list', array('events' => $user->getSpoken())) ?>
         <?php endif ?>
 
         <?php if($user->getSpokenAlongside()->count()) : ?>
