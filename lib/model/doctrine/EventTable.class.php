@@ -57,6 +57,7 @@ class EventTable extends Doctrine_Table {
       leftJoin('e.'.$relation.' '.substr($relation, 0, 1).' on '.substr($relation, 0, 1).'.event_id = e.id')->
       where(substr($relation, 0, 1).'.user_id = ?', $user->getId())->
       andWhere('e.end_at < ?', date('Y-m-d'))->
+      orderBy('e.end_at desc')->
       execute();
   }
 
