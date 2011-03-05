@@ -28,6 +28,7 @@ class sfGuardUser extends PluginsfGuardUser {
 
   private $past_event_relations = array(
     'Attended' => 'Attendee',
+    'Favourites' => 'Favouriter',
     'Organised' => 'Organiser',
     'Spoken' => 'Speaker'
   );
