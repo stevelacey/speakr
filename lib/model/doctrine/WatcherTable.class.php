@@ -1,11 +1,7 @@
 <?php
 
-
-class WatcherTable extends Doctrine_Table
-{
-    
-    public static function getInstance()
-    {
-        return Doctrine_Core::getTable('Watcher');
-    }
+class WatcherTable extends Doctrine_Table {
+  public static function getInstance() {
+    return Doctrine_Core::getTable('Watcher');
+  }
 }

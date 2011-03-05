@@ -42,6 +42,24 @@ class EventTable extends Doctrine_Table {
       execute();
   }
 
+  public function findFutureEventsByUserRelation(sfGuardUser $user, $relation) {
+    return Doctrine_Query::create()->
+      from('Event e')->
+      leftJoin('e.'.$relation.' '.substr($relation, 0, 1).' on '.substr($relation, 0, 1).'.event_id = e.id')->
+      where(substr($relation, 0, 1).'.user_id = ?', $user->getId())->
+      andWhere('e.end_at >= ?', date('Y-m-d'))->
+      execute();
+  }
+
+  public function findPastEventsByUserRelation(sfGuardUser $user, $relation) {
+    return Doctrine_Query::create()->
+      from('Event e')->
+      leftJoin('e.'.$relation.' '.substr($relation, 0, 1).' on '.substr($relation, 0, 1).'.event_id = e.id')->
+      where(substr($relation, 0, 1).'.user_id = ?', $user->getId())->
+      andWhere('e.end_at < ?', date('Y-m-d'))->
+      execute();
+  }
+
   public function getUpcoming() {
     return Doctrine_Query::create()->
       from('Event e')->

@@ -11,6 +11,32 @@
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 class sfGuardUser extends PluginsfGuardUser {
+  private $event_relations = array(
+    'Attendee',
+    'Favouriter',
+    'Organiser',
+    'Speaker',
+    'Watcher'
+  );
+  
+  private $future_event_relations = array(
+    'Attending' => 'Attendee',
+    'Organising' => 'Organiser',
+    'Speaking' => 'Speaker',
+    'Watching' => 'Watcher'
+  );
+
+  private $past_event_relations = array(
+    'Attended' => 'Attendee',
+    'Organised' => 'Organiser',
+    'Spoken' => 'Speaker'
+  );
+
+  private $user_relations = array(
+    'Follower' => 'Friend',
+    'Following' => 'Friend'
+  );
+
   public function __toString() {
     return $this->getName().' (@'.$this->getUsername().')';
   }
@@ -30,7 +56,7 @@ class sfGuardUser extends PluginsfGuardUser {
       leftJoin('u.Friend f on f.following_id = u.id')->
       leftJoin('u.Attendee a on a.user_id = f.following_id')->
       leftJoin('u.Speaker s on s.user_id = f.following_id')->
-      andWhere('f.follower_id = ?', $this->getId())->
+      where('f.follower_id = ?', $this->getId())->
       andWhere('a.event_id = ? or s.event_id = ?', array($event->getId(), $event->getId()))->
       execute();
   }
@@ -41,7 +67,7 @@ class sfGuardUser extends PluginsfGuardUser {
       leftJoin('u.Profile p')->
       leftJoin('u.Friend f on f.following_id = u.id')->
       leftJoin('u.Attendee a on a.user_id = f.following_id')->
-      andWhere('f.follower_id = ?', $this->getId())->
+      where('f.follower_id = ?', $this->getId())->
       andWhere('a.event_id = ?', $event->getId())->
       execute();
   }
@@ -52,7 +78,7 @@ class sfGuardUser extends PluginsfGuardUser {
       leftJoin('u.Profile p')->
       leftJoin('u.Friend f on f.following_id = u.id')->
       leftJoin('u.Speaker s on s.user_id = f.following_id')->
-      andWhere('f.follower_id = ?', $this->getId())->
+      where('f.follower_id = ?', $this->getId())->
       andWhere('s.event_id = ?', $event->getId())->
       execute();
   }
@@ -148,6 +174,20 @@ class sfGuardUser extends PluginsfGuardUser {
   }
 
   public function __call($method, $arguments) {
+    if(in_array($verb = substr($method, 0, 3), array('set', 'get'))) {
+      $name = substr($method, 3);
+      
+      if($verb == 'get') {
+        if(in_array($name, array_keys($this->future_event_relations))) {
+          return Doctrine::getTable('Event')->findFutureEventsByUserRelation($this, $this->future_event_relations[$name]);
+        }
+
+        if(in_array($name, array_keys($this->past_event_relations))) {
+          return Doctrine::getTable('Event')->findPastEventsByUserRelation($this, $this->past_event_relations[$name]);
+        }
+      }
+    }
+
     try {
       return parent::__call($method, $arguments);
     } catch (Doctrine_Record_UnknownPropertyException $e) {
