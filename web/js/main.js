@@ -245,11 +245,16 @@ function localUserSearch(query) {
       );
     }
 
-    list.append($('<a/>', {text: 'Try Twitter?', href: '#'}).click(function(event) {
+    if(users.length) {
+      list.append($('<a/>', {text: 'Try Twitter?', href: '#'}).click(function(event) {
+        $('.user_search').unbind('submit', userSearchAction).submit(twitterSearchAction).find('ol, a').remove();
+        twitterUserSearch(query);
+        event.preventDefault();
+      }));
+    } else {
       $('.user_search').unbind('submit', userSearchAction).submit(twitterSearchAction).find('ol, a').remove();
       twitterUserSearch(query);
-      event.preventDefault();
-    }));
+    }
 
     $('.user_search').each(function() {
       $(this).find('ol, a').remove();
