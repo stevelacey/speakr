@@ -83,8 +83,8 @@ class sfTwitterAuthActions extends sfActions {
   private function createUser($result) {
     $user = new sfGuardUser();
     $user->setId((int) $result->id);
-    $user->setUsername($result->screen_name);
-    $user->setEmailAddress($result->screen_name);
+    $user->setUsername(strtolower($result->screen_name));
+    $user->setEmailAddress(strtolower($result->screen_name));
     $user->setPassword($this->generatePassword());
 
     if(stristr($result->name, ' ')) {
