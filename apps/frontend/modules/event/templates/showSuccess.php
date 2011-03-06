@@ -38,7 +38,12 @@
 
       <?php if($sf_user->isAuthenticated() || (!$sf_user->isAuthenticated() && $event->getSpeakers()->count())) : ?>
         <section class="speakers">
-          <h2><?php echo link_to('Speakers', 'speakers', $event) ?></h2>
+          <header>
+            <h2>Speakers</h2>
+            <?php if($sf_user->isAuthenticated()) : ?>
+              <?php echo link_to($event->getSpeakers()->count() ? 'Edit' : 'Add', 'speakers', $event, array('class' => 'add')) ?>
+            <?php endif ?>
+          </header>
           <?php if($event->getSpeakers()->count()) : ?>
             <?php include_partial('user/image_name_list', array('users' => $event->getSpeakers())) ?>
           <?php else : ?>
