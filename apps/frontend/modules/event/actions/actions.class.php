@@ -45,6 +45,31 @@ class eventActions extends myEventActions {
     }
   }
 
+  public function executeAddExistingContent(sfWebRequest $request) {
+    $event = $this->getRoute()->getObject();
+    $content = Doctrine::getTable('Content')->findOneBySlug($request->getParameter('content_slug'));
+
+    if($content instanceOf Content) {
+      if(!$event->hasContent($content)) {
+        $presentation = new Presentation();
+        $presentation->setContent($content);
+        $presentation->setEvent($event);
+
+        foreach($content->getSpeakers() as $user) {
+          if($user->isSpeaking($event)) {
+            $presentation->Speakers[] = $user;
+          }
+        }
+
+        $presentation->save();
+      }
+      
+      $this->redirect('event', $this->getRoute()->getObject());
+    } else {
+      $this->redirect('add_content', $this->getRoute()->getObject());
+    }
+  }
+
   public function executeSearchPresentableContent(sfWebRequest $request) {
     $this->event = $this->getRoute()->getObject();
 

@@ -52,6 +52,13 @@ content_search:
     module: event
     action: searchPresentableContent
 
+content_search_query:
+  url: /content/search/:query
+  param:
+    module: content
+    action: search
+    sf_format: json
+
 user_search:
   url: /user/search
   param:
@@ -133,7 +140,7 @@ speakers:
 
 add_content:
   class: sfDoctrineRoute
-  url: /:slug/add/content
+  url: /:slug/content/add
   options:
     model: Event
     method: findBySlug

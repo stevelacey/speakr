@@ -272,16 +272,20 @@ function localUserSearch(query) {
 }
 
 function contentSearch(query) {
-  $.get($('h1 a').attr('href') + '/content/search/' + query, {}, function(results) {
-    $('.content_search').each(function() {
-      if(!$(this).find('.results').length) {
-        $(this).append($('<div/>', {'class': 'results'}));
-      }
+  $.getJSON('/content/search/' + query, {}, function(results) {
+    var list = $('<ol/>');
 
-      $(this).find('.results').html(results);
-    });
-  });
-}
+    for(var i in results) {
+      var content = results[i];
+      list.append($('.content-search-result-template').jqote(content));
+    }
+
+     $('.content_search').each(function() {
+      $(this).find('ol, a').remove();
+      $(this).append(list);
+     });
+   });
+ }
 
 function twitterUserSearch(query) {
   $.getJSON('/user/twitter/search/' + query, {}, function(users) {

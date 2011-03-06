@@ -22,25 +22,17 @@ class contentActions extends sfActions {
           'title' => $content->getTitle(),
           'slug' => $content->getSlug(),
           'description' => $content->getDescription(),
-          'presentations' => array()
+          'speakers' => array()
         );
 
-        foreach($content->getPresentations() as $presentation) {
-          $event = array (
-            'name' => $presentation->getEvent()->getName(),
-            'date' => $presentation->getEvent()->getDate(),
-            'speakers' => array()
+        foreach($content->getSpeakers() as $speaker) {
+          $user = array(
+            'name' => $speaker->__toString(),
+            'username' => $speaker->getUsername(),
+            'icon' => $speaker->getIcon()
           );
 
-          foreach($presentation->getSpeakers() as $speaker) {
-            $event['speakers'][] = array(
-              'name' => $speaker->__toString(),
-              'username' => $speaker->getUsername(),
-              'icon' => $speaker->getIcon()
-            );
-          }
-
-          $result['presentations'][] = $event;
+          $result['speakers'][] = $user;
         }
 
         $results[] = $result;

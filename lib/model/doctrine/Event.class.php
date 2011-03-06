@@ -89,6 +89,15 @@ class Event extends BaseEvent {
     return $ids;
   }
 
+  public function hasContent(Content $content) {
+    return (boolean) Doctrine_Query::create()->
+      from('Event e')->
+      leftJoin('e.Presentations p')->
+      where('p.event_id = ?', $this->getId())->
+      andWhere('p.content_id = ?', $content->getId())->
+      count();
+  }
+
   public function isUpcoming() {
     return $this->getStartDate('U') >= time();
   }
