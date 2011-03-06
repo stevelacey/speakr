@@ -104,6 +104,20 @@ th, td {
   }
 }
 
+  @mixin editable-section {
+    header {
+      h2 {
+        float: left;
+      }
+
+      @include clearfix;
+    }
+
+    .add, .edit {
+      margin: 25px 0 0 10px;
+    }
+  }
+
 article.event {
   header {
     .icons {
@@ -159,6 +173,10 @@ article.event {
     @include clearfix;
   }
 
+  .content {
+    @include editable-section;
+  }
+
   .location {
     display: block;
 
@@ -168,17 +186,11 @@ article.event {
       clear: both;
     }
 
-    header {
-      h2 {
-        float: left;
-      }
-
-      @include clearfix;
-    }
-
     div {
       @include clearfix;
     }
+
+    @include editable-section;
 
     form {
       fieldset {
@@ -205,10 +217,6 @@ article.event {
 
     .address {
       height: 120px;
-    }
-
-    .edit {
-      margin: 25px 0 0 10px;
     }
 
     @include clearfix;
@@ -343,6 +351,33 @@ article.event {
         color: #555;
       }
     }
+  }
+}
+
+.add {
+  $width: 50px;
+  $height: 26px;
+  $border-width: 1px;
+
+  @include background(linear-gradient(#EEE, #DDD));
+  background-color: #EEE;
+  border: $border-width solid #CCC;
+  @include border-radius(4px);
+  display: block;
+  float: left;
+  position: relative;
+  width: $width - $border-width * 2;
+  height: $height - $border-width * 2;
+  padding: 0;
+  font-size: 13px;
+  color: #222;
+  line-height: 24px;
+  text-align: center;
+  cursor: pointer;
+
+  &:hover, &:focus {
+    @include background(linear-gradient(#f6f6f6, #EEE));
+    text-decoration: none;
   }
 }
 

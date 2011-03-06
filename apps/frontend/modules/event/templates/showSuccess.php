@@ -37,7 +37,7 @@
       <p><?php echo $event->getRawValue()->getDescription() ?></p>
 
       <?php if($sf_user->isAuthenticated() || (!$sf_user->isAuthenticated() && $event->getSpeakers()->count())) : ?>
-        <section>
+        <section class="speakers">
           <h2><?php echo link_to('Speakers', 'speakers', $event) ?></h2>
           <?php if($event->getSpeakers()->count()) : ?>
             <?php include_partial('user/image_name_list', array('users' => $event->getSpeakers())) ?>
@@ -48,13 +48,15 @@
       <?php endif ?>
 
       <?php if($sf_user->isAuthenticated() || (!$sf_user->isAuthenticated() && $event->getPresentations()->count())) : ?>
-        <section>
-          <h2>Content</h2>
+        <section class="content">
+          <header>
+            <h2>Content</h2>
+            <?php if($sf_user->isAuthenticated()) : ?>
+              <?php echo link_to('Add', 'add_content', $event, array('class' => 'add')) ?>
+            <?php endif ?>
+          </header>
           <?php if($event->getPresentations()->count()) : ?>
             <?php include_partial('presentation/list', array('presentations' => $event->getPresentations())) ?>
-            <?php if($sf_user->isAuthenticated()) : ?>
-              <p><?php echo link_to('Add more content', 'add_content', $event) ?></p>
-            <?php endif ?>
           <?php else : ?>
             <p>
               None listed,
