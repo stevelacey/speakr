@@ -16,7 +16,9 @@
         <?php include_partial('social', array('event' => $event)) ?>
         <?php if($sf_user->isAuthenticated()) : ?>
           <aside class="mini-actions">
-            <?php include_partial('watch', array('event' => $event)) ?>
+            <?php if(!$event->isOver()): ?>
+              <?php include_partial('watch', array('event' => $event)) ?>
+            <?php endif ?>
 
             <?php if($event->isOngoing() || $event->isOver()): ?>
               <?php include_partial('favourite', array('event' => $event)) ?>
