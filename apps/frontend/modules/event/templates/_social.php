@@ -9,7 +9,7 @@
           '%country%' => $event->getCountry()
         )),
         'url' => url_for('event', $event, true),
-        'via' => 'speakr'
+        'via' => 'speakrapp'
       )),
       'class' => 'tweet',
       'title' => sfConfig::get('app_tweet_text')
