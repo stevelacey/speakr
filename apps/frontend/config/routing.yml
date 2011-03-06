@@ -49,8 +49,9 @@ new:
 content_search:
   url: /content/search
   param:
-    module: event
-    action: searchPresentableContent
+    module: content
+    action: search
+    sf_format: json
 
 content_search_query:
   url: /content/search/:query
@@ -185,17 +186,6 @@ event_content_add:
   param:
     module: event
     action: addExistingContent
-
-event_presentable_content_search_query:
-  class: sfDoctrineRoute
-  url: /:slug/content/search/:query
-  options:
-    model: Event
-    method: findBySlug
-    type: object
-  param:
-    module: event
-    action: searchPresentableContent
 
 event_speaker_add:
   class: sfDoctrineRoute

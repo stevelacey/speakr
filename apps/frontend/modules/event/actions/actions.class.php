@@ -70,18 +70,6 @@ class eventActions extends myEventActions {
     }
   }
 
-  public function executeSearchPresentableContent(sfWebRequest $request) {
-    $this->event = $this->getRoute()->getObject();
-
-    $this->results = array();
-
-    if($request->hasParameter('query')) {
-      foreach(Doctrine::getTable('Content')->search($request->getParameter('query')) as $content) {
-        $this->results[] = new PresentationForm(null, array('event' => $this->event, 'content' => $content));
-      }
-    }
-  }
-
   public function executeMap(sfWebRequest $request) {
     $event = $this->getRoute()->getObject();
     
