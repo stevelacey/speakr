@@ -28,6 +28,11 @@ class eventActions extends myEventActions {
 
   public function executeAddContent(sfWebRequest $request) {
     $this->event = $this->getRoute()->getObject();
+
+    if(!$this->event->getSpeakers()->count()) {
+      $this->redirect('event', $this->event);
+    }
+
     $this->form = new PresentationForm(null, array('event' => $this->event));
 
     if($request->isMethod(sfRequest::POST)) {
@@ -36,6 +41,18 @@ class eventActions extends myEventActions {
       if ($this->form->isValid()) {
         $content = $this->form->save();
         $this->redirect('content', $this->form->getObject()->getContent());
+      }
+    }
+  }
+
+  public function executeSearchPresentableContent(sfWebRequest $request) {
+    $this->event = $this->getRoute()->getObject();
+
+    $this->results = array();
+
+    if($request->hasParameter('query')) {
+      foreach(Doctrine::getTable('Content')->search($request->getParameter('query')) as $content) {
+        $this->results[] = new PresentationForm(null, array('event' => $this->event, 'content' => $content));
       }
     }
   }

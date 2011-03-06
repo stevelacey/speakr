@@ -56,7 +56,14 @@
               <p><?php echo link_to('Add more content', 'add_content', $event) ?></p>
             <?php endif ?>
           <?php else : ?>
-            <p>None listed, why not <?php echo link_to('add some content', 'add_content', $event) ?>?</p>
+            <p>
+              None listed,
+              <?php if($event->getSpeakers()->count()) : ?>
+                why not <?php echo link_to('add some content', 'add_content', $event) ?>?
+              <?php else : ?>
+                <?php echo link_to('add some speakers', 'speakers', $event) ?> to be able to start adding content.
+              <?php endif ?>
+            </p>
           <?php endif ?>
         </section>
       <?php endif ?>

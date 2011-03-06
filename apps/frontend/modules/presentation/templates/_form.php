@@ -33,7 +33,7 @@
             <p>You'll have an opportunity to add slides, videos and more at the next step.</p>
           <?php endif ?>
           <?php echo $form->renderHiddenFields(false) ?>
-          <input type="submit" value="Add New Content" />
+          <input type="submit" value="<?php echo $form->getObject()->getContent()->isNew() ? 'Add New Content' : 'Add to Event' ?>" />
         </td>
       </tr>
     </tfoot>

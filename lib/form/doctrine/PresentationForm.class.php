@@ -15,6 +15,11 @@ class PresentationForm extends BasePresentationForm {
     }
 
     $this->getObject()->setEvent($event);
+
+    if($content = $this->getOption('content')) {
+      $this->getObject()->setContent($content);
+    }
+
     $this->embedForm('content', new ContentForm($this->getObject()->getContent()));
 
     $this->widgetSchema['speakers_list'] = new sfWidgetFormDoctrineChoice(array(

@@ -272,17 +272,13 @@ function localUserSearch(query) {
 }
 
 function contentSearch(query) {
-  $.getJSON('/content/search/' + query, {}, function(results) {
-    var list = $('<ol/>');
-
-    for(var i in results) {
-      var content = results[i];
-      list.append($('.content-search-result-template').jqote(content));
-    }
-
+  $.get($('h1 a').attr('href') + '/content/search/' + query, {}, function(results) {
     $('.content_search').each(function() {
-      $(this).find('ol, a').remove();
-      $(this).append(list);
+      if(!$(this).find('.results').length) {
+        $(this).append($('<div/>', {'class': 'results'}));
+      }
+
+      $(this).find('.results').html(results);
     });
   });
 }

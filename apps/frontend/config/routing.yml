@@ -49,9 +49,8 @@ new:
 content_search:
   url: /content/search
   param:
-    module: content
-    action: search
-    sf_format: json
+    module: event
+    action: searchPresentableContent
 
 user_search:
   url: /user/search
@@ -89,13 +88,6 @@ city:
   param:
     module: city
     action: show
-
-content_search_query:
-  url: /content/search/:query
-  param:
-    module: content
-    action: search
-    sf_format: json
 
 user_search_query:
   url: /user/search/:query
@@ -178,7 +170,7 @@ event_map:
 
 event_content_add:
   class: sfDoctrineRoute
-  url: /:slug/add/content/:content_slug
+  url: /:slug/content/add/:content_slug
   options:
     model: Event
     method: findBySlug
@@ -186,6 +178,17 @@ event_content_add:
   param:
     module: event
     action: addExistingContent
+
+event_presentable_content_search_query:
+  class: sfDoctrineRoute
+  url: /:slug/content/search/:query
+  options:
+    model: Event
+    method: findBySlug
+    type: object
+  param:
+    module: event
+    action: searchPresentableContent
 
 event_speaker_add:
   class: sfDoctrineRoute
