@@ -11,6 +11,15 @@
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 class Content extends BaseContent {
+  public function getPresentations() {
+    return Doctrine_Query::create()->
+      from('Presentation p')->
+      leftJoin('p.Event e')->
+      where('p.content_id = ?', $this->getId())->
+      orderBy('e.end_at desc')->
+      execute();
+  }
+
   public function getSpeakers() {
     return Doctrine_Query::create()->
       from('sfGuardUser u')->

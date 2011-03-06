@@ -149,15 +149,19 @@ add_content:
   param:
     module: event
     action: addContent
+  requirements:
+    sf_method:
+      - get
+      - post
 
-presentation:
+content:
   class: sfDoctrineRoute
   url: /:speaker_slug/:slug
   options:
     model: Content
     type: object
   param:
-    module: presentation
+    module: content
     action: show
 
 event_map:

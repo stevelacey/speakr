@@ -52,7 +52,9 @@
           <h2>Content</h2>
           <?php if($event->getPresentations()->count()) : ?>
             <?php include_partial('presentation/list', array('presentations' => $event->getPresentations())) ?>
-            <p><?php echo link_to('Add more content', 'add_content', $event) ?></p>
+            <?php if($sf_user->isAuthenticated()) : ?>
+              <p><?php echo link_to('Add more content', 'add_content', $event) ?></p>
+            <?php endif ?>
           <?php else : ?>
             <p>None listed, why not <?php echo link_to('add some content', 'add_content', $event) ?>?</p>
           <?php endif ?>

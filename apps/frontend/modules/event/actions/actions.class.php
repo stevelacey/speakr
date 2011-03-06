@@ -28,6 +28,23 @@ class eventActions extends myEventActions {
 
   public function executeAddContent(sfWebRequest $request) {
     $this->event = $this->getRoute()->getObject();
+    $content = new Content();
+
+    $presentation = new Presentation();
+    $presentation->setEvent($this->event);
+
+    $content->Presentations[] = $presentation;
+
+    $this->form = new ContentForm($content);
+
+    if($request->isMethod(sfRequest::POST)) {
+      $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+
+      if ($this->form->isValid()) {
+        $content = $this->form->save();
+        $this->redirect('event', $this->event);
+      }
+    }
   }
 
   public function executeMap(sfWebRequest $request) {

@@ -12,6 +12,7 @@
   <div class="two columns">
     <section class="new-content column">
       <h2>Add New Content</h2>
+      <?php include_partial('content/form', array('event' => $event, 'form' => $form)) ?>
     </section>
 
     <section class="existing-content column">
