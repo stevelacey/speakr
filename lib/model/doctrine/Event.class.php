@@ -71,6 +71,24 @@ class Event extends BaseEvent {
     return $this->getRegion()->getCountry();
   }
 
+  public function getSpeakersQuery() {
+    return Doctrine_Query::create()->
+      from('sfGuardUser u')->
+      leftJoin('u.Speaker s on u.id = s.user_id')->
+      leftJoin('s.Event e on s.event_id = e.id')->
+      where('e.id = ?', $this->getId());
+  }
+
+  public function getSpeakersIds() {
+    $ids = array();
+
+    foreach($this->getSpeakers() as $speaker) {
+      $ids[] = $speaker->getId();
+    }
+
+    return $ids;
+  }
+
   public function isUpcoming() {
     return $this->getStartDate('U') >= time();
   }

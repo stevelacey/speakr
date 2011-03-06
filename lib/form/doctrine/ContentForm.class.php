@@ -10,6 +10,7 @@
  */
 class ContentForm extends BaseContentForm {
   public function configure() {
+
     unset(
       $this['slug'],
       $this['created_at'], $this['updated_at']

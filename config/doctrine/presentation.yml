@@ -2,8 +2,10 @@ Presentation:
   columns:
     event_id:
       type: integer(20)
+      notnull: true
     content_id:
       type: integer(20)
+      notnull: true
   indexes:
     event_id_content_id:
       fields:

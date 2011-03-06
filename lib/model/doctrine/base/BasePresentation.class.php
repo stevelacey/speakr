@@ -37,10 +37,12 @@ abstract class BasePresentation extends sfDoctrineRecord
         $this->setTableName('presentation');
         $this->hasColumn('event_id', 'integer', 20, array(
              'type' => 'integer',
+             'notnull' => true,
              'length' => '20',
              ));
         $this->hasColumn('content_id', 'integer', 20, array(
              'type' => 'integer',
+             'notnull' => true,
              'length' => '20',
              ));
 
