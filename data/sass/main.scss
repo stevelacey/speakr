@@ -399,29 +399,62 @@ article.event {
   }
 
   &.icons {
+    $width: 24px;
+    $height: 24px;
+
     padding: 0.5em 0;
 
     li {
-      width: 24px;
-      height: 24px;
+      width: $width;
+      height: $height;
       margin: 0 6px 6px 0;
+
+      a {
+        width: $width;
+        height: $height;
+
+        img {
+          width: $width;
+          height: $height;
+        }
+      }
     }
   }
 
   li {
+    $width: 48px;
+    $height: 48px;
+
     display: block;
     float: left;
-    width: 48px;
-    height: 48px;
+    width: $width;
+    height: $height;
     margin: 0 10px 10px 0;
     @include box-sizing(border-box);
 
     a {
       display: block;
+      width: $width;
+      height: $height;
+
+      img {
+        width: $width;
+        height: $height;
+      }
     }
   }
 
   @include clearfix;
+}
+
+.image {
+  width: 48px;
+  height: 48px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
 }
 
 .twitter {

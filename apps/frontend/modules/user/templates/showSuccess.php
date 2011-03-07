@@ -1,6 +1,6 @@
 <article role="main" class="two">
   <h1><?php echo $user->getName() ?></h1>
-  <img src="<?php echo $user->getImage() ?>"/>
+  <?php echo image_tag($user->getImage(), array('alt' => $user, 'class' => 'image')) ?>
 
   <div class="two columns">
     <section class="future column">
