@@ -304,6 +304,30 @@ article.event {
         }
       }
     }
+
+    &.extra {
+      li {
+        position: relative;
+        padding-right: 48px;
+
+        .action {
+          display: block;
+          width: 48px;
+          padding-left: 0;
+          @include top-right;
+
+          &.add {
+            background: url("/images/icons/actions/add.png") center center no-repeat;
+            text-indent: -9999px;
+          }
+
+          &.remove {
+            background: url("/images/icons/actions/remove.png") center center no-repeat;
+            text-indent: -9999px;
+          }
+        }
+      }
+    }
   }
 
   &.icons {

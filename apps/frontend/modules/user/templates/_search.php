@@ -2,4 +2,5 @@
   <label for="query">Search users</label>
   <input name="query" type="text" class="query"/>
   <input type="submit" value="Search"/>
+  <?php include_partial('user/image_name_link_action.jqote') ?>
 </form>

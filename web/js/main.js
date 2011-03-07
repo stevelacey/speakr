@@ -242,15 +242,10 @@ function getTweets() {
 
 function localUserSearch(query) {
   $.getJSON('/user/search/' + query, {}, function(users) {
-    var list = $('<ol/>');
-
+    var list = $('<ul/>', {'class': 'users details extra'});
+    
     for(var i in users) {
-      var user = users[i];
-      var text = ' ' + user.name + ' (@' + user.username + ') ';
-      list.append($('<li/>', {text: text})
-        .prepend($('<img/>', {src: user.image, alt: text, title: text}))
-        .append($('<a/>', {text: 'Add as speaker!', href: window.location + '/add/' + user.username}))
-      );
+      list.append($('.user-search-result-template').jqote(users[i]));
     }
 
     if(users.length) {
@@ -265,7 +260,22 @@ function localUserSearch(query) {
     }
 
     $('.user_search').each(function() {
-      $(this).find('ol, a').remove();
+      $(this).find('ul, a').remove();
+      $(this).append(list);
+    });
+  });
+}
+
+function twitterUserSearch(query) {
+  $.getJSON('/user/twitter/search/' + query, {}, function(users) {
+    var list = $('<ul/>', {'class': 'users details extra'});
+
+    for(var i in users) {
+      list.append($('.user-search-result-template').jqote(users[i]));
+    }
+
+    $('.user_search').each(function() {
+      $(this).find('ul').remove();
       $(this).append(list);
     });
   });
@@ -276,8 +286,7 @@ function contentSearch(query) {
     var list = $('<ol/>');
 
     for(var i in results) {
-      var content = results[i];
-      list.append($('.content-search-result-template').jqote(content));
+      list.append($('.content-search-result-template').jqote(results[i]));
     }
 
      $('.content_search').each(function() {
@@ -286,27 +295,6 @@ function contentSearch(query) {
      });
    });
  }
-
-function twitterUserSearch(query) {
-  $.getJSON('/user/twitter/search/' + query, {}, function(users) {
-    var list = $('<ol/>');
-
-    for(var i in users) {
-      var user = users[i];
-      var text = ' ' + user.name + ' (@' + user.username + ') ';
-      list.append(
-        $('<li/>', {text: text})
-          .prepend($('<img/>', {src: user.image, alt: text, title: text}))
-          .append($('<a/>', {text: 'Add as speaker!', href: window.location + '/add/' + user.username}))
-      );
-    }
-
-    $('.user_search').each(function() {
-      $(this).find('ol').remove();
-      $(this).append(list);
-    });
-  });
-}
 
 function searchCallback(poi) {
   if (response[poi].results) {
