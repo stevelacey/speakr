@@ -238,6 +238,22 @@ article.event {
   }
 }
 
+.checkbox_list {
+  list-style: none;
+}
+
+.existing-content {
+  ol {
+    list-style: none;
+
+    li {
+      h3 {
+        margin: 0;
+      }
+    }
+  }
+}
+
 .events {
   padding: 0;
   list-style: none;
@@ -374,6 +390,10 @@ article.event {
       top: 0;
       right: 0;
     }
+  }
+
+  form {
+    margin: 20px 0;
   }
 
   ol {
