@@ -2,6 +2,10 @@ $(function() {
   if($('article.event').length) {
     if($('article.event .location .street-address').length) {
       getGoogleMap();
+    } else {
+      $('section.location').append(
+        $('<p/>', {text: 'Provide a street address and we\'ll render a map of the event and nearby POI.'})
+      );
     }
 
     $('section.description').each(function () {
