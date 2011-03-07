@@ -4,6 +4,55 @@ $(function() {
       getGoogleMap();
     }
 
+    $('section.description').each(function () {
+      var description = this
+      $(description).css('padding-right', '60px');
+
+      if($(description).find('form').length) {
+        $(description).find('form').hide();
+
+        $(description).find('.content').after(
+          $('<button/>', {
+            html: '<span class="action">Edit</span><span class="cancel">Cancel</span>',
+            'class': 'edit'
+          }).click(function() {
+            var speed = 0;
+
+            if($(this).hasClass('active')) {
+              $(description).find('form').hide(speed, function() {
+                $(description).find('.content').show(speed);
+              });
+              $(this).removeClass('active');
+            } else {
+              $(description).find('.content').hide(speed, function() {
+                $(description).find('form')
+                  .show(speed)
+                  .find(':input:visible:first')
+                  .focus();
+              });
+              $(this).addClass('active');
+            }
+        })).dblclick(function() {
+            var speed = 0;
+
+            if($(this).siblings('.edit').hasClass('active')) {
+              $(description).find('form').hide(speed, function() {
+                $(description).find('.content').show(speed);
+              });
+              $(this).siblings('.edit').removeClass('active');
+            } else {
+              $(description).find('.content').hide(speed, function() {
+                $(description).find('form')
+                  .show(speed)
+                  .find(':input:visible:first')
+                  .focus();
+              });
+              $(this).siblings('.edit').addClass('active');
+            }
+        });
+      }
+    });
+
     $('section.location').each(function () {
       var location = this
 

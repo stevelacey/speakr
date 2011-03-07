@@ -36,7 +36,27 @@
   
   <div class="two columns">
     <div class="wide column">
-      <p><?php echo $event->getRawValue()->getDescription() ?></p>
+      <section class="description">
+        <div class="content">
+          <?php if($event->getDescription()) : ?>
+            <?php echo nl2br($event->getDescription()) ?>
+          <?php else : ?>
+            Double-click to add some description!
+          <?php endif ?>
+        </div>
+
+        <?php if($sf_user->isAuthenticated()) : ?>
+          <form action="<?php echo url_for('event_update', array('action' => 'description', 'sf_subject' => $event)) ?>" method="post">
+            <fieldset>
+              <div>
+                <?php echo $forms['description']['description'] ?>
+              </div>
+            </fieldset>
+            <?php echo $forms['description']->renderHiddenFields(false) ?>
+            <input type="submit" value="Update Description"/>
+          </form>
+        <?php endif ?>
+      </section>
 
       <?php if($sf_user->isAuthenticated() || (!$sf_user->isAuthenticated() && $event->getSpeakers()->count())) : ?>
         <section class="speakers">

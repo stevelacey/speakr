@@ -241,7 +241,7 @@ event_update:
   param:
     module: event
   requirements:
-    action: hashtag|location
+    action: description|hashtag|location
     sf_method: post
 
 event:

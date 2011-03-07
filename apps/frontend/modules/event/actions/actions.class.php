@@ -16,6 +16,7 @@ class eventActions extends myEventActions {
     if($this->getUser()->isAuthenticated()) {
       $user = $this->getUser()->getGuardUser();
       $this->forms = array(
+        'description' => new EventDescriptionForm($this->event),
         'hashtag' => new EventHashtagForm($this->event),
         'location' => new EventLocationForm($this->event)
       );
@@ -119,6 +120,20 @@ class eventActions extends myEventActions {
   public function executeLocation(sfWebRequest $request) {
     $event = $this->getRoute()->getObject();
     $this->form = new EventLocationForm($event);
+
+    if($request->isMethod(sfRequest::POST)) {
+      $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+      if ($this->form->isValid()) {
+        $this->form->save();
+      }
+    }
+
+    $this->redirect('event', $event);
+  }
+
+  public function executeDescription(sfWebRequest $request) {
+    $event = $this->getRoute()->getObject();
+    $this->form = new EventDescriptionForm($event);
 
     if($request->isMethod(sfRequest::POST)) {
       $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));

@@ -4,7 +4,7 @@
 
 body {
   margin-bottom: 100px;
-  font-family: arial;
+  font-family: arial, helvetica, verdana;
 
   > header, > article, > div, > .columns, > footer {
     width: 980px !important;
@@ -81,6 +81,11 @@ ol, ul {
   padding: 0;
 }
 
+textarea {
+  font: 16px arial, helvetica, verdana;
+  @include box-sizing(border-box);
+}
+
 th, td {
   text-align: left;
   vertical-align: top;
@@ -95,13 +100,24 @@ th, td {
 }
 
 .actions {
+  margin-bottom: 30px;
+
   a {
     @include sexy-button(#1F65BC);
-    width: 140px;
+    width: 145px;
     height: 48px;
-    margin: 0 10px 10px 0;
     line-height: 48px;
+
+    &.attend {
+      float: left;
+    }
+
+    &.speak {
+      float: right;
+    }
   }
+
+  @include clearfix;
 }
 
 @mixin editable-section {
@@ -171,6 +187,19 @@ article.event {
 
   .actions {
     @include clearfix;
+  }
+
+  .description {
+    position: relative;
+
+    textarea {
+      width: 100%;
+      min-height: 300px;
+    }
+
+    .edit {
+      @include top-right;
+    }
   }
 
   .speakers {
@@ -384,6 +413,10 @@ article.event {
 .twitter {
   header {
     position: relative;
+
+    h2 {
+      margin-top: 0;
+    }
 
     .edit {
       position: absolute;
