@@ -477,6 +477,7 @@ article.event {
     span {
       &.action {
         @include transform(rotateY(180deg));
+        @include opacity(0);
       }
 
       &.cancel {
