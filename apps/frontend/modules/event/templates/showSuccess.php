@@ -3,13 +3,15 @@
     <div class="wide column">
       <hgroup>
         <h1><?php echo $event ?></h1>
-        <h2><?php echo $event->getTagline() ?></h2>
+        <?php if($event->getTagline()) : ?>
+          <h2><?php echo $event->getTagline() ?></h2>
+        <?php endif ?>
       </hgroup>
 
       <?php include_partial('event/date', array('event' => $event)) ?>
 
       <?php if($event->getWebsite()) : ?>
-        <?php echo link_to($event->getWebsite(), $event->getWebsite(), array('class' => 'url')) ?>
+        <?php echo link_to($event->getWebsite(), $event->getWebsite(), array('class' => 'website')) ?>
       <?php endif ?>
 
       <div class="icons">

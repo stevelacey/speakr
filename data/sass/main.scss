@@ -75,7 +75,7 @@ h2 {
 }
 
 hgroup {
-  margin-bottom: 2em;
+  margin-bottom: 10px;
 
   h1, h2 {
     margin: 0;
@@ -142,6 +142,13 @@ th, td {
 
 article.event {
   header {
+    padding-bottom: 10px;
+
+    .date {
+      display: block;
+      margin-bottom: 5px;
+    }
+
     .icons {
       float: right;
 
