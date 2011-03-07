@@ -141,7 +141,7 @@ th, td {
 }
 
 article.event {
-  header {
+  > header {
     padding-bottom: 10px;
 
     .date {
