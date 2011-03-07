@@ -37,6 +37,12 @@ body {
       margin: 40px 0;
     }
 
+    .new {
+      float: left;
+      width: 80px;
+      margin: 46px 0 40px 200px;
+    }
+
     @include clearfix;
   }
 }
@@ -440,7 +446,7 @@ article.event {
   }
 }
 
-.add {
+.add, .new {
   $width: 50px;
   $height: 26px;
   $border-width: 1px;

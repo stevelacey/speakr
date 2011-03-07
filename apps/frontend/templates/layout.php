@@ -13,8 +13,9 @@
     <header>
       <?php echo link_to(image_tag('/images/speakr.png', array('alt' => 'Speakr')), '@homepage', array('class' => 'logo')) ?>
       <?php if($sf_user->isAuthenticated()) : ?>
+        <?php echo link_to('New Event', 'new', array(), array('class' => 'new')) ?>
         <div class="user">
-          <?php echo link_to('new event', 'new') ?> logged in as: <?php echo link_to(image_tag($user->getIcon()).$user, 'profile', $user) ?>, <?php echo link_to('logout', 'logout') ?>
+          logged in as: <?php echo link_to(image_tag($user->getIcon()).$user, 'profile', $user) ?>, <?php echo link_to('logout', 'logout') ?>
         </div>
       <?php else : ?>
         <?php include_partial('sfTwitterAuth/signin_button') ?>
