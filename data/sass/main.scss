@@ -450,7 +450,7 @@ article.event {
 
     &.cancel {
       @include background(linear-gradient(#d67178, #bc1422));
-      background-color: #CC0000;
+      background-color: #bc1422;
       border-color: #661e21;
       @include text-shadow(0 0 3px rgba(100, 30, 30, 0.5));
       color: #FFF;

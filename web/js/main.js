@@ -60,24 +60,45 @@ var poi = ['coffee', 'hotel', 'internet cafe'];
 
 var icons = {
   'coffee': new google.maps.MarkerImage(
-    "http://labs.google.com/ridefinder/images/mm_20_brown.png",
-    new google.maps.Size(12, 20),
+    "/images/map/coffee.png",
+    new google.maps.Size(22, 22),
     new google.maps.Point(0, 0),
     new google.maps.Point(6, 20)
   ),
   'hotel': new google.maps.MarkerImage(
-    "http://labs.google.com/ridefinder/images/mm_20_red.png",
-    new google.maps.Size(12, 20),
+    "/images/map/hotel.png",
+    new google.maps.Size(22, 22),
     new google.maps.Point(0, 0),
     new google.maps.Point(6, 20)
   ),
   'internet cafe': new google.maps.MarkerImage(
-    "http://labs.google.com/ridefinder/images/mm_20_gray.png",
-    new google.maps.Size(12, 20),
+    "/images/map/wifi.png",
+    new google.maps.Size(22, 22),
     new google.maps.Point(0, 0),
     new google.maps.Point(6, 20)
   )
 };
+
+var shadows = {
+  'coffee': new google.maps.MarkerImage(
+    "/images/map/coffee_s.png",
+    new google.maps.Size(36,22),
+    new google.maps.Point(0,0),
+    new google.maps.Point(11,22)
+  ),
+  'hotel': new google.maps.MarkerImage(
+    "/images/map/hotel_s.png",
+    new google.maps.Size(36,22),
+    new google.maps.Point(0,0),
+    new google.maps.Point(11,22)
+  ),
+  'internet cafe': new google.maps.MarkerImage(
+    "/images/map/wifi_s.png",
+    new google.maps.Size(39,22),
+    new google.maps.Point(0,0),
+    new google.maps.Point(11,22)
+  )
+}
 
 var contentSearchAction = function(event) {
   contentSearch($(this).find('input.query').val());
@@ -113,11 +134,21 @@ function getGoogleMap() {
         map: map,
         name: data.event.name,
         icon: new google.maps.MarkerImage(
-          "/images/map/marker.png",
-          new google.maps.Size(40, 43),
-          new google.maps.Point(0, 0),
-          new google.maps.Point(6, 20)
+          "/images/map/event.png",
+          new google.maps.Size(30,40),
+          new google.maps.Point(0,0),
+          new google.maps.Point(15,40)
         ),
+        shadow: new google.maps.MarkerImage(
+          "/images/map/event_s.png",
+          new google.maps.Size(54,40),
+          new google.maps.Point(0,0),
+          new google.maps.Point(15,40)
+        ),
+        shape: {
+          coord: [14,1,14,2,11,3,9,4,7,5,22,6,23,7,24,8,26,9,27,10,28,11,28,12,28,13,23,14,23,15,23,16,23,17,22,18,22,19,22,20,22,21,22,22,22,23,22,24,22,25,22,26,21,27,21,28,21,29,21,30,21,31,21,32,21,33,21,34,21,35,27,36,27,37,26,38,23,39,5,39,3,38,3,37,5,36,10,35,10,34,10,33,10,32,10,31,10,30,10,29,10,28,10,27,10,26,10,25,10,24,9,23,9,22,9,21,9,20,9,19,9,18,8,17,8,16,8,15,7,14,7,13,7,12,4,11,2,10,0,9,0,8,0,7,0,6,5,5,6,4,8,3,10,2,11,1,14,1],
+          type: 'poly'
+        },
         zIndex: 1
       });
 
@@ -299,23 +330,18 @@ function contentSearch(query) {
 function searchCallback(poi) {
   if (response[poi].results) {
     for (var i in response[poi].results) {
-      addMarker(poi, response[poi].results[i], icons[poi]);
+      addMarker(poi, response[poi].results[i], icons[poi], shadows[poi]);
     }
   }
 }
 
-function addMarker(poi, data, icon) {
+function addMarker(poi, data, icon, shadow) {
   var marker = new google.maps.Marker({
     position: new google.maps.LatLng(data.lat, data.lng),
     map: map,
     title: data.title,
     icon: icon,
-    shadow: new google.maps.MarkerImage(
-      "http://labs.google.com/ridefinder/images/mm_20_shadow.png",
-      new google.maps.Size(22, 20),
-      new google.maps.Point(0, 0),
-      new google.maps.Point(6, 20)
-    ),
+    shadow: shadow,
     zIndex: 0
   });
 
