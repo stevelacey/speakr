@@ -232,6 +232,12 @@ article.event {
   }
 }
 
+.add-speaker {
+  .users {
+    margin: 20px 0;
+  }
+}
+
 .events {
   padding: 0;
   list-style: none;
@@ -296,6 +302,8 @@ article.event {
 
         em, span {
           display: block;
+          height: 24px;
+          overflow: hidden;
         }
 
         span {
@@ -308,6 +316,7 @@ article.event {
     &.extra {
       li {
         position: relative;
+        width: 250px;
         padding-right: 48px;
 
         .action {
@@ -316,12 +325,12 @@ article.event {
           padding-left: 0;
           @include top-right;
 
-          &.add {
+          &.add-icon {
             background: url("/images/icons/actions/add.png") center center no-repeat;
             text-indent: -9999px;
           }
 
-          &.remove {
+          &.remove-icon {
             background: url("/images/icons/actions/remove.png") center center no-repeat;
             text-indent: -9999px;
           }

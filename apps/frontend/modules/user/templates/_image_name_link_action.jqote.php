@@ -5,6 +5,6 @@
       <em><%= this.name %></em>
       <span>@<%= this.username %></span>
     </a>
-    <a href="<%= window.location + '/add/' + this.username %>" class="action add" title="Add as Speaker">Add</a>
+    <a href="<%= window.location + '/add/' + this.username %>" class="action add-icon" title="Add as Speaker">Add</a>
   </li>
 </script>

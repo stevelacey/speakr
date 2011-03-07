@@ -275,25 +275,23 @@ function localUserSearch(query) {
   $.getJSON('/user/search/' + query, {}, function(users) {
     var list = $('<ul/>', {'class': 'users details extra'});
     
+    $('.user_search').find('ul, a').remove();
+
     for(var i in users) {
       list.append($('.user-search-result-template').jqote(users[i]));
     }
 
     if(users.length) {
-      list.append($('<a/>', {text: 'Try Twitter?', href: '#'}).click(function(event) {
-        $('.user_search').unbind('submit', userSearchAction).submit(twitterSearchAction).find('ol, a').remove();
+      $('.user_search').append(list);
+
+      list.after($('<a/>', {text: 'Load more results from Twitter', href: '#'}).click(function(event) {
+        $('.user_search').find('ul, a').remove();
         twitterUserSearch(query);
         event.preventDefault();
       }));
     } else {
-      $('.user_search').unbind('submit', userSearchAction).submit(twitterSearchAction).find('ol, a').remove();
       twitterUserSearch(query);
     }
-
-    $('.user_search').each(function() {
-      $(this).find('ul, a').remove();
-      $(this).append(list);
-    });
   });
 }
 
@@ -305,10 +303,7 @@ function twitterUserSearch(query) {
       list.append($('.user-search-result-template').jqote(users[i]));
     }
 
-    $('.user_search').each(function() {
-      $(this).find('ul').remove();
-      $(this).append(list);
-    });
+    $('.user_search').append(list);
   });
 }
 
