@@ -30,4 +30,8 @@ class scheduleActions extends sfActions
   public function executeUpcoming(sfWebRequest $request) {
     $this->events = Doctrine::getTable('Event')->getUpcoming();
   }
+
+  public function executeWatching(sfWebRequest $request) {
+    $this->events = $this->getUser()->getGuardUser()->getWatching();
+  }
 }

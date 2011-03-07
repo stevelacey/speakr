@@ -16,6 +16,12 @@ upcoming_events:
     module: schedule
     action: upcoming
 
+watching_events:
+  url: /watching
+  param:
+    module: schedule
+    action: watching
+
 account:
   url: /account
   param:
