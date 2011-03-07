@@ -84,6 +84,17 @@ class sfGuardUser extends PluginsfGuardUser {
       execute();
   }
 
+  public function getContent() {
+    return Doctrine_Query::create()->
+      from('Content c')->
+      leftJoin('c.Presentations p')->
+      leftJoin('p.PresentationUser pu')->
+      leftJoin('p.Event e')->
+      where('pu.user_id = ?', $this->getId())->
+      orderBy('e.end_at desc')->
+      execute();
+  }
+
   public function attend(Event $event, $bool = true) {
     if($bool) {
       $event->Attending[] = $this;

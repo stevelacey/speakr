@@ -50,9 +50,9 @@
           <?php include_partial('user/image_list', array('users' => $user->getSpokenAlongside())) ?>
         <?php endif ?>
 
-        <?php if($user->getPresentations()->count()) : ?>
+        <?php if($user->getContent()->count()) : ?>
           <h3>Presented</h3>
-          <?php include_partial('presentation/list', array('presentations' => $user->getPresentations())) ?>
+          <?php include_partial('content/list', array('content' => $user->getContent())) ?>
         <?php endif ?>
 
         <?php if($user->getAttended()->count()) : ?>
