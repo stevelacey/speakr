@@ -96,7 +96,6 @@ $(function() {
   getLocation();
 
   $('.content_search').each(function() {
-    $(this).keyup(contentSearchAction);
     $(this).submit(contentSearchAction);
   });
 
