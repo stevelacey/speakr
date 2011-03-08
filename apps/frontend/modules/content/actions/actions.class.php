@@ -11,6 +11,7 @@
 class contentActions extends myActions {
   public function executeShow(sfWebRequest $request) {
     $this->content = $this->getRoute()->getObject();
+    $this->setTitle(implode(' | ', array($this->content, implode(', ', $this->content->getSpeakers()->getData()))));
   }
 
   public function executeSearch(sfWebRequest $request) {

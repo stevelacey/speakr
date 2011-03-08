@@ -32,6 +32,7 @@ class eventActions extends myEventActions {
 
   public function executeAddContent(sfWebRequest $request) {
     $this->event = $this->getRoute()->getObject();
+    $this->setTitle(implode(' | ', array($this->event, 'Add Content')));
 
     if(!$this->event->getSpeakers()->count()) {
       $this->redirect('event', $this->event);
