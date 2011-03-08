@@ -55,6 +55,10 @@ a {
   &:hover, &:focus {
     text-decoration: underline;
   }
+
+  img {
+    border: 0;
+  }
 }
 
 em {
