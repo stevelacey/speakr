@@ -20,7 +20,7 @@ class scheduleActions extends myActions
       $this->setTitle('Your Schedule');
       $this->events = $this->getUser()->getGuardUser()->getEvents();
     } else {
-      $this->setTitle('Upcoming Events');
+      $this->setTitle('Speakr - Social Events Directory', false);
       $this->events = Doctrine::getTable('Event')->getUpcoming();
     }
   }
