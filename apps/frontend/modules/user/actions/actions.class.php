@@ -1,8 +1,9 @@
 <?php
 
-class userActions extends sfActions {
+class userActions extends myActions {
   public function executeShow(sfWebRequest $request) {
     $this->user = $this->getRoute()->getObject();
+    $this->setTitle($this->user);
   }
 
   public function executeSearch(sfWebRequest $request) {

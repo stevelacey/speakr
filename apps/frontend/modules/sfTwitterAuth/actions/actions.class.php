@@ -1,6 +1,6 @@
 <?php
 
-class sfTwitterAuthActions extends sfActions {
+class sfTwitterAuthActions extends myActions {
   public function executeLogin(sfRequest $request) {
     /* Consumer key from twitter */
     $consumer_key = sfConfig::get('app_sf_twitter_auth_consumer_key');

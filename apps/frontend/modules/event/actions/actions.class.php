@@ -13,6 +13,8 @@ class eventActions extends myEventActions {
     $this->event = $this->getRoute()->getObject();
     $this->forms = array();
 
+    $this->setTitle(implode(', ', array($this->event, $this->event->getLocation())));
+
     if($this->getUser()->isAuthenticated()) {
       $user = $this->getUser()->getGuardUser();
       $this->forms = array(
@@ -25,6 +27,7 @@ class eventActions extends myEventActions {
 
   public function executeSpeakers(sfWebRequest $request) {
     $this->event = $this->getRoute()->getObject();
+    $this->setTitle(implode(' | ', array($this->event, 'Speakers')));
   }
 
   public function executeAddContent(sfWebRequest $request) {
@@ -90,6 +93,7 @@ class eventActions extends myEventActions {
   }
 
   public function executeNew(sfWebRequest $request) {
+    $this->setTitle('New Event');
     $this->form = new ConferenceEventForm();
 
     if($request->isMethod(sfRequest::POST)) {

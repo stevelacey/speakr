@@ -8,7 +8,7 @@
  * @author     Steve Lacey
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class myEventActions extends sfActions {
+class myEventActions extends myActions {
   public function executeAttend(sfWebRequest $request) {
     $this->go($request, $this->getUser()->getGuardUser(), 'attend', $request->getParameter('verb') == 'do');
   }
