@@ -98,6 +98,8 @@ th, td {
 }
 
 .welcome {
+  width: 600px;
+
   @include clearfix;
 }
 

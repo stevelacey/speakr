@@ -2,6 +2,10 @@
   <?php if(!$sf_user->isAuthenticated()) : ?>
     <div class="welcome">
       <h1>Welcome to Speakr</h1>
+      <p>Find yourself missing out on awesome events in the web industry? No more!</p>
+      <p>Speakr is here to help you keep track of the events your friends are attending, and where your favourite speakers are making an appearance.</p>
+      <p>Organising an event? You might already be listed! If not, <?php echo link_to('sign in', 'login') ?>, and the add event button is at the top!</p>
+      <p>Know of a cool event you want people to know about? Add it! Speakr is a community wiki, you make the content, and others can contribute.</p>
       <?php include_partial('sfTwitterAuth/signin_button') ?>
     </div>
   <?php endif ?>
