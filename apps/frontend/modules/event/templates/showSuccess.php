@@ -60,7 +60,7 @@
         <?php endif ?>
       </section>
 
-      <?php if($sf_user->isAuthenticated() || (!$sf_user->isAuthenticated() && $event->getSpeakers()->count())) : ?>
+      <?php if($sf_user->isAuthenticated() || $event->getSpeakers()->count()) : ?>
         <section class="speakers">
           <header>
             <h2>Speakers</h2>
@@ -76,7 +76,7 @@
         </section>
       <?php endif ?>
 
-      <?php if($sf_user->isAuthenticated() || (!$sf_user->isAuthenticated() && $event->getPresentations()->count())) : ?>
+      <?php if($sf_user->isAuthenticated() || $event->getPresentations()->count()) : ?>
         <section class="content">
           <header>
             <h2>Content</h2>
@@ -146,23 +146,25 @@
         </section>
       <?php endif ?>
 
-      <section class="twitter">
-        <header>
-          <h2>Twitter</h2>
-        </header>
-        <?php if($event->getHashtag()) : ?>
-          <p>#<span class="hashtag"><?php echo $event->getHashtag() ?></span></p>
-        <?php endif ?>
+      <?php if($sf_user->isAuthenticated() || $event->getHashtag()) : ?>
+        <section class="twitter">
+          <header>
+            <h2>Twitter</h2>
+          </header>
+          <?php if($event->getHashtag()) : ?>
+            <p>#<span class="hashtag"><?php echo $event->getHashtag() ?></span></p>
+          <?php endif ?>
 
-        <?php if($sf_user->isAuthenticated()) : ?>
-          <form action="<?php echo url_for('event_update', array('action' => 'hashtag', 'sf_subject' => $event)) ?>" method="post">
-            <?php echo $forms['hashtag']['hashtag']->renderHelp() ?>
-            <?php echo $forms['hashtag']['hashtag'] ?>
-            <?php echo $forms['hashtag']->renderHiddenFields(false) ?>
-            <input type="submit" value="Set Hashtag"/>
-          </form>
-        <?php endif ?>
-      </section>
+          <?php if($sf_user->isAuthenticated()) : ?>
+            <form action="<?php echo url_for('event_update', array('action' => 'hashtag', 'sf_subject' => $event)) ?>" method="post">
+              <?php echo $forms['hashtag']['hashtag']->renderHelp() ?>
+              <?php echo $forms['hashtag']['hashtag'] ?>
+              <?php echo $forms['hashtag']->renderHiddenFields(false) ?>
+              <input type="submit" value="Set Hashtag"/>
+            </form>
+          <?php endif ?>
+        </section>
+      <?php endif ?>
     </aside>
   </div>
 </article>
