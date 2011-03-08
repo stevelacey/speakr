@@ -23,7 +23,7 @@ class myActions extends sfActions {
    * Sets the Page Title
    * @param string $title The page title
    */
-  public function setTitle($title = '') {
-    $this->response->setTitle($title . $this->title['d'] . $this->title['t'], false);
+  public function setTitle($title = '', $prepend = true) {
+    $this->response->setTitle($title . ($prepend ? $this->title['d'] . $this->title['t'] : ''), false);
   }
 }
