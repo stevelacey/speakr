@@ -1,4 +1,4 @@
-<div>
+<div class="schedule">
   <?php include_partial('nav') ?>
   <div class="events">
     <h2>Friends Events</h2>

@@ -303,6 +303,38 @@ article.event {
   }
 }
 
+.schedule {
+  nav {
+    ul {
+      float: right;
+
+      li {
+        display: inline;
+
+        a {
+          display: block;
+          float: left;
+          margin-right: 10px;
+          padding: 5px 10px;
+          border: 1px solid #EEE;
+
+          @include transition(ease, 0.2s, all);
+
+          &:hover, &:focus {
+            background: #FEFEFE;
+            border: 1px solid #DDD;
+            @include box-shadow(0 0 10px #DDD);
+          }
+        }
+      }
+
+      @include clearfix;
+    }
+
+    @include clearfix;
+  }
+}
+
 .events {
   padding: 0;
   list-style: none;

@@ -1,4 +1,4 @@
-<div>
+<div class="schedule">
   <?php if(!$sf_user->isAuthenticated()) : ?>
     <div class="welcome">
       <h1>Welcome to Speakr</h1>
