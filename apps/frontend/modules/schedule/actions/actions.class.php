@@ -19,8 +19,15 @@ class scheduleActions extends myActions
     if($this->getUser()->isAuthenticated()) {
       $this->setTitle('Your Schedule');
       $this->events = $this->getUser()->getGuardUser()->getEvents();
+
+      if(!$this->events->count()) {
+        $this->empty = true;
+      }
     } else {
       $this->setTitle('Speakr - Social Events Directory', false);
+    }
+
+    if(!$this->getUser()->isAuthenticated() || (isset($this->empty) && $this->empty)) {
       $this->events = Doctrine::getTable('Event')->getUpcoming();
     }
   }

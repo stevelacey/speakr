@@ -21,6 +21,11 @@
       <h2>Upcoming Events</h2>
     <?php endif ?>
 
+    <?php if(isset($empty) && $empty) : ?>
+      <o>It doesn't look like you're planning to go to any events, perhaps you'd be interested in some of these upcoming ones?</p>
+      <h3>Upcoming Events</h3>
+    <?php endif ?>
+
     <?php include_partial('event/short_list', array('events' => $events)) ?>
   </div>
 </div>
